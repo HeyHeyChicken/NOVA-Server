@@ -4,7 +4,6 @@
     </a>
     <br>
     **NOVA - Server** is the central server for your favorite voice assistant.<br>
-    <br><br>
 </div>
 
 <br>
