@@ -10,7 +10,7 @@
 
 <div align="center">
     <a href="//nova-assistant.com">
-      <img src="https://github.com/HeyHeyChicken/NOVA-Server/blob/master/resources/screenshot.jpg" alt="NOVA" width="300">
+      <img src="https://github.com/HeyHeyChicken/NOVA-Server/blob/master/resources/screenshot.jpg">
     </a>
 </div>
 
