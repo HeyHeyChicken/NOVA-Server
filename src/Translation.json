@@ -1,0 +1,32 @@
+{
+  "en-US": {
+    "dashboard": "Dashboard",
+    "skills": "Skills",
+    "house": "House",
+    "name": "Name",
+    "no_name": "No name",
+    "room": "Room",
+    "choose": "Choose...",
+    "language": "Language",
+    "hotWord": "Hot word",
+    "address": "Address",
+    "uninstall": "Uninstall",
+    "install": "Install",
+    "installed": "Installed"
+  },
+  "fr-FR": {
+    "dashboard": "Tableau de bord",
+    "skills": "Compétences",
+    "house": "Maison",
+    "name": "Nom",
+    "no_name": "Pas de nom",
+    "room": "Pièce",
+    "choose": "Veuillez renseigner ce champ...",
+    "language": "Langue",
+    "hotWord": "Mot déclencheur",
+    "address": "Adresse",
+    "uninstall": "Désinstaller",
+    "install": "Installer",
+    "installed": "Installé"
+  }
+}

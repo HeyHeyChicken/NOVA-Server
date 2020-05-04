@@ -1,0 +1,58 @@
+<html xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <title>SERVER</title>
+    <!-- CSS-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" />
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="">
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <b-tabs align="left">
+        <b-tab data-tab-name="home">
+          <template v-slot:title>
+            <i class="fas fa-tachometer-alt"></i>
+            <span>{{ Dictionary.dashboard }}</span>
+          </template>
+          <div class="container" id="tab-dashboard">
+            <%- include('./dashbord/index.ejs') %>
+          </div>
+        </b-tab>
+        <b-tab data-tab-name="skills">
+          <template v-slot:title>
+            <i class="fas fa-border-all"></i>
+            <span>{{ Dictionary.skills }}</span>
+          </template>
+          <div class="container" id="tab-skills">
+            <%- include('./skills/index.ejs') %>
+          </div>
+        </b-tab>
+        <b-tab data-tab-name="house">
+          <template v-slot:title>
+            <i class="far fa-house"></i>
+            <span>{{ Dictionary.house }}</span>
+          </template>
+          <div class="container" id="tab-house">
+            <%- include('./house/index.ejs') %>
+          </div>
+        </b-tab>
+      </b-tabs>
+      <%- include('./skills/modal.ejs') %>
+      <%- include('./house/modal.ejs') %>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <script src="//unpkg.com/vue@latest/dist/vue.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+    <script src="/js/lib/socket.io/socket.io.js"></script>
+    <script src="/js/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/lib/fontawesome/all.min.js"></script>
+    <script src="/js/index.js"></script>
+  </body>
+</html>

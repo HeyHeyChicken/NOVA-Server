@@ -1,0 +1,30 @@
+<b-modal :key="'modal-house'+index" class="skill" v-for="(room,index) in House.Rooms" :id="'modal-room'+index" hide-footer>
+    <template>
+        <div>
+            <b-form>
+                <b-form-group
+                        label="Name:"
+                        description="Nom de la room"
+                placeholder="abc">
+                    <b-form-input
+                        v-model="room.Name"
+                        type="text"
+                        required
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-form-group
+                        label="Icon:"
+                        description="Icon de la room">
+                    <b-form-input
+                        v-model="room.Icon"
+                        type="text"
+                        required
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-button type="submit" variant="primary">Submit</b-button>
+            </b-form>
+        </div>
+    </template>
+</b-modal>

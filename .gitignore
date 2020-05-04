@@ -1,0 +1,8 @@
+node_modules/
+**/src/public/mp3/*.mp3
+**/src/lib/GoogleTextToSpeech/*.json
+**/src/lib/skills/*/
+              **/src/lib/skills/skills.json
+**/src/voices/*.wav
+sqlite.db
+.idea/

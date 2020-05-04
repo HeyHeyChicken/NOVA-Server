@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">{{ Dictionary.language }}</span>
+            </div>
+            <select v-model="Language" class="custom-select" @change="set_language">
+                <option selected>{{ Dictionary.choose }}</option>
+                <option value="fr-FR">🇫🇷 Français</option>
+                <option value="en-US">🇬🇧 English</option>
+            </select>
+        </div>
+    </div>
+    <div class="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">{{ Dictionary.hotWord }}</span>
+            </div>
+            <select class="custom-select">
+                <option selected>{{ Dictionary.choose }}</option>
+                <option value="Nova">Nova</option>
+                <option value="Jarvis">Jarvis</option>
+            </select>
+        </div>
+    </div>
+    <!--
+    <div class="col col-12">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">{{ Dictionary.address }}</span>
+        </div>
+        <input type="text" class="form-control" :placeholder="Dictionary.choose">
+      </div>
+    </div>
+    <div class="col col-12">
+      <div class="map" id="map"></div>
+    </div>
+     -->
+    <novaroom icon="fas fa-plus" ></novaroom>
+    <novaroom :key="index" :Name="room.Name" :Icon="room.Icon" v-for="(room, index) in House.Rooms" v-b-modal="'modal-room'+index"></novaroom>
+</div>
