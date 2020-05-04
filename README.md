@@ -14,8 +14,6 @@
     </a>
 </div>
 
-<br>
-
 ## Installation
 
 Follow the [installation guide](//github.com/HeyHeyChicken/NOVA#installation).
