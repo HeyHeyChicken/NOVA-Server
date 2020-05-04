@@ -5,7 +5,7 @@ const LIBRARIES = {
   FreeGoogleTTS: require("google-tts-api"),
   PayingGoogleTTS: require("@google-cloud/text-to-speech"),
 
-  Audio: require("../../../lib/Audio")
+  Audio: require("../Audio")
 };
 
 class GoogleTextToSpeech {

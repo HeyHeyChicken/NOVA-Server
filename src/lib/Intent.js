@@ -1,5 +1,5 @@
 const LIBRARIES = {
-  Message: require("../../lib/Message")
+  Message: require("./Message")
 };
 
 class Intent {

@@ -9,7 +9,7 @@ const LIBRARIES = {
   Colors: require("colors"),
   STT: require("@google-cloud/speech"),
 
-  NOVAClient: require("../../lib/Client"),
+  NOVAClient: require("./Client"),
   GoogleTextToSpeech: require("./GoogleTextToSpeech/GoogleTextToSpeech"),
   Manager: require("./Manager"),
   House: require("./House"),
