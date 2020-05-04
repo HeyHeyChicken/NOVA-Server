@@ -1,17 +1,17 @@
 <div align="center">
-
-<a href="//nova-assistant.com" rel="nofollow"><img src="https://github.com/HeyHeyChicken/NOVA-Server/blob/master/resources/github-logo.svg" alt="NOVA" width="300"></a>
-
-**NOVA - Server** is the central server for your favorite voice assistant.<br>
-<br><br>
+    <a href="//nova-assistant.com" rel="nofollow">
+        <img src="https://github.com/HeyHeyChicken/NOVA-Server/blob/master/resources/github-logo.svg" alt="NOVA" width="300">
+    </a>
+    **NOVA - Server** is the central server for your favorite voice assistant.<br>
+    <br><br>
 </div>
 
 <br>
 
 <div align="center">
-<a href="//nova-assistant.com">
-  I'll place a screenshot here :)
-</a>
+    <a href="//nova-assistant.com">
+      <img src="https://github.com/HeyHeyChicken/NOVA-Server/blob/master/resources/screenshot.jpg" alt="NOVA" width="300">
+    </a>
 </div>
 
 <br>

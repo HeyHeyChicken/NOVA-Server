@@ -6,6 +6,7 @@ const LIBRARIES = {
   FS: require("fs"),
   SQLite3: require("sqlite3").verbose(),
   WAV: require("wav"),
+  Colors: require("colors"),
   STT: require("@google-cloud/speech"),
 
   NOVAClient: require("../../lib/Client"),
