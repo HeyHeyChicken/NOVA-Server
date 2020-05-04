@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="//nova-assistant.com" rel="nofollow"><img src="https://github.com/HeyHeyChicken/NOVA-Server/blob/master/resources/nova-logo.svg" alt="NOVA" width="300"></a>
+<a href="//nova-assistant.com" rel="nofollow"><img src="https://github.com/HeyHeyChicken/NOVA-Server/blob/master/resources/github-logo.svg" alt="NOVA" width="300"></a>
 
 **NOVA - Server** is a customizable voice assistant made with Node.js.<br>
 <br><br>
