@@ -66,7 +66,7 @@ class Skill {
     /* Cette fonction permet de charger tous les skills installés. */
     static LoadAll(_main) {
         _main.Log("Start loading skills.", "green");
-        const DEPENDENCIES = LIBRARIES.FS.readdirSync("./lib/skills/", { withFileTypes: true }).filter(x => x.isDirectory()).map(x => x.name);
+        const DEPENDENCIES = LIBRARIES.FS.readdirSync(_main.DirName + "/lib/skills/", { withFileTypes: true }).filter(x => x.isDirectory()).map(x => x.name);
         for(let i = 0; i < DEPENDENCIES.length; i++) {
             Skill.Load(DEPENDENCIES[i], _main);
         }
@@ -102,7 +102,7 @@ class Skill {
         const skill = _main.URL_Skills.find(x => x.git === _git);
         if(skill !== undefined) {
 
-            const DIR = "./lib/skills/";
+            const DIR = _main.DirName + "/lib/skills/";
             const tmpFilePath = DIR + "temp.zip";
 
             // On récupère le nom du futur dossier du skill.
@@ -156,7 +156,7 @@ class Skill {
     static Uninstall(_git, _main, _socket){
         const SKILL = _main.URL_Skills.find(x => x.git === _git);
         if(SKILL !== undefined){
-            const SKILLS_DIR_PATH = "./lib/skills/";
+            const SKILLS_DIR_PATH = _main.DirName + "/lib/skills/";
             const SKILL_DIR_NAME = SKILL.git.split("/").splice(-2, 2).join("_") + "/";
             Skill.Unload(SKILLS_DIR_PATH + SKILL_DIR_NAME + "src/corpus/", _main); // On décharge le skill.
             LIBRARIES._FS.rmdirSync(SKILLS_DIR_PATH + SKILL_DIR_NAME); // On supprime le dossier du skill.
