@@ -17,7 +17,7 @@ const LIBRARIES = {
 };
 
 class Nova {
-  constructor() {
+  constructor(_launcher) {
     const SELF = this;
 
     // TODO : Il faut gérer les erreurs lors de l'utilisation de skills.
@@ -25,6 +25,7 @@ class Nova {
     // TODO : Nous devrions être capables de savoir si un skill n'est plus à jour afin de le réinstaller.
     // TODO / Personnaliser le "What can I ask ?" du client (onglet chat)
 
+    this.Launcher = _launcher;
     this.SkillPermanentSettings = JSON.parse(LIBRARIES.FS.readFileSync("./lib/skills/skills.json", "utf8"));
     this.Settings = JSON.parse(LIBRARIES.FS.readFileSync("./settings.json", "utf8")); // On récupère les paramètres du serveur.
     this.Translation = JSON.parse(LIBRARIES.FS.readFileSync("./translation.json", "utf8")); // On récupère les traductions pour les GUI.

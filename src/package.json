@@ -2,7 +2,7 @@
   "name": "nova-server",
   "version": "1.0.0",
   "description": "This is the NOVA server.",
-  "main": "index.js",
+  "main": "../index.js",
   "author": "Antoine Duval",
   "license": "SEE LICENSE IN LICENSE FILE",
   "dependencies": {
