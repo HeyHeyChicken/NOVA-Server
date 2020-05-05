@@ -1,0 +1,27 @@
+{
+  "name": "nova-server",
+  "version": "1.0.0",
+  "description": "This is the NOVA server.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HeyHeyChicken/NOVA-Server.git"
+  },
+  "author": "Antoine Duval",
+  "license": "SEE LICENSE IN LICENSE FILE",
+  "bugs": {
+    "url": "https://github.com/HeyHeyChicken/NOVA-Server/issues"
+  },
+  "homepage": "https://github.com/HeyHeyChicken/NOVA-Server#readme",
+  "dependencies": {
+    "@google-cloud/speech": "^3.6.0",
+    "colors": "^1.4.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.1-security",
+    "https": "^1.0.0",
+    "socket.io": "^2.3.0",
+    "sqlite3": "^4.2.0",
+    "wav": "^1.0.2"
+  }
+}
