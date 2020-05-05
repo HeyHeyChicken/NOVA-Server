@@ -16,6 +16,7 @@
   "dependencies": {
     "@google-cloud/speech": "^3.6.0",
     "@google-cloud/text-to-speech": "^2.3.0",
+    "adm-zip": "^0.4.14",
     "colors": "^1.4.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
