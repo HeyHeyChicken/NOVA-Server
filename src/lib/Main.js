@@ -25,14 +25,15 @@ class Main {
     // TODO : Nous devrions être capables de savoir si un skill n'est plus à jour afin de le réinstaller.
     // TODO / Personnaliser le "What can I ask ?" du client (onglet chat)
 
+    this.DirName = _dirname;
     this.Launcher = _launcher;
-    this.SkillPermanentSettings = JSON.parse(LIBRARIES.FS.readFileSync("./lib/skills/skills.json", "utf8"));
-    this.Settings = JSON.parse(LIBRARIES.FS.readFileSync("./settings.json", "utf8")); // On récupère les paramètres du serveur.
-    this.Translation = JSON.parse(LIBRARIES.FS.readFileSync("./translation.json", "utf8")); // On récupère les traductions pour les GUI.
+    this.SkillPermanentSettings = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/lib/skills/skills.json", "utf8"));
+    this.Settings = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/settings.json", "utf8")); // On récupère les paramètres du serveur.
+    this.Translation = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/translation.json", "utf8")); // On récupère les traductions pour les GUI.
 
     this.ClientSkillsPublic = {}; // Cet objet va contenir l'arbre des fichiers provenant des skills destinés à la GUI des clients.
 
-    this.ExpressViewsDirectories = ["./views"];
+    this.ExpressViewsDirectories = [this.DirName + "/views"];
     this.Express = null; // Serveur Web permettant à un utilisateur d'accéder à une interface d'administration du serveur NOVA.
 
     this.HTTP = null; // Le serveur Web est en http, pas en https.
@@ -133,7 +134,7 @@ class Main {
       return 0;
     });
 
-    this.RootPath = "./lib/GoogleTextToSpeech/";
+    this.RootPath = this.DirName + "/lib/GoogleTextToSpeech/";
     this.KeyFile = LIBRARIES.FS.readdirSync(this.RootPath).filter(e => e.endsWith(".json"))[0];
     this.SST = new LIBRARIES.STT.SpeechClient({
       projectId: this.Settings.Google.TextToSpeech.ProjectID,

@@ -142,7 +142,7 @@ class Skill {
                             Repository: SPLIT.slice(4)[0]
                         }
                     });
-                    LIBRARIES.FS.writeFileSync("./lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
+                    LIBRARIES.FS.writeFileSync(_main.DirName + "/lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
                     _socket.emit("set_installed_skills", _main.SkillPermanentSettings.installed);
                 }
             });
@@ -166,7 +166,7 @@ class Skill {
             const INDEX = _main.SkillPermanentSettings.installed.findIndex(x => x.GIT.URL === _git)
             if(INDEX >= 0){
                 _main.SkillPermanentSettings.installed.splice(INDEX, 1);
-                LIBRARIES.FS.writeFileSync("./lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
+                LIBRARIES.FS.writeFileSync(_main.DirName + "/lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
                 _socket.emit("set_installed_skills", _main.SkillPermanentSettings.installed);
             }
         }
