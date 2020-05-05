@@ -12,7 +12,7 @@ class GoogleTextToSpeech {
   constructor(_main) {
     this.Main = _main;
 
-    this.RootPath = "./lib/GoogleTextToSpeech/";
+    this.RootPath = _main.DirName + "/lib/GoogleTextToSpeech/";
     this.KeyFile = LIBRARIES.FS.readdirSync(this.RootPath).filter(e => e.endsWith(".json"))[0];
 
     if(this.KeyFile !== undefined){
