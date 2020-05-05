@@ -49,7 +49,7 @@ class FS {
                 FILE.close(_callback);  // close() is async, call the callback after close completes.
             });
         }).on("error", function(err) { // Handle errors
-            _main.Log(false, err.message);
+            _main.Log(err.message, "red");
             LIBRARIES.FS.unlink(_destination, function(){}); // Delete the file async. (But we don't check the result
             if (_callback !== undefined){
                 _callback(err.message);

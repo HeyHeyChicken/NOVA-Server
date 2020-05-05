@@ -60,17 +60,17 @@ class Skill {
             }
         }
 
-        _main.Log(true, "The skill named \"" + SETTINGS.FolderName + "\" is loaded (" + _main.Settings.Language + ").");
+        _main.Log("The skill named \"" + SETTINGS.FolderName + "\" is loaded (" + _main.Settings.Language + ").", "green");
     }
 
     /* Cette fonction permet de charger tous les skills installés. */
     static LoadAll(_main) {
-        _main.Log(true, "Start loading skills.");
+        _main.Log("Start loading skills.", "green");
         const DEPENDENCIES = LIBRARIES.FS.readdirSync("./lib/skills/", { withFileTypes: true }).filter(x => x.isDirectory()).map(x => x.name);
         for(let i = 0; i < DEPENDENCIES.length; i++) {
             Skill.Load(DEPENDENCIES[i], _main);
         }
-        _main.Log(true, "End of skills loading.");
+        _main.Log("End of skills loading.", "green");
     }
 
     /* Cette fonction permet de charger le skill dont le nom du dossier est passé en paramètre. */
@@ -93,7 +93,7 @@ class Skill {
             });
         }
         else{
-            _main.Log(false, "The skill folder you want to uninstall does not exist.");
+            _main.Log("The skill folder you want to uninstall does not exist.", "red");
         }
     }
 
@@ -148,7 +148,7 @@ class Skill {
             });
         }
         else{
-            _main.Log(false, "Skill with GIT : \"" + _git + "\" not found.");
+            _main.Log("Skill with GIT : \"" + _git + "\" not found.", "red");
         }
     }
 
@@ -171,7 +171,7 @@ class Skill {
             }
         }
         else{
-            _main.Log(false, "Skill with GIT : \"" + _git + "\" not found.");
+            _main.Log("Skill with GIT : \"" + _git + "\" not found.", "red");
         }
     }
 }

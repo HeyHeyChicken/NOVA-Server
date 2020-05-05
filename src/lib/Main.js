@@ -16,7 +16,7 @@ const LIBRARIES = {
   Skill: require("./Skill")
 };
 
-class Nova {
+class Main {
   constructor(_launcher) {
     const SELF = this;
 
@@ -365,11 +365,15 @@ class Nova {
     }
   }
 
-  // Cette fonction remplace la fonction "console.log".
-  Log(_green, _text){
-    const HEADER = "NOVA";
-    console.log("[" + (_green ? LIBRARIES.Colors.green(HEADER) : LIBRARIES.Colors.red(HEADER)) + "] " + _text);
+  // Cette fonction remplace le "console.log"
+  Log(_text, _color = "white", _header = "NOVA SERVER"){
+    if(this.Launcher !== undefined){
+      this.Launcher.Log(_text, _color, _header);
+    }
+    else{
+      console.log(_text);
+    }
   }
 }
 
-module.exports = Nova;
+module.exports = Main;

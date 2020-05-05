@@ -1,5 +1,5 @@
 const LIBRARIES = {
-  Server : require("./src/lib/Server")
+  Server : require("./src/lib/Main")
 };
 
-const SERVER = new LIBRARIES.Server(_launcher);
+const SERVER = new LIBRARIES.Server(__dirname + "/src");
