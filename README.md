@@ -3,7 +3,7 @@
         <img src="https://github.com/HeyHeyChicken/NOVA-Server/blob/master/resources/github-logo.svg" alt="NOVA" width="300">
     </a>
     <br>
-    **NOVA - Server** is the central server for your favorite voice assistant.<br>
+    NOVA - Server is the central server for your favorite voice assistant.<br>
 </div>
 
 <br>
