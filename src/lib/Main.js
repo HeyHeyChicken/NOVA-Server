@@ -190,7 +190,7 @@ class Main {
     this.InitialiseSocketClient();
     this.InitialiseSocketServer();
     this.HTTP.listen(this.Settings.WebServerPort, function(){
-      SELF.Log("You can access the server's GUI on http://localhost:" + SELF.Settings.WebServerPort, "green");
+      SELF.Log("You can access the server's GUI on http://localhost:" + SELF.Settings.WebServerPort + ".", "green");
     });
   }
 
