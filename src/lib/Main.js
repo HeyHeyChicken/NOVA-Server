@@ -17,7 +17,7 @@ const LIBRARIES = {
 };
 
 class Main {
-  constructor(_launcher) {
+  constructor(_dirname, _launcher) {
     const SELF = this;
 
     // TODO : Il faut gérer les erreurs lors de l'utilisation de skills.
