@@ -6,7 +6,7 @@
     NOVA - Server is the central server for your favorite voice assistant.<br>
 </div>
 
-<br>
+<br> 
 
 <div align="center">
     <a href="//nova-assistant.com">
