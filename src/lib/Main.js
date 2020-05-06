@@ -171,9 +171,6 @@ class Main {
       for(let i = 0; i < _data.length; i++){
         if(_data[i].length > 0){
           MESSAGES.push(_data[i]);
-          if(SELF.Settings.Debug === true){
-            SELF.Log(_data[i]);
-          }
         }
       }
     });
@@ -183,9 +180,6 @@ class Main {
       for(let i = 0; i < _data.length; i++){
         if(_data[i].length > 0){
           MESSAGES.push(_data[i]);
-          if(SELF.Settings.Debug === true){
-            SELF.Log(_data[i]);
-          }
         }
       }
     });

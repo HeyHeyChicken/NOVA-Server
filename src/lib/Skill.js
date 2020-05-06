@@ -73,6 +73,7 @@ class Skill {
         _main.Log("End of skills loading.", "green");
     }
 
+    // Cette fonction installe les dépendances d'un skill
     static InstallDependances(_main, _dependencies, _index, _callback){
         if(_dependencies[_index] !== undefined){
             const COMMAND = "npm install " + _dependencies[_index];
@@ -111,7 +112,6 @@ class Skill {
                 const new_skill_folder_name = skill.git.split("/").splice(-2, 2).join("_") + "/";
                 LIBRARIES.FS.renameSync(DIR + skill_folder_name, DIR + new_skill_folder_name);
 
-                // TODO : Il reste à installer les dépendances.
                 const DEPENDENCIES = JSON.parse(LIBRARIES.FS.readFileSync(DIR + new_skill_folder_name + "package.json", "utf8")).dependencies;
                 if(DEPENDENCIES !== undefined) {
                     let array = [];
