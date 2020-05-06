@@ -61,7 +61,7 @@ class GoogleTextToSpeech {
     LIBRARIES.FreeGoogleTTS(_text, this.Main.Settings.Language.substring(0, 2))
     .then(function (url) {
       const NAME = "/mp3/GoogleTTS-" + new Date().getTime() + ".mp3";
-      const FILE = LIBRARIES.FS.createWriteStream("./public" + NAME);
+      const FILE = LIBRARIES.FS.createWriteStream(SELF.Main.DirName + "/public" + NAME);
       const request = LIBRARIES.HTTPS.get(url, function(response) {
         response.pipe(FILE);
         FILE.on("finish", function() {
