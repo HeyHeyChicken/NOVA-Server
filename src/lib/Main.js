@@ -25,6 +25,8 @@ class Main {
     // TODO : Nous devrions être capables de savoir si un skill n'est plus à jour afin de le réinstaller.
     // TODO / Personnaliser le "What can I ask ?" du client (onglet chat)
 
+    this.LauncherIO = LIBRARIES.SocketIOClient("http://localhost:8082"); // Ce serveur socket relie le serveur à son launcher.
+
     this.DirName = _dirname;
     this.SkillPermanentSettings = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/lib/skills/skills.json", "utf8"));
     this.Settings = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/settings.json", "utf8")); // On récupère les paramètres du serveur.
@@ -38,7 +40,6 @@ class Main {
     this.HTTP = null; // Le serveur Web est en http, pas en https.
     this.ClientIO = null; // Ce serveur socket relie le serveur aux clients NOVA.
     this.ServerIO = null; // Ce serveur socket relie le serveur à son interface.
-    this.LauncherIO = LIBRARIES.SocketIOClient("http://localhost:8082"); // Ce serveur socket relie le serveur à son launcher.
     this.WavWriters = {}; // Cet objet contiens les modules qui récupèrent la voix pour la convertir en fichier.
 
     this.DataBase = null; // Base de données du serveur.
@@ -368,6 +369,7 @@ class Main {
 
   // Cette fonction remplace le "console.log"
   Log(_text, _color = "white", _header = "NOVA SERVER"){
+    console.log(this.LauncherIO);
     if(this.Launcher !== undefined){
       this.Launcher.Log(_text, _color, _header);
     }
