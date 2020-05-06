@@ -25,7 +25,9 @@ class Main {
     // TODO : Nous devrions être capables de savoir si un skill n'est plus à jour afin de le réinstaller.
     // TODO / Personnaliser le "What can I ask ?" du client (onglet chat)
 
-    this.LauncherIO = LIBRARIES.SocketIOClient("http://localhost:8082"); // Ce serveur socket relie le serveur à son launcher.
+    this.LauncherIO = null; // Ce serveur socket relie le serveur à son launcher.
+    this.LauncherMessages = []; // Cette liste contiendra les messages non envoyés au launcher.
+    this.InitialiseLauncherSocketClient();
 
     this.DirName = _dirname;
     this.SkillPermanentSettings = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/lib/skills/skills.json", "utf8"));
@@ -175,6 +177,22 @@ class Main {
     else{
       LIBRARIES.NOVAClient.Reset(SELF.DataBase);
     }
+  }
+
+  // Cette fonction initialise la conection socket avec le serveur socket du launcher.
+  InitialiseLauncherSocketClient(){
+    const SELF = this;
+
+    SELF.LauncherIO = LIBRARIES.SocketIOClient("http://localhost:8082"); // Ce serveur socket relie le serveur à son launcher.
+    SELF.LauncherMessages = []; // Cette liste contiendra les messages non envoyés au launcher.
+    SELF.LauncherIO.on("connect", function(){
+      if(SELF.LauncherMessages.length > 0){
+        for(let i = 0; i < SELF.LauncherMessages.length; i++){
+          SELF.Log(SELF.LauncherMessages[i][0], SELF.LauncherMessages[i][1], SELF.LauncherMessages[i][2]);
+        }
+        SELF.LauncherMessages = [];
+      }
+    });
   }
 
   // Cette fonction initialise les serveurs de NOVA.
@@ -369,11 +387,11 @@ class Main {
 
   // Cette fonction remplace le "console.log"
   Log(_text, _color = "white", _header = "NOVA SERVER"){
-    console.log(this.LauncherIO);
-    if(this.Launcher !== undefined){
-      this.Launcher.Log(_text, _color, _header);
+    if(this.LauncherIO.connected === true){
+      this.LauncherIO.emit("log", _text, _color, _header);
     }
     else{
+      this.LauncherMessages.push([_text, _color, _header]);
       console.log(_text);
     }
   }
