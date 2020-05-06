@@ -373,7 +373,7 @@ class Main {
   AddClientSkillsPublicFile(_skillName, _file){
     if(this.ClientSkillsPublic[_skillName] === undefined){
       this.ClientSkillsPublic[_skillName] = [];
-      const PATH = "./lib/skills/" + _skillName + "/src/public/CLIENT/";
+      const PATH = this.DirName + "/lib/skills/" + _skillName + "/src/public/CLIENT/";
       if(LIBRARIES.FS.existsSync(PATH)) {
         this.Express.use("/" + _skillName, LIBRARIES.Express.static(PATH)); // On défini un dossier public.
       }
