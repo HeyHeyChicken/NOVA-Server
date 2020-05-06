@@ -8,6 +8,7 @@ const LIBRARIES = {
   WAV: require("wav"),
   STT: require("@google-cloud/speech"),
   SocketIOClient: require("socket.io-client"),
+  ChildProcess: require("child_process"),
 
   NOVAClient: require("./Client"),
   GoogleTextToSpeech: require("./GoogleTextToSpeech/GoogleTextToSpeech"),
@@ -156,6 +157,44 @@ class Main {
     this.InitialiseDataBase(); // On initialise la base de donnée et créé les tables si besoin.
     this.InitialiseServers(); // On initialise les serveurs de NOVA.
     LIBRARIES.Skill.LoadAll(this); // On charge les skills du serveur NOVA.
+  }
+
+  // Cette fonction exécute des commandes terminales sur le poste du client.
+  Terminal(_command, _path, _callback){
+    const SELF = this;
+
+    const MESSAGES = [];
+    const EXECUTION = LIBRARIES.ChildProcess.exec(_command, { cwd: _path });
+
+    EXECUTION.stdout.on("data", (_data) => {
+      _data = _data.split("\n");
+      for(let i = 0; i < _data.length; i++){
+        if(_data[i].length > 0){
+          MESSAGES.push(_data[i]);
+          if(SELF.Settings.Debug === true){
+            SELF.Log(_data[i]);
+          }
+        }
+      }
+    });
+
+    EXECUTION.stderr.on("data", (_data) => {
+      _data = _data.split("\n");
+      for(let i = 0; i < _data.length; i++){
+        if(_data[i].length > 0){
+          MESSAGES.push(_data[i]);
+          if(SELF.Settings.Debug === true){
+            SELF.Log(_data[i]);
+          }
+        }
+      }
+    });
+
+    EXECUTION.on("close", (_error_code) => {
+      if(_callback !== undefined){
+        _callback(_error_code, MESSAGES);
+      }
+    });
   }
 
   // Cette fonction transforme un texte en voix et l'envoie au client.

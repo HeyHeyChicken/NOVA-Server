@@ -2,7 +2,6 @@ const LIBRARIES = {
     FS: require("fs"),
     Path: require("path"),
     Zip: require("adm-zip"),
-    ChildProcess: require("child_process"),
 
     _FS: require("./FS")
 };
@@ -74,6 +73,20 @@ class Skill {
         _main.Log("End of skills loading.", "green");
     }
 
+    static InstallDependances(_main, _dependencies, _index, _callback){
+        if(_dependencies[_index] !== undefined){
+            const COMMAND = "npm install " + _dependencies[_index];
+            _main.Terminal(COMMAND, _main.DirName, function(){
+                Skill.InstallDependances(_main, _dependencies, _index + 1, _callback);
+            });
+        }
+        else{
+            if(_callback !== undefined){
+                _callback();
+            }
+        }
+    }
+
     /* Cette fonction permet d'installer un skill par son url GIT. */
     static Install(_git, _main, _socket) {
         const skill = _main.URL_Skills.find(x => x.git === _git);
@@ -101,30 +114,38 @@ class Skill {
                 // TODO : Il reste à installer les dépendances.
                 const DEPENDENCIES = JSON.parse(LIBRARIES.FS.readFileSync(DIR + new_skill_folder_name + "package.json", "utf8")).dependencies;
                 if(DEPENDENCIES !== undefined) {
+                    let array = [];
                     for(let dependency in DEPENDENCIES) {
-                        const COMMAND = "npm install " + dependency + "@" + DEPENDENCIES[dependency];
-                        _main.Log(COMMAND + ", " + _main.DirName, "red");
-                        LIBRARIES.ChildProcess.exec(COMMAND, { cwd: _main.DirName });
+                        array.push(dependency + "@" + DEPENDENCIES[dependency]);
                     }
-                }
-                _main.URL_Skills.find(x => x.git === _git).installed = true;
-
-                if(!_main.SkillPermanentSettings.installed.includes(_git)) {
-                    const SPLIT = _git.split("/");
-                    _main.SkillPermanentSettings.installed.push({
-                        GIT: {
-                            URL: _git,
-                            Pseudo: SPLIT.slice(3, -1)[0],
-                            Repository: SPLIT.slice(4)[0]
-                        }
+                    Skill.InstallDependances(_main, array, 0, function(){
+                        Skill.InstallStep2(_git, _main, _socket);
                     });
-                    LIBRARIES.FS.writeFileSync(_main.DirName + "/lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
-                    _main.LauncherIO.emit("reboot_server");
+                }
+                else{
+                    Skill.InstallStep2(_git, _main, _socket);
                 }
             });
         }
         else{
             _main.Log("Skill with GIT : \"" + _git + "\" not found.", "red");
+        }
+    }
+
+    static InstallStep2(_git, _main, _socket) {
+        _main.URL_Skills.find(x => x.git === _git).installed = true;
+
+        if(!_main.SkillPermanentSettings.installed.includes(_git)) {
+            const SPLIT = _git.split("/");
+            _main.SkillPermanentSettings.installed.push({
+                GIT: {
+                    URL: _git,
+                    Pseudo: SPLIT.slice(3, -1)[0],
+                    Repository: SPLIT.slice(4)[0]
+                }
+            });
+            LIBRARIES.FS.writeFileSync(_main.DirName + "/lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
+            _main.LauncherIO.emit("reboot_server");
         }
     }
 
