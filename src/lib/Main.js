@@ -185,13 +185,20 @@ class Main {
 
     SELF.LauncherIO = LIBRARIES.SocketIOClient("http://localhost:8082"); // Ce serveur socket relie le serveur à son launcher.
     SELF.LauncherMessages = []; // Cette liste contiendra les messages non envoyés au launcher.
+
+    // Lorsque le serveur arrive à se connecter au launcher
     SELF.LauncherIO.on("connect", function(){
       if(SELF.LauncherMessages.length > 0){
         for(let i = 0; i < SELF.LauncherMessages.length; i++){
-          SELF.Log(SELF.LauncherMessages[i][0], SELF.LauncherMessages[i][1], SELF.LauncherMessages[i][2]);
+          SELF.LauncherIO.emit("log", SELF.LauncherMessages[i][0], SELF.LauncherMessages[i][1], SELF.LauncherMessages[i][2]);
         }
         SELF.LauncherMessages = [];
       }
+    });
+
+    // Lorsque le launcher demande au serveur de redémarrer.
+    SELF.LauncherIO.on("reboot", function(){
+      process.exit(1);
     });
   }
 
