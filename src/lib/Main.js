@@ -21,17 +21,6 @@ class Main {
   constructor(_dirname) {
     const SELF = this;
 
-    // TODO : Il faut gérer les erreurs lors de l'utilisation de skills.
-    // TODO : Lorsqu'un utilisateur change de langue, charger les skills à la bonne langue.
-    // TODO : Nous devrions être capables de savoir si un skill n'est plus à jour afin de le réinstaller.
-    // TODO : Personnaliser le "What can I ask ?" du client (onglet chat).
-    // TODO : Il faut pouvoir revenir à l'onglet en cour en cas de redémarrage.
-    // TODO : Créer un skil lqui démarre chrome avec les bons flags.
-    // TODO : Vérifier pk le skill radio ne trouve pas certaines radios.
-    // TODO : Permettre à l'utilisateur de couper la radio.
-    // TODO : Le skill spotify ne fonctionne plus.
-    // TODO : Bloquer les actions utilisateurs lors de l'installation et de la desinstallation de skill.
-
     this.LauncherIO = null; // Ce serveur socket relie le serveur à son launcher.
     this.LauncherMessages = []; // Cette liste contiendra les messages non envoyés au launcher.
     this.InitialiseLauncherSocketClient();
@@ -56,6 +45,14 @@ class Main {
     this.Manager = new LIBRARIES.Manager(this.GoogleTextToSpeech); // Cette entité permet de convertir la demande utilisateur en action tout en extrayant les données importantes.
 
     this.URL_Skills = [
+      {
+        title: "Chrome Auto Launcher",
+        description: "This skill will allow your client to launch automatically Chrome at boot.",
+        wallpaper: "https://www.journaldugeek.com/content/uploads/2019/08/googlechrome.png",
+        icon: "https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png",
+        git: "https://github.com/HeyHeyChicken/NOVA-ChromeAutoLauncher",
+        screenshots: []
+      },
       {
         title: "Spotify",
         description: "This skill will allow your NOVA assistant to play you some Spotify music.",
