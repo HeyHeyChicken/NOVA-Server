@@ -103,6 +103,7 @@ class Skill {
                 if(DEPENDENCIES !== undefined) {
                     for(let dependency in DEPENDENCIES) {
                         const COMMAND = "npm install " + dependency + "@" + DEPENDENCIES[dependency];
+                        _main.Log(COMMAND, DIR + new_skill_folder_name);
                         LIBRARIES.ChildProcess.exec(COMMAND, { cwd: DIR + new_skill_folder_name });
                     }
                 }
