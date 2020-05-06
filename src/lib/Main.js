@@ -49,7 +49,7 @@ class Main {
         title: "Chrome Auto Launcher",
         description: "This skill will allow your client to launch automatically Chrome at boot.",
         wallpaper: "https://www.journaldugeek.com/content/uploads/2019/08/googlechrome.png",
-        icon: "https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png",
+        icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Google_Chrome_icon_%282011%29.svg/1024px-Google_Chrome_icon_%282011%29.svg.png",
         git: "https://github.com/HeyHeyChicken/NOVA-ChromeAutoLauncher",
         screenshots: []
       },
