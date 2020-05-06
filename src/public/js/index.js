@@ -23,12 +23,12 @@ const APP = new Vue({
       SOCKET.emit("set_language", event.target.value);
     },
     install_skill: function(event) {
-      SOCKET.emit("install_skill", event.target.closest("button").getAttribute("data-git"));
       ShowSpinner = true;
+      SOCKET.emit("install_skill", event.target.closest("button").getAttribute("data-git"));
     },
     uninstall_skill: function(event) {
-      SOCKET.emit("uninstall_skill", event.target.closest("button").getAttribute("data-git"));
       ShowSpinner = true;
+      SOCKET.emit("uninstall_skill", event.target.closest("button").getAttribute("data-git"));
     }
   },
   data: {

@@ -75,11 +75,20 @@ html body > #app > #spinner {
   left: 0px;
   height: 100%;
   width: 100%;
-  background-color: white;
-  z-index: 999;
+  z-index: 1051;
+}
+html body > #app > #spinner > .background, html body > #app > #spinner > .center {
+  position: absolute;
+}
+html body > #app > #spinner > .background {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
 }
 html body > #app > #spinner > .center {
-  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
