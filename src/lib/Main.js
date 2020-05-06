@@ -313,14 +313,14 @@ class Main {
 
       // L'utilisateur est en train de parler, nous enregisrons son flux audio dans un fichier.
       socket.on("write_audio", function(_data){
-        LIBRARIES.FS.appendFile("./voices/" + socket.client.conn.id + ".wav", _data, function (err) {
+        LIBRARIES.FS.appendFile(SELF.DirName + "/voices/" + socket.client.conn.id + ".wav", _data, function (err) {
           if (err) throw err;
         });
       });
 
       // L'utilisateur a fini de parler, nous envoyons sa voix au serveur STT.
       socket.on("end_recording", function(){
-        const FILE = LIBRARIES.FS.readFileSync("./voices/" + socket.client.conn.id + ".wav");
+        const FILE = LIBRARIES.FS.readFileSync(SELF.DirName + "/voices/" + socket.client.conn.id + ".wav");
         const AUDIO_BYTES = FILE.toString("base64");
         const REQUEST = {
           audio: {
