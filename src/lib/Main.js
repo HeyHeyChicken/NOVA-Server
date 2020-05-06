@@ -7,6 +7,7 @@ const LIBRARIES = {
   SQLite3: require("sqlite3").verbose(),
   WAV: require("wav"),
   STT: require("@google-cloud/speech"),
+  SocketIOClient: require("socket.io-client"),
 
   NOVAClient: require("./Client"),
   GoogleTextToSpeech: require("./GoogleTextToSpeech/GoogleTextToSpeech"),
@@ -16,7 +17,7 @@ const LIBRARIES = {
 };
 
 class Main {
-  constructor(_dirname, _launcher) {
+  constructor(_dirname) {
     const SELF = this;
 
     // TODO : Il faut gérer les erreurs lors de l'utilisation de skills.
@@ -25,7 +26,6 @@ class Main {
     // TODO / Personnaliser le "What can I ask ?" du client (onglet chat)
 
     this.DirName = _dirname;
-    this.Launcher = _launcher;
     this.SkillPermanentSettings = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/lib/skills/skills.json", "utf8"));
     this.Settings = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/settings.json", "utf8")); // On récupère les paramètres du serveur.
     this.Translation = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/translation.json", "utf8")); // On récupère les traductions pour les GUI.
@@ -38,6 +38,7 @@ class Main {
     this.HTTP = null; // Le serveur Web est en http, pas en https.
     this.ClientIO = null; // Ce serveur socket relie le serveur aux clients NOVA.
     this.ServerIO = null; // Ce serveur socket relie le serveur à son interface.
+    this.LauncherIO = LIBRARIES.SocketIOClient("http://localhost:8082"); // Ce serveur socket relie le serveur à son launcher.
     this.WavWriters = {}; // Cet objet contiens les modules qui récupèrent la voix pour la convertir en fichier.
 
     this.DataBase = null; // Base de données du serveur.
