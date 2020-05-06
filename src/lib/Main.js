@@ -180,12 +180,11 @@ class Main {
     }
   }
 
-  // Cette fonction initialise la conection socket avec le serveur socket du launcher.
+  // Cette fonction initialise la conection socket avec le launcher.
   InitialiseLauncherSocketClient(){
     const SELF = this;
 
     SELF.LauncherIO = LIBRARIES.SocketIOClient("http://localhost:8082"); // Ce serveur socket relie le serveur à son launcher.
-    SELF.LauncherMessages = []; // Cette liste contiendra les messages non envoyés au launcher.
 
     // Lorsque le serveur arrive à se connecter au launcher
     SELF.LauncherIO.on("connect", function(){

@@ -117,7 +117,7 @@ class Skill {
                         }
                     });
                     LIBRARIES.FS.writeFileSync(_main.DirName + "/lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
-                    _main.LauncherIO.emit("reboot");
+                    _main.LauncherIO.emit("reboot_server");
                 }
             });
         }
@@ -139,7 +139,7 @@ class Skill {
                 _main.SkillPermanentSettings.installed.splice(INDEX, 1);
                 LIBRARIES.FS.writeFileSync(_main.DirName + "/lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
             }
-            _main.LauncherIO.emit("reboot");
+            _main.LauncherIO.emit("reboot_server");
         }
         else{
             _main.Log("Skill with GIT : \"" + _git + "\" not found.", "red");
