@@ -13,6 +13,7 @@ class Skill {
 
     /* Cette fonction permet de charger le skill dont le nom du dossier est passé en paramètre. */
     static Load(_directory, _main) {
+        _main.Log(_main.DirName);
         const DEPENDENCY_PATH = __dirname + "/skills/" + _directory + "/src/";
         const CORPUS_PATH = DEPENDENCY_PATH + "corpus/" + _main.Settings.Language + "/corpus.json";
         const SETTINGS_PATH = DEPENDENCY_PATH + "settings.json";
