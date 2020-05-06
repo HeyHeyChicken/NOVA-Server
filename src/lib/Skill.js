@@ -2,6 +2,7 @@ const LIBRARIES = {
     FS: require("fs"),
     Path: require("path"),
     Zip: require("adm-zip"),
+    ChildProcess: require("child_process"),
 
     _FS: require("./FS")
 };
