@@ -38,7 +38,8 @@ const APP = new Vue({
     Dictionary: {},
     NovaClients: [],
     House: {},
-    Rebooting: false
+    Rebooting: false,
+    ShowSpinner: false
   }
 });
 

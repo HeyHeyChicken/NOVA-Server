@@ -13,6 +13,11 @@
   </head>
   <body>
     <div id="app">
+      <div v-if="ShowSpinner === true" id="spinner">
+        <div class="center">
+          <div></div>
+        </div>
+      </div>
       <b-tabs align="left">
         <b-tab data-tab-name="home">
           <template v-slot:title>
