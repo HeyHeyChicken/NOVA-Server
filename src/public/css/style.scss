@@ -99,7 +99,8 @@ html{
             border-width: 4px;
             border-style: solid;
             border-color: $message_color transparent transparent transparent;
-            animation: spin 1s linear infinite;
+            animation: spin 0.5s linear infinite;
+            border-radius: 50%;
           }
         }
       }

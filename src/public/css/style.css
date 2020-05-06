@@ -90,7 +90,8 @@ html body > #app > #spinner > .center > div {
   border-width: 4px;
   border-style: solid;
   border-color: #2196F3 transparent transparent transparent;
-  animation: spin 1s linear infinite;
+  animation: spin 0.5s linear infinite;
+  border-radius: 50%;
 }
 html body > #app > .tabs {
   height: 100%;
