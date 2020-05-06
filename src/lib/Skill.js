@@ -104,7 +104,7 @@ class Skill {
                     for(let dependency in DEPENDENCIES) {
                         const COMMAND = "npm install " + dependency + "@" + DEPENDENCIES[dependency];
                         _main.Log(COMMAND + ", " + DIR + new_skill_folder_name, "red");
-                        LIBRARIES.ChildProcess.exec(COMMAND, { cwd: DIR + new_skill_folder_name });
+                        LIBRARIES.ChildProcess.exec(COMMAND, { cwd: _main.DirName });
                     }
                 }
                 _main.URL_Skills.find(x => x.git === _git).installed = true;
