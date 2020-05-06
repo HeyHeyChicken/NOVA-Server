@@ -298,7 +298,7 @@ class Main {
       });
 
       socket.on("start_recording", function(_data){
-        SELF.WavWriters[socket.client.conn.id] = new LIBRARIES.WAV.FileWriter("./voices/" + socket.client.conn.id + ".wav", {
+        SELF.WavWriters[socket.client.conn.id] = new LIBRARIES.WAV.FileWriter(SELF.DirName + "/voices/" + socket.client.conn.id + ".wav", {
           channels: _data.numChannels,
           sampleRate: _data.fps,
           bitDepth: _data.bps
@@ -393,7 +393,7 @@ class Main {
       // L'utilisateur demande à changer de langue
       socket.on("set_language", function(_language) {
         SELF.Settings.Language = _language;
-        LIBRARIES.FS.writeFileSync("./settings.json", JSON.stringify(SELF.Settings, null, 4), "utf8");
+        LIBRARIES.FS.writeFileSync(SELF.DirName + "/settings.json", JSON.stringify(SELF.Settings, null, 4), "utf8");
         socket.emit("set_translation", SELF.Translation[SELF.Settings.Language]);
         SELF.ClientIO.sockets.emit("set_language", _language);
       });
