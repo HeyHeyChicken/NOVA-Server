@@ -23,7 +23,8 @@ class Main {
     // TODO : Il faut gérer les erreurs lors de l'utilisation de skills.
     // TODO : Lorsqu'un utilisateur change de langue, charger les skills à la bonne langue.
     // TODO : Nous devrions être capables de savoir si un skill n'est plus à jour afin de le réinstaller.
-    // TODO / Personnaliser le "What can I ask ?" du client (onglet chat)
+    // TODO : Personnaliser le "What can I ask ?" du client (onglet chat).
+    // TODO : Il faut pouvoir revenir à l'onglet en cour en cas de redémarrage.
 
     this.LauncherIO = null; // Ce serveur socket relie le serveur à son launcher.
     this.LauncherMessages = []; // Cette liste contiendra les messages non envoyés au launcher.
@@ -198,6 +199,7 @@ class Main {
 
     // Lorsque le launcher demande au serveur de redémarrer.
     SELF.LauncherIO.on("reboot", function(){
+      SELF.ClientIO.sockets.emit("reboot");
       SELF.ServerIO.sockets.emit("reboot");
       process.exit(1);
     });
