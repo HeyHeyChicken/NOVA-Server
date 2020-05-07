@@ -1,3 +1,25 @@
 {
-    "installed": []
+    "installed": [
+        {
+            "GIT": {
+                "URL": "https://github.com/HeyHeyChicken/NOVA-TuneIn",
+                "Pseudo": "HeyHeyChicken",
+                "Repository": "NOVA-TuneIn"
+            }
+        },
+        {
+            "GIT": {
+                "URL": "https://github.com/HeyHeyChicken/NOVA-HomePod-Sounds",
+                "Pseudo": "HeyHeyChicken",
+                "Repository": "NOVA-HomePod-Sounds"
+            }
+        },
+        {
+            "GIT": {
+                "URL": "https://github.com/HeyHeyChicken/NOVA-DateAndTime",
+                "Pseudo": "HeyHeyChicken",
+                "Repository": "NOVA-DateAndTime"
+            }
+        }
+    ]
 }

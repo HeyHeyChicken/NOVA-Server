@@ -396,8 +396,7 @@ class Main {
       socket.on("set_language", function(_language) {
         SELF.Settings.Language = _language;
         LIBRARIES.FS.writeFileSync(SELF.DirName + "/settings.json", JSON.stringify(SELF.Settings, null, 4), "utf8");
-        socket.emit("set_translation", SELF.Translation[SELF.Settings.Language]);
-        SELF.ClientIO.sockets.emit("set_language", _language);
+        SELF.LauncherIO.emit("reboot_server");
       });
     });
 
