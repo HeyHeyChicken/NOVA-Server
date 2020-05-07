@@ -41,8 +41,8 @@ const APP = new Vue({
     Dictionary: {},
     NovaClients: [],
     House: {},
-    Rebooting: false,
-    ShowSpinner: false
+    ShowSpinner: false,
+    AlreadyConnected: false
   }
 });
 
@@ -50,7 +50,10 @@ const SOCKET = io("http://localhost:8081");
 
 // Si la connection socket avec le serveur est réussie.
 SOCKET.on("connect", function() {
-  if(APP.Rebooting === true){
+  if(APP.AlreadyConnected === false){
+    APP.AlreadyConnected = true;
+  }
+  else{
     document.location.reload(true);
   }
 });
@@ -83,11 +86,6 @@ SOCKET.on("set_translation", function(_data) {
 // Si le serveur envoie une mise à jour de la langue.
 SOCKET.on("set_language", function(_data) {
   APP.Language = _data;
-});
-
-// Si le serveur demande à redémarrer l'interface.
-SOCKET.on("reboot", function() {
-  APP.Rebooting = true;
 });
 
 function InitMap() {
