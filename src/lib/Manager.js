@@ -38,6 +38,12 @@ class Manager {
     this.Intents[_intentName].addAnswers(_answers);
   }
 
+  /* Errors */
+  addErrors(_intentName, _errorsName, _errors){
+    this._checkIntentExistence(_intentName);
+    this.Intents[_intentName].addErrors(_errorsName, _errors);
+  }
+
   /* Actions */
   /* Cette fonction ajoute une action. Cette action sera déclenchée à l'appel d'un document. */
   addAction(_intentName, _action){

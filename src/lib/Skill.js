@@ -32,6 +32,11 @@ class Skill {
                         _main.Manager.addAnswers(CORPUS.data[j].intent, CORPUS.data[j].answers[k]);
                     }
                 }
+                if(CORPUS.data[j].errors !== undefined) {
+                    for(let code in CORPUS.data[j].errors) {
+                        _main.Manager.addErrors(CORPUS.data[j].intent, code, CORPUS.data[j].errors[code]);
+                    }
+                }
             }
         }
 
