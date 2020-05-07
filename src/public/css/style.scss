@@ -67,6 +67,12 @@ html{
     > #app{
       height: 100%;
 
+      .custom-file-label{
+        &:after{
+          content: none;
+        }
+      }
+
       [role="button"]{
         outline: none;
       }
@@ -116,344 +122,345 @@ html{
         }
       }
 
-      > .tabs{
-        height: 100%;
+      > .nav{
+        background-color: white;
+        border-bottom: 1px solid $border_color;
+        height: $nav_height;
+        box-sizing: content-box;
+        padding: 0px 18px;
 
-        > div{
-          > .nav{
-            background-color: white;
-            border-bottom: 1px solid $border_color;
+        > li{
+          height: $nav_height;
+          padding: 0px 12px;
+
+          > a{
             height: $nav_height;
-            box-sizing: content-box;
-            padding: 0px 18px;
+            line-height: $nav_height;
+            padding: 0px;
+            cursor: pointer;
+            border-radius: 0px;
+            border: none;
+            text-decoration: none;
 
-            > .nav-item{
-              height: $nav_height;
-              padding: 0px 12px;
+            &:focus{
+              outline: 0;
+            }
 
-              > .nav-link{
-                height: $nav_height;
-                line-height: $nav_height;
-                padding: 0px;
-                cursor: pointer;
-                border-radius: 0px;
-                border: none;
+            &.active{
+              background-color: transparent;
+              color: #467fcf;
+            }
 
-                &:focus{
-                  outline: 0;
-                }
+            &:not(.active){
+              color: #9aa0ac;
+            }
 
-                &.active{
-                  background-color: transparent;
-                  color: #467fcf;
-                }
+            > svg{
+              font-size: 14px;
+            }
 
-                &:not(.active){
-                  color: #9aa0ac;
-                }
+            > span{
+              font-size: 15px;
+            }
+          }
+        }
+      }
 
-                > svg{
-                  font-size: 14px;
-                }
+      > .tab-content{
+        height: calc(100% - #{$nav_height} - 1px);
+        padding: 15px;
+        overflow: auto;
 
-                > span{
-                  font-size: 15px;
+        > .tab-pane{
+          min-height: 100%;
+
+          > .container{
+            > .row{
+              > .col{
+                padding-top: 15px;
+                padding-bottom: 15px;
+
+                > .card{
+                  border-color: $border_color;
+
+                  > .card-header, > .card-footer{
+                    background-color: transparent;
+                    border-color: $border_color;
+                  }
+
+                  > .card-footer{
+                    padding: 15px;
+
+                    > .input-group{
+                      margin-bottom: 0px;
+
+                      > input{
+                        border: none;
+                        border-radius: 100px;
+                        background-color: #F2F2F2;
+                        font-size: 14px;
+                        margin-right: 15px;
+                      }
+
+                      > .input-group-append{
+                        > button{
+                          border-radius: 50%;
+                          color: $message_color;
+                          background-color: transparent;
+                          border-color: $border_color;
+                          width: 35px;
+                          padding: 0px;
+                          text-align: center;
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
           }
-        }
 
-        > .tab-content{
-          height: calc(100% - #{$nav_height} - 1px);
-          padding: 15px;
-          overflow: auto;
-
-          > .tab-pane{
-            min-height: 100%;
-
-            > .container{
-              > .row{
-                > .col{
-                  padding-top: 15px;
-                  padding-bottom: 15px;
-
-                  > .card{
-                    border-color: $border_color;
-
-                    > .card-header, > .card-footer{
-                      background-color: transparent;
-                      border-color: $border_color;
-                    }
-
-                    > .card-footer{
-                      padding: 15px;
-
-                      > .input-group{
-                        margin-bottom: 0px;
-
-                        > input{
-                          border: none;
-                          border-radius: 100px;
-                          background-color: #F2F2F2;
-                          font-size: 14px;
-                          margin-right: 15px;
+          &#home{
+            > .container {
+              > .row {
+                > .col {
+                  > .card {
+                    &.connected {
+                      > .card-body {
+                        > .mic {
+                          background-color: $message_color;
                         }
+                      }
 
-                        > .input-group-append{
-                          > button{
-                            border-radius: 50%;
-                            color: $message_color;
-                            background-color: transparent;
-                            border-color: $border_color;
-                            width: 35px;
-                            padding: 0px;
-                            text-align: center;
+                      &.active {
+                        > .card-body {
+                          > .grey {
+                            animation-duration: 3s;
+                            animation-name: microphone;
+                            animation-iteration-count: infinite;
                           }
                         }
                       }
                     }
-                  }
-                }
-              }
 
-              &#tab-dashboard{
-                > .row{
-                  > .col{
-                    > .card{
-                      &.connected{
-                        > .card-body{
-                          > .mic{
-                            background-color: $message_color;
-                          }
-                        }
-
-                        &.active{
-                          > .card-body{
-                            > .grey{
-                              animation-duration: 3s;
-                              animation-name: microphone;
-                              animation-iteration-count: infinite;
-                            }
-                          }
-                        }
-                      }
-
-                      &:not(.connected){
-                        > .card-body{
-                          > .mic{
-                            background-color: #9E9E9E;
-                          }
-                        }
-                      }
-
-                      > .card-body{
-                        position: relative;
-                        padding-top: 35px;
-
-                        > .grey, > .mic{
-                          position: absolute;
-                          border-radius: 50%;
-                          transform: translate(-50%, -50%);
-                          top: 0px;
-                          left: 50%;
-                        }
-
-                        > .grey{
-                          background-color: #E0E0E0;
-                          z-index: 1;
-                        }
-
-                        > .mic{
-                          color: white;
-                          z-index: 2;
-                          height: 40px;
-                          width: 40px;
-
-                          > i, > svg{
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                          }
-                        }
-
-                        > .input-group{
-                            &:not(:last-child){
-                                margin-bottom: 15px;
-                            }
+                    &:not(.connected) {
+                      > .card-body {
+                        > .mic {
+                          background-color: #9E9E9E;
                         }
                       }
                     }
-                  }
-                }
-              }
 
-              &#tab-skills{
-                > .row{
-                  display: flex;
-                  flex-wrap: wrap;
+                    > .card-body {
+                      position: relative;
+                      padding-top: 35px;
 
-                  > .col {
-                    display: flex;
-                    flex-direction: column;
-
-                    > .card{
-                      height: 100%;
-                      cursor: pointer;
-                      overflow: hidden;
-
-                      > .card-header{
-                        padding: 0px;
-                        position: relative;
-
-                        > .icon, > .wallpaper{
-                          background-color: white;
-                          background-position: center center;
-                          background-size: cover;
-                        }
-
-                        > .icon{
-                          border-radius: 0.25rem;
-                          height: 60px;
-                          width: 60px;
-                          border: 1px solid $border_color;
-                          position: absolute;
-                          left: 15px;
-                          top: 100%;
-                          transform: translateY(-50%);
-                        }
-
-                        > .wallpaper{
-                          width: 100%;
-                          padding-top: 56%;
-                        }
+                      > .grey, > .mic {
+                        position: absolute;
+                        border-radius: 50%;
+                        transform: translate(-50%, -50%);
+                        top: 0px;
+                        left: 50%;
                       }
 
-                      > .card-body{
-                        padding: 15px;
-                        padding-left: 60px + 15px * 2;
-                        position: relative;
+                      > .grey {
+                        background-color: #E0E0E0;
+                        z-index: 1;
+                      }
 
-                        > .card-title{
-                          margin: 0px;
-                          font-size: 16px;
-                        }
+                      > .mic {
+                        color: white;
+                        z-index: 2;
+                        height: 40px;
+                        width: 40px;
 
-                        > .installed{
+                        > i, > svg {
                           position: absolute;
-                          transform: translateY(-50%);
                           top: 50%;
-                          right: 15px;
-                          background-color: #4CAF50;
-                          border-radius: 100px;
-                          border: 1px solid #E0E5EC;
-                          color: white;
-                          padding: 0px 5px;
-                          line-height: 28px;
-                          height: 28px;
-                          min-width: 28px;
-                          text-align: center;
-
-                          &:not(:hover){
-                            > i, > svg{
-                              position: absolute;
-                              top: 50%;
-                              left: 50%;
-                              transform: translate(-50%, -50%);
-                            }
-
-                            > span{
-                              display: none;
-                            }
-                          }
-                        }
-                      }
-
-                      > .card-footer{
-                        > .row{
-                          > .col{
-                            > a{
-                              width: 100%;
-                              display: block;
-
-                              > button{
-                                width: 100%;
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-
-              &#tab-house{
-                > .row{
-                  > .col{
-                    > .map{
-                      height: 300px;
-                      border-radius: 0.25rem;
-                      border: 1px solid #ced4da;
-                      background-color: white;
-                    }
-
-                    > .room{
-                      &.has_title{
-                        > .square{
-                          padding-top: calc(100% - 1px * 2);
-                          border: 1px solid #ced4da;
-
-                          > i, > svg{
-                            top: calc(50% - 37px / 2);
-                          }
-
-                          > span{
-                            text-align: center;
-                            width: 100%;
-                            display: block;
-                            bottom: 0px;
-                            left: 0px;
-                            background-color: #e9ecef;
-                            border-top: 1px solid #ced4da;
-                            padding: 6px 12px;
-                          }
-                        }
-                      }
-
-                      &:not(.has_title){
-                        > .square{
-                          padding-top: calc(100% - 3px * 2);
-                          border: 3px dashed #ced4da;
-
-                          > i, > svg{
-                            top: 50%;
-                          }
-                        }
-                      }
-
-                      > .square{
-                        width: 100%;
-                        border-radius: 0.25rem;
-                        background-color: white;
-                        position: relative;
-                        cursor: pointer;
-
-                        > i, > svg{
                           left: 50%;
                           transform: translate(-50%, -50%);
-                          font-size: 40px;
                         }
+                      }
 
-                        > i, > svg, > span{
-                          position: absolute;
+                      > .input-group {
+                        &:not(:last-child) {
+                          margin-bottom: 15px;
                         }
                       }
                     }
                   }
                 }
               }
+            }
+          }
+
+          &#skills{
+            > .container {
+              > .row{
+              display: flex;
+              flex-wrap: wrap;
+
+              > .col {
+                display: flex;
+                flex-direction: column;
+
+                > .card{
+                  height: 100%;
+                  cursor: pointer;
+                  overflow: hidden;
+
+                  > .card-header{
+                    padding: 0px;
+                    position: relative;
+
+                    > .icon, > .wallpaper{
+                      background-color: white;
+                      background-position: center center;
+                      background-size: cover;
+                    }
+
+                    > .icon{
+                      border-radius: 0.25rem;
+                      height: 60px;
+                      width: 60px;
+                      border: 1px solid $border_color;
+                      position: absolute;
+                      left: 15px;
+                      top: 100%;
+                      transform: translateY(-50%);
+                    }
+
+                    > .wallpaper{
+                      width: 100%;
+                      padding-top: 56%;
+                    }
+                  }
+
+                  > .card-body{
+                    padding: 15px;
+                    padding-left: 60px + 15px * 2;
+                    position: relative;
+
+                    > .card-title{
+                      margin: 0px;
+                      font-size: 16px;
+                    }
+
+                    > .installed{
+                      position: absolute;
+                      transform: translateY(-50%);
+                      top: 50%;
+                      right: 15px;
+                      background-color: #4CAF50;
+                      border-radius: 100px;
+                      border: 1px solid #E0E5EC;
+                      color: white;
+                      padding: 0px 5px;
+                      line-height: 28px;
+                      height: 28px;
+                      min-width: 28px;
+                      text-align: center;
+
+                      &:not(:hover){
+                        > i, > svg{
+                          position: absolute;
+                          top: 50%;
+                          left: 50%;
+                          transform: translate(-50%, -50%);
+                        }
+
+                        > span{
+                          display: none;
+                        }
+                      }
+                    }
+                  }
+
+                  > .card-footer{
+                    > .row{
+                      > .col{
+                        > a{
+                          width: 100%;
+                          display: block;
+
+                          > button{
+                            width: 100%;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            }
+          }
+
+          &#house{
+            > .container {
+              > .row{
+              > .col{
+                > .map{
+                  height: 300px;
+                  border-radius: 0.25rem;
+                  border: 1px solid #ced4da;
+                  background-color: white;
+                }
+
+                > .room{
+                  &.has_title{
+                    > .square{
+                      padding-top: calc(100% - 1px * 2);
+                      border: 1px solid #ced4da;
+
+                      > i, > svg{
+                        top: calc(50% - 37px / 2);
+                      }
+
+                      > span{
+                        text-align: center;
+                        width: 100%;
+                        display: block;
+                        bottom: 0px;
+                        left: 0px;
+                        background-color: #e9ecef;
+                        border-top: 1px solid #ced4da;
+                        padding: 6px 12px;
+                      }
+                    }
+                  }
+
+                  &:not(.has_title){
+                    > .square{
+                      padding-top: calc(100% - 3px * 2);
+                      border: 3px dashed #ced4da;
+
+                      > i, > svg{
+                        top: 50%;
+                      }
+                    }
+                  }
+
+                  > .square{
+                    width: 100%;
+                    border-radius: 0.25rem;
+                    background-color: white;
+                    position: relative;
+                    cursor: pointer;
+
+                    > i, > svg{
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                      font-size: 40px;
+                    }
+
+                    > i, > svg, > span{
+                      position: absolute;
+                    }
+                  }
+                }
+              }
+            }
             }
           }
         }

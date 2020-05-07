@@ -1,5 +1,26 @@
 <div class="row">
-    <div class="col col-12 col-sm-12 col-md-6 col-lg-4" v-for="(skill,index) in skills.Library">
+    <div class="col col-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">{{ Dictionary.search }}</span>
+            </div>
+            <input v-model="skillSearch" type="text" :placeholder="Dictionary.search_placeholder" class="form-control">
+        </div>
+    </div>
+    <div class="col col-12 col-sm-6 col-md-6 col-lg-6">
+        <!--
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">{{ Dictionary.install_from_zip }}</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input">
+                <label class="custom-file-label">{{ Dictionary.choose_file }}</label>
+            </div>
+        </div>
+        -->
+    </div>
+    <div v-if="skill.title.includes(skillSearch) === true" class="col col-12 col-sm-12 col-md-6 col-lg-4" v-for="(skill,index) in skills.Library">
         <b-card no-body v-b-modal="'modal-skill'+index">
             <b-card-header>
                 <div class="wallpaper" :style="{ backgroundImage: 'url(' + skill.wallpaper + ')' }"></div>

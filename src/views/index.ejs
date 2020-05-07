@@ -19,35 +19,43 @@
           <div></div>
         </div>
       </div>
-      <b-tabs align="left">
-        <b-tab data-tab-name="home">
-          <template v-slot:title>
-            <i class="fas fa-tachometer-alt"></i>
-            <span>{{ Dictionary.dashboard }}</span>
-          </template>
-          <div class="container" id="tab-dashboard">
-            <%- include('./dashbord/index.ejs') %>
-          </div>
-        </b-tab>
-        <b-tab data-tab-name="skills">
-          <template v-slot:title>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#home">
             <i class="fas fa-border-all"></i>
+            <span>{{ Dictionary.dashboard }}</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#skills">
+            <i class="fas fa-tachometer-alt"></i>
             <span>{{ Dictionary.skills }}</span>
-          </template>
-          <div class="container" id="tab-skills">
-            <%- include('./skills/index.ejs') %>
-          </div>
-        </b-tab>
-        <b-tab data-tab-name="house">
-          <template v-slot:title>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#house">
             <i class="far fa-house"></i>
             <span>{{ Dictionary.house }}</span>
-          </template>
-          <div class="container" id="tab-house">
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="home">
+          <div class="container">
+            <%- include('./dashbord/index.ejs') %>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="skills">
+          <div class="container">
+            <%- include('./skills/index.ejs') %>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="house">
+          <div class="container">
             <%- include('./house/index.ejs') %>
           </div>
-        </b-tab>
-      </b-tabs>
+        </div>
+      </div>
       <%- include('./skills/modal.ejs') %>
       <%- include('./house/modal.ejs') %>
     </div>

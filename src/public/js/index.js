@@ -42,7 +42,8 @@ const APP = new Vue({
     NovaClients: [],
     House: {},
     ShowSpinner: false,
-    AlreadyConnected: false
+    AlreadyConnected: false,
+    skillSearch: ""
   }
 });
 

@@ -60,6 +60,9 @@ html body {
 html body > #app {
   height: 100%;
 }
+html body > #app .custom-file-label:after {
+  content: none;
+}
 html body > #app [role=button] {
   outline: none;
 }
@@ -102,77 +105,75 @@ html body > #app > #spinner > .center > div {
   animation: spin 0.5s linear infinite;
   border-radius: 50%;
 }
-html body > #app > .tabs {
-  height: 100%;
-}
-html body > #app > .tabs > div > .nav {
+html body > #app > .nav {
   background-color: white;
   border-bottom: 1px solid #E0E5EC;
   height: 54px;
   box-sizing: content-box;
   padding: 0px 18px;
 }
-html body > #app > .tabs > div > .nav > .nav-item {
+html body > #app > .nav > li {
   height: 54px;
   padding: 0px 12px;
 }
-html body > #app > .tabs > div > .nav > .nav-item > .nav-link {
+html body > #app > .nav > li > a {
   height: 54px;
   line-height: 54px;
   padding: 0px;
   cursor: pointer;
   border-radius: 0px;
   border: none;
+  text-decoration: none;
 }
-html body > #app > .tabs > div > .nav > .nav-item > .nav-link:focus {
+html body > #app > .nav > li > a:focus {
   outline: 0;
 }
-html body > #app > .tabs > div > .nav > .nav-item > .nav-link.active {
+html body > #app > .nav > li > a.active {
   background-color: transparent;
   color: #467fcf;
 }
-html body > #app > .tabs > div > .nav > .nav-item > .nav-link:not(.active) {
+html body > #app > .nav > li > a:not(.active) {
   color: #9aa0ac;
 }
-html body > #app > .tabs > div > .nav > .nav-item > .nav-link > svg {
+html body > #app > .nav > li > a > svg {
   font-size: 14px;
 }
-html body > #app > .tabs > div > .nav > .nav-item > .nav-link > span {
+html body > #app > .nav > li > a > span {
   font-size: 15px;
 }
-html body > #app > .tabs > .tab-content {
+html body > #app > .tab-content {
   height: calc(100% - 54px - 1px);
   padding: 15px;
   overflow: auto;
 }
-html body > #app > .tabs > .tab-content > .tab-pane {
+html body > #app > .tab-content > .tab-pane {
   min-height: 100%;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container > .row > .col {
+html body > #app > .tab-content > .tab-pane > .container > .row > .col {
   padding-top: 15px;
   padding-bottom: 15px;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container > .row > .col > .card {
+html body > #app > .tab-content > .tab-pane > .container > .row > .col > .card {
   border-color: #E0E5EC;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container > .row > .col > .card > .card-header, html body > #app > .tabs > .tab-content > .tab-pane > .container > .row > .col > .card > .card-footer {
+html body > #app > .tab-content > .tab-pane > .container > .row > .col > .card > .card-header, html body > #app > .tab-content > .tab-pane > .container > .row > .col > .card > .card-footer {
   background-color: transparent;
   border-color: #E0E5EC;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container > .row > .col > .card > .card-footer {
+html body > #app > .tab-content > .tab-pane > .container > .row > .col > .card > .card-footer {
   padding: 15px;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container > .row > .col > .card > .card-footer > .input-group {
+html body > #app > .tab-content > .tab-pane > .container > .row > .col > .card > .card-footer > .input-group {
   margin-bottom: 0px;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container > .row > .col > .card > .card-footer > .input-group > input {
+html body > #app > .tab-content > .tab-pane > .container > .row > .col > .card > .card-footer > .input-group > input {
   border: none;
   border-radius: 100px;
   background-color: #F2F2F2;
   font-size: 14px;
   margin-right: 15px;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container > .row > .col > .card > .card-footer > .input-group > .input-group-append > button {
+html body > #app > .tab-content > .tab-pane > .container > .row > .col > .card > .card-footer > .input-group > .input-group-append > button {
   border-radius: 50%;
   color: #2196F3;
   background-color: transparent;
@@ -181,70 +182,70 @@ html body > #app > .tabs > .tab-content > .tab-pane > .container > .row > .col >
   padding: 0px;
   text-align: center;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-dashboard > .row > .col > .card.connected > .card-body > .mic {
+html body > #app > .tab-content > .tab-pane#home > .container > .row > .col > .card.connected > .card-body > .mic {
   background-color: #2196F3;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-dashboard > .row > .col > .card.connected.active > .card-body > .grey {
+html body > #app > .tab-content > .tab-pane#home > .container > .row > .col > .card.connected.active > .card-body > .grey {
   animation-duration: 3s;
   animation-name: microphone;
   animation-iteration-count: infinite;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-dashboard > .row > .col > .card:not(.connected) > .card-body > .mic {
+html body > #app > .tab-content > .tab-pane#home > .container > .row > .col > .card:not(.connected) > .card-body > .mic {
   background-color: #9E9E9E;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-dashboard > .row > .col > .card > .card-body {
+html body > #app > .tab-content > .tab-pane#home > .container > .row > .col > .card > .card-body {
   position: relative;
   padding-top: 35px;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-dashboard > .row > .col > .card > .card-body > .grey, html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-dashboard > .row > .col > .card > .card-body > .mic {
+html body > #app > .tab-content > .tab-pane#home > .container > .row > .col > .card > .card-body > .grey, html body > #app > .tab-content > .tab-pane#home > .container > .row > .col > .card > .card-body > .mic {
   position: absolute;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   top: 0px;
   left: 50%;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-dashboard > .row > .col > .card > .card-body > .grey {
+html body > #app > .tab-content > .tab-pane#home > .container > .row > .col > .card > .card-body > .grey {
   background-color: #E0E0E0;
   z-index: 1;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-dashboard > .row > .col > .card > .card-body > .mic {
+html body > #app > .tab-content > .tab-pane#home > .container > .row > .col > .card > .card-body > .mic {
   color: white;
   z-index: 2;
   height: 40px;
   width: 40px;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-dashboard > .row > .col > .card > .card-body > .mic > i, html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-dashboard > .row > .col > .card > .card-body > .mic > svg {
+html body > #app > .tab-content > .tab-pane#home > .container > .row > .col > .card > .card-body > .mic > i, html body > #app > .tab-content > .tab-pane#home > .container > .row > .col > .card > .card-body > .mic > svg {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-dashboard > .row > .col > .card > .card-body > .input-group:not(:last-child) {
+html body > #app > .tab-content > .tab-pane#home > .container > .row > .col > .card > .card-body > .input-group:not(:last-child) {
   margin-bottom: 15px;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row {
   display: flex;
   flex-wrap: wrap;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col {
   display: flex;
   flex-direction: column;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card {
   height: 100%;
   cursor: pointer;
   overflow: hidden;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card > .card-header {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-header {
   padding: 0px;
   position: relative;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card > .card-header > .icon, html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card > .card-header > .wallpaper {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-header > .icon, html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-header > .wallpaper {
   background-color: white;
   background-position: center center;
   background-size: cover;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card > .card-header > .icon {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-header > .icon {
   border-radius: 0.25rem;
   height: 60px;
   width: 60px;
@@ -254,20 +255,20 @@ html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .r
   top: 100%;
   transform: translateY(-50%);
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card > .card-header > .wallpaper {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-header > .wallpaper {
   width: 100%;
   padding-top: 56%;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card > .card-body {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-body {
   padding: 15px;
   padding-left: 90px;
   position: relative;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card > .card-body > .card-title {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-body > .card-title {
   margin: 0px;
   font-size: 16px;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card > .card-body > .installed {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-body > .installed {
   position: absolute;
   transform: translateY(-50%);
   top: 50%;
@@ -282,36 +283,36 @@ html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .r
   min-width: 28px;
   text-align: center;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card > .card-body > .installed:not(:hover) > i, html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card > .card-body > .installed:not(:hover) > svg {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-body > .installed:not(:hover) > i, html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-body > .installed:not(:hover) > svg {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card > .card-body > .installed:not(:hover) > span {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-body > .installed:not(:hover) > span {
   display: none;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card > .card-footer > .row > .col > a {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-footer > .row > .col > a {
   width: 100%;
   display: block;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-skills > .row > .col > .card > .card-footer > .row > .col > a > button {
+html body > #app > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-footer > .row > .col > a > button {
   width: 100%;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .map {
+html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .map {
   height: 300px;
   border-radius: 0.25rem;
   border: 1px solid #ced4da;
   background-color: white;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .room.has_title > .square {
+html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .room.has_title > .square {
   padding-top: calc(100% - 1px * 2);
   border: 1px solid #ced4da;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .room.has_title > .square > i, html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .room.has_title > .square > svg {
+html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .room.has_title > .square > i, html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .room.has_title > .square > svg {
   top: calc(50% - 37px / 2);
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .room.has_title > .square > span {
+html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .room.has_title > .square > span {
   text-align: center;
   width: 100%;
   display: block;
@@ -321,26 +322,26 @@ html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .ro
   border-top: 1px solid #ced4da;
   padding: 6px 12px;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .room:not(.has_title) > .square {
+html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .room:not(.has_title) > .square {
   padding-top: calc(100% - 3px * 2);
   border: 3px dashed #ced4da;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .room:not(.has_title) > .square > i, html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .room:not(.has_title) > .square > svg {
+html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .room:not(.has_title) > .square > i, html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .room:not(.has_title) > .square > svg {
   top: 50%;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .room > .square {
+html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .room > .square {
   width: 100%;
   border-radius: 0.25rem;
   background-color: white;
   position: relative;
   cursor: pointer;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .room > .square > i, html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .room > .square > svg {
+html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .room > .square > i, html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .room > .square > svg {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 40px;
 }
-html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .room > .square > i, html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .room > .square > svg, html body > #app > .tabs > .tab-content > .tab-pane > .container#tab-house > .row > .col > .room > .square > span {
+html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .room > .square > i, html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .room > .square > svg, html body > #app > .tab-content > .tab-pane#house > .container > .row > .col > .room > .square > span {
   position: absolute;
 }
 html body .modal > .modal-dialog > .modal-content > header {

@@ -1,1 +1,14 @@
-{"Language":"fr-FR","WebServerPort":8080,"LicenseKey":"non-commercial-and-evaluation","HotWord":"Nova","Google":{"TextToSpeech":{"PlaybackRate":1,"ProjectID":null,"Gender":"FEMALE"},"CustomSearchAPI":null}}
+{
+    "Language": "fr-FR",
+    "WebServerPort": 8080,
+    "LicenseKey": "non-commercial-and-evaluation",
+    "HotWord": "Nova",
+    "Google": {
+        "TextToSpeech": {
+            "PlaybackRate": 1,
+            "ProjectID": null,
+            "Gender": "FEMALE"
+        },
+        "CustomSearchAPI": null
+    }
+}
