@@ -20,6 +20,7 @@ const APP = new Vue({
   el: "#app",
   methods: {
     set_language: function(event) {
+      this.ShowSpinner = true;
       SOCKET.emit("set_language", event.target.value);
     },
     install_skill: function(event) {
