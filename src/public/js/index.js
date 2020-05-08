@@ -23,6 +23,10 @@ const APP = new Vue({
       this.ShowSpinner = true;
       SOCKET.emit("set_language", event.target.value);
     },
+    set_hot_word: function(event){
+      this.ShowSpinner = true;
+      SOCKET.emit("set_hot_word", event.target.value);
+    },
     install_skill: function(event) {
       this.ShowSpinner = true;
       SOCKET.emit("install_skill", event.target.closest("button").getAttribute("data-git"));
@@ -43,7 +47,9 @@ const APP = new Vue({
     House: {},
     ShowSpinner: false,
     AlreadyConnected: false,
-    skillSearch: ""
+    skillSearch: "",
+    hotWords: "",
+    hotWord: ""
   }
 });
 
@@ -51,10 +57,10 @@ const SOCKET = io("http://localhost:8081");
 
 // Si la connection socket avec le serveur est réussie.
 SOCKET.on("connect", function() {
-  if(APP.AlreadyConnected === false){
+  if(APP.AlreadyConnected === false) {
     APP.AlreadyConnected = true;
   }
-  else{
+  else {
     document.location.reload(true);
   }
 });
@@ -62,6 +68,14 @@ SOCKET.on("connect", function() {
 // Si le serveur envoie une mise à jour de la liste des clients NOVA.
 SOCKET.on("set_clients", function(_NovaClients) {
   APP.NovaClients = _NovaClients;
+});
+
+SOCKET.on("set_hot_words", function(_hotWords) {
+  APP.hotWords = _hotWords;
+});
+
+SOCKET.on("set_hot_word", function(_hotWord) {
+  APP.hotWord = _hotWord;
 });
 
 // Si le serveur envoie une mise à jour de ???

@@ -38,7 +38,14 @@ class FS {
     // Cette fonction télécharge le fichier présent sur l'URL demandée et le dépose au chemin demandé.
     static downloadFile(_url, _destination, _main, _callback){
         const FILE = LIBRARIES.FS.createWriteStream(_destination);
-        LIBRARIES.HTTPS.get(_url, function(_response) {
+        let lib = null;
+        if(_url.startsWith("https://")){
+            lib = LIBRARIES.HTTPS;
+        }
+        else{
+            lib = LIBRARIES.HTTP;
+        }
+        lib.get(_url, function(_response) {
             // TODO : Gérer le cas 404.
             if ([301, 302].indexOf(_response.statusCode) > -1 ) {
                 FS.downloadFile(_response.headers.location, _destination, _main, _callback);

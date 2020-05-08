@@ -30,6 +30,8 @@ class Main {
     this.Settings = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/settings.json", "utf8")); // On récupère les paramètres du serveur.
     this.Translation = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/translation.json", "utf8")); // On récupère les traductions pour les GUI.
 
+    this.HotWords = LIBRARIES.FS.readdirSync(this.DirName + "/public/hot_words").filter(x => x.endsWith(".pmdl")).map(x => x.slice(0, -5));
+
     this.ClientSkillsPublic = {}; // Cet objet va contenir l'arbre des fichiers provenant des skills destinés à la GUI des clients.
 
     this.ExpressViewsDirectories = [this.DirName + "/views"];
@@ -265,6 +267,7 @@ class Main {
     this.ClientIO.on("connection", function(socket){
       socket.emit("set_skills_public_files", SELF.ClientSkillsPublic);
       socket.emit("set_language", SELF.Settings.Language);
+      socket.emit("set_hot_word", SELF.Settings.HotWord);
 
       // Lorsque l'utilisateur envoie un message au serveur.
       socket.on("cs_message", function(_message){
@@ -380,6 +383,8 @@ class Main {
       socket.emit("set_house", SELF.House);
       socket.emit("set_language", SELF.Settings.Language);
       socket.emit("set_translation", SELF.Translation[SELF.Settings.Language]);
+      socket.emit("set_hot_words", SELF.HotWords);
+      socket.emit("set_hot_word", SELF.Settings.HotWord);
 
       // L'utilisateur demande à installer un skill
       socket.on("install_skill", function(_git){
@@ -394,6 +399,13 @@ class Main {
       // L'utilisateur demande à changer de langue
       socket.on("set_language", function(_language) {
         SELF.Settings.Language = _language;
+        LIBRARIES.FS.writeFileSync(SELF.DirName + "/settings.json", JSON.stringify(SELF.Settings, null, 4), "utf8");
+        SELF.LauncherIO.emit("reboot_server");
+      });
+
+      // L'utilisateur demande à changer le mot de déclenchement
+      socket.on("set_hot_word", function(_hot_word) {
+        SELF.Settings.HotWord = _hot_word;
         LIBRARIES.FS.writeFileSync(SELF.DirName + "/settings.json", JSON.stringify(SELF.Settings, null, 4), "utf8");
         SELF.LauncherIO.emit("reboot_server");
       });

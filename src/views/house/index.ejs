@@ -12,18 +12,15 @@
         </div>
     </div>
     <div class="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-        <!--
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">{{ Dictionary.hotWord }}</span>
             </div>
-            <select class="custom-select">
+            <select v-model="hotWord" class="custom-select" @change="set_hot_word">
                 <option selected>{{ Dictionary.choose }}</option>
-                <option value="Nova">Nova</option>
-                <option value="Jarvis">Jarvis</option>
+                <option :key="index" :value="item" v-for="(item, index) in hotWords">{{item}}</option>
             </select>
         </div>
-        -->
     </div>
     <!--
     <div class="col col-12">
@@ -38,6 +35,8 @@
       <div class="map" id="map"></div>
     </div>
      -->
+    <!--
     <novaroom icon="fas fa-plus" ></novaroom>
     <novaroom :key="index" :Name="room.Name" :Icon="room.Icon" v-for="(room, index) in House.Rooms" v-b-modal="'modal-room'+index"></novaroom>
+    -->
 </div>
