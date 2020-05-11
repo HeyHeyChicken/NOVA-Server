@@ -4,7 +4,6 @@ const LIBRARIES = {
   HTTPS: require("https"),
   SocketIO: require("socket.io"),
   FS: require("fs"),
-  SQLite3: require("sqlite3").verbose(),
   WAV: require("wav"),
   STT: require("@google-cloud/speech"),
   SocketIOClient: require("socket.io-client"),
