@@ -1,7 +1,6 @@
 {
     "Language": "fr-FR",
     "WebServerPort": 8080,
-    "LicenseKey": "non-commercial-and-evaluation",
     "Google": {
         "TextToSpeech": {
             "PlaybackRate": 1,

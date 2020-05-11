@@ -5,4 +5,5 @@ node_modules/
 **/src/voices/*.wav
 sqlite.db
 .idea/
-/src/public/hot_words/index.json
+/src/public/hot_words/*.json
+/src/lib/DB/Client.json

@@ -42,7 +42,6 @@ class Main {
     this.ServerIO = null; // Ce serveur socket relie le serveur à son interface.
     this.WavWriters = {}; // Cet objet contiens les modules qui récupèrent la voix pour la convertir en fichier.
 
-    this.DataBase = null; // Base de données du serveur.
     this.GoogleTextToSpeech = new LIBRARIES.GoogleTextToSpeech(this); // On initialise le service TTS de Google.
     this.Manager = new LIBRARIES.Manager(this.GoogleTextToSpeech); // Cette entité permet de convertir la demande utilisateur en action tout en extrayant les données importantes.
 
@@ -158,7 +157,6 @@ class Main {
     this.House.AddRoom("Salon", "fas fa-tv");
     this.House.AddRoom("Toilettes", "fas fa-toilet");
 
-    this.InitialiseDataBase(); // On initialise la base de donnée et créé les tables si besoin.
     this.InitialiseServers(); // On initialise les serveurs de NOVA.
     LIBRARIES.Skill.LoadAll(this); // On charge les skills du serveur NOVA.
   }
@@ -198,23 +196,6 @@ class Main {
   // Cette fonction transforme un texte en voix et l'envoie au client.
   TTS(_socket, _text, _callback){
     this.GoogleTextToSpeech.TTS(_socket, _text, _callback);
-  }
-
-  // Cette fonction initialise la base de donnée et créée les tables si besoin.
-  InitialiseDataBase(){
-    const SELF = this;
-
-    const DATA_BASE_FILE_NAME = this.DirName + "/sqlite.db";
-    const BOOL = !LIBRARIES.FS.existsSync(DATA_BASE_FILE_NAME);
-    SELF.DataBase = new LIBRARIES.SQLite3.Database(DATA_BASE_FILE_NAME);
-    if (BOOL) {
-      SELF.DataBase.serialize(function() {
-        SELF.DataBase.run("CREATE TABLE NovaClient (ID INT, Name TEXT, Connected INT, Speaking INT, SocketID TEXT)");
-      });
-    }
-    else{
-      LIBRARIES.NOVAClient.Reset(SELF.DataBase);
-    }
   }
 
   // Cette fonction initialise la conection socket avec le launcher.
@@ -276,6 +257,15 @@ class Main {
 
       // Lorsque l'utilisateur envoie un message au serveur.
       socket.on("add_client", function(_ID){
+        let client = LIBRARIES.NOVAClient.SelectByID(_ID, SELF);
+        if(client === undefined){
+          client = new LIBRARIES.NOVAClient(_ID).Insert(SELF);
+          client.SetConnected(true, SELF);
+          client.SetSocketID(socket.client.conn.id, SELF);
+
+          SELF.UpdateServerGUI();
+        }
+        /*
         LIBRARIES.NOVAClient.SelectByID(_ID, SELF.DataBase, function(_client){
           if(_client === undefined){
             _client = new LIBRARIES.NOVAClient(_ID).Insert(SELF.DataBase);
@@ -284,6 +274,7 @@ class Main {
           _client.SetSocketID(socket.client.conn.id, SELF.DataBase);
           SELF.UpdateServerGUI();
         });
+         */
       });
 
       // Lorsque l'utilisateur fait une demande directe au serveur.
@@ -307,12 +298,14 @@ class Main {
           sampleRate: _data.fps,
           bitDepth: _data.bps
         });
+        /*
         LIBRARIES.NOVAClient.SelectBySocketID(socket.client.conn.id, SELF.DataBase, function(_client){
           if(_client !== undefined){
             _client.SetSpeaking(true, SELF.DataBase);
             SELF.UpdateServerGUI();
           }
         });
+         */
       });
 
       // L'utilisateur est en train de parler, nous enregisrons son flux audio dans un fichier.
@@ -345,17 +338,19 @@ class Main {
             console.log(`Transcription: ${transcription}`);
         })();
 
-
+        /*
         LIBRARIES.NOVAClient.SelectBySocketID(socket.client.conn.id, SELF.DataBase, function(_client){
           if(_client !== undefined){
             _client.SetSpeaking(false, SELF.DataBase);
             SELF.UpdateServerGUI();
           }
         });
+         */
       });
 
       // Lorsqu'un client NOVA se déconnecte du serveur NOVA.
       socket.on("disconnect", function(){
+        /*
         LIBRARIES.NOVAClient.SelectBySocketID(socket.client.conn.id, SELF.DataBase, function(_client){
           if(_client !== undefined){
             _client.SetConnected(false, SELF.DataBase);
@@ -363,6 +358,7 @@ class Main {
             SELF.UpdateServerGUI();
           }
         });
+         */
       });
     });
   }
@@ -374,9 +370,9 @@ class Main {
     this.ServerIO = LIBRARIES.SocketIO();
     this.ServerIO.on("connection", function(socket){ // Un utilisateur vient d'ouvrir la page Web du serveur NOVA.
       // On envoie à l'interface WEB la liste des clients NOVA.
-      LIBRARIES.NOVAClient.SelectAll(SELF.DataBase, function(_clients){
-        socket.emit("set_clients", _clients);
-      });
+
+      socket.emit("set_clients", LIBRARIES.NOVAClient.SelectAll(SELF));
+
       // On envoie à l'interface WEB la liste des skills officiels installables.
       socket.emit("set_skills", SELF.URL_Skills);
       socket.emit("set_installed_skills", SELF.SkillPermanentSettings.installed);
@@ -433,9 +429,7 @@ class Main {
     const SELF = this;
 
     if(SELF.ServerIO.sockets !== undefined){
-      LIBRARIES.NOVAClient.SelectAll(SELF.DataBase, function(_clients){
-        SELF.ServerIO.sockets.emit("set_clients", _clients);
-      });
+      SELF.ServerIO.sockets.emit("set_clients", LIBRARIES.NOVAClient.SelectAll(SELF));
     }
   }
 

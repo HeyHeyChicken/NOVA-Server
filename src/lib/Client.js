@@ -1,3 +1,7 @@
+const LIBRARIES = {
+  FS: require("fs")
+};
+
 class Client {
   constructor(_ID, _connected = false, _name = "", _speaking = false, _socketID = null) {
     this.ID = _ID;
@@ -7,37 +11,64 @@ class Client {
     this.SocketID = _socketID;
   }
 
-  Insert(_db){
-    var stmt = _db.prepare("INSERT INTO NovaClient VALUES (?, ?, ?, ?, ?)");
-    stmt.run(this.ID, this.Name, this.Connected, this.Speaking, this.SocketID);
-    stmt.finalize();
+  Insert(_main){
+    Client._PrepareFile(_main);
+
+    const DATA = JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8"));
+    DATA.push(this);
+    LIBRARIES.FS.writeFileSync(Client._GetPath(_main), JSON.stringify(DATA, null, 4), "utf8");
+
     return this;
   }
 
-  SetSocketID(_socketID, _db){
-    const SELF = this;
+  SetSocketID(_socketID, _main){
+    Client._PrepareFile(_main);
 
-    var stmt = _db.prepare("UPDATE NovaClient SET SocketID = ? WHERE ID = ?");
-    stmt.run(_socketID, this.ID);
-    stmt.finalize();
+    this.SocketID = _socketID;
+
+    const DATA = JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8"));
+    const INDEX = DATA.findIndex(x => x.ID === this.ID);
+
+    if(INDEX > -1){
+      DATA[INDEX].SocketID = _socketID;
+
+      LIBRARIES.FS.writeFileSync(Client._GetPath(_main), JSON.stringify(DATA, null, 4), "utf8");
+    }
+
     return this;
   }
 
-  SetConnected(_connected, _db){
-    const SELF = this;
+  SetConnected(_connected, _main){
+    Client._PrepareFile(_main);
 
-    var stmt = _db.prepare("UPDATE NovaClient SET Connected = ? WHERE ID = ?");
-    stmt.run(_connected, this.ID);
-    stmt.finalize();
+    this.Connected = _connected;
+
+    const DATA = JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8"));
+    const INDEX = DATA.findIndex(x => x.ID === this.ID);
+
+    if(INDEX > -1){
+      DATA[INDEX].Connected = _connected;
+
+      LIBRARIES.FS.writeFileSync(Client._GetPath(_main), JSON.stringify(DATA, null, 4), "utf8");
+    }
+
     return this;
   }
 
-  SetSpeaking(_speaking, _db){
-    const SELF = this;
+  SetSpeaking(_speaking, _main){
+    Client._PrepareFile(_main);
 
-    var stmt = _db.prepare("UPDATE NovaClient SET Speaking = ? WHERE ID = ?");
-    stmt.run(_speaking, this.ID);
-    stmt.finalize();
+    this.Speaking = _speaking;
+
+    const DATA = JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8"));
+    const INDEX = DATA.findIndex(x => x.ID === this.ID);
+
+    if(INDEX > -1){
+      DATA[INDEX].Speaking = _speaking;
+
+      LIBRARIES.FS.writeFileSync(Client._GetPath(_main), JSON.stringify(DATA, null, 4), "utf8");
+    }
+
     return this;
   }
 
@@ -45,64 +76,34 @@ class Client {
   /* ### STATIC ############################################################################# */
   /* ######################################################################################## */
 
-  static SelectBySocketID(_socketID, _db, _callback){
-    const SELF = this;
+  static SelectBySocketID(_socketID, _main, _callback){
+    Client._PrepareFile(_main);
 
-    _db.get("SELECT * FROM NovaClient WHERE SocketID = ?", [_socketID], (err, row) => {
-      if (err) {
-        throw err;
-      }
-      if(_callback !== undefined){
-        if(row === undefined){
-          _callback(row);
-        }
-        else{
-          _callback(Client._DBToObj(row));
-        }
-      }
-    });
+    return JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8")).find(x => x.SocketID === _socketID);
   }
 
-  static SelectByID(_ID, _db, _callback){
-    const SELF = this;
+  static SelectByID(_ID, _main){
+    Client._PrepareFile(_main);
 
-    _db.get("SELECT * FROM NovaClient WHERE ID = ?", [_ID], (err, row) => {
-      if (err) {
-        throw err;
-      }
-      if(_callback !== undefined){
-        if(row === undefined){
-          _callback(row);
-        }
-        else{
-          _callback(Client._DBToObj(row));
-        }
-      }
-    });
+    return JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8")).find(x => x.ID === _ID);
   }
 
-  static SelectAll(_db, _callback){
-    const SELF = this;
+  static SelectAll(_main){
+    Client._PrepareFile(_main);
 
-    _db.all("SELECT * FROM NovaClient", [], (err, rows) => {
-      if (err) {
-        throw err;
-      }
-      if(_callback !== undefined){
-        const ARRAY = [];
-        for(let index = 0; index < rows.length; index++){
-          ARRAY.push(Client._DBToObj(rows[index]));
-        }
-        _callback(ARRAY);
-      }
-    });
+    return JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8"));
   }
 
-  static Reset(_db){
-    var stmt = _db.prepare("UPDATE NovaClient SET Speaking = 0, Connected = 0");
-    stmt.run();
-    stmt.finalize();
-    return this;
+  static Reset(_main){
+    Client._PrepareFile(_main);
+
+    const DATA = JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8"));
+    for(let i = 0; i < DATA.length; i++){
+      DATA[i].Speaking = 0;
+      DATA[i].Connected = 0;
+    }
+
+    LIBRARIES.FS.writeFileSync(Client._GetPath(_main), JSON.stringify(DATA, null, 4), "utf8");
   }
 
   /* ######################################################################################## */
@@ -115,6 +116,17 @@ class Client {
       CLIENT[attr] = _dbRow[attr];
     }
     return CLIENT;
+  }
+
+  static _GetPath(_main){
+    return _main.DirName + "/lib/DB/Client.json";
+  }
+
+  static _PrepareFile(_main){
+    const PATH = Client._GetPath(_main);
+    if (!LIBRARIES.FS.existsSync(PATH)) {
+      LIBRARIES.FS.writeFileSync(PATH, JSON.stringify([]));
+    }
   }
 }
 
