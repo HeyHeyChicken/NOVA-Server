@@ -130,6 +130,9 @@ class Client {
   }
 
   static _Convert(_db){
+    if(_db === undefined){
+      return _db;
+    }
     return new Client(_db.ID, _db.Connected, _db.Name, _db.Speaking, _db.SocketID);
   }
 }
