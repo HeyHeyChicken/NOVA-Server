@@ -265,16 +265,6 @@ class Main {
 
           SELF.UpdateServerGUI();
         }
-        /*
-        LIBRARIES.NOVAClient.SelectByID(_ID, SELF.DataBase, function(_client){
-          if(_client === undefined){
-            _client = new LIBRARIES.NOVAClient(_ID).Insert(SELF.DataBase);
-          }
-          _client.SetConnected(true, SELF.DataBase);
-          _client.SetSocketID(socket.client.conn.id, SELF.DataBase);
-          SELF.UpdateServerGUI();
-        });
-         */
       });
 
       // Lorsque l'utilisateur fait une demande directe au serveur.
@@ -298,14 +288,12 @@ class Main {
           sampleRate: _data.fps,
           bitDepth: _data.bps
         });
-        /*
-        LIBRARIES.NOVAClient.SelectBySocketID(socket.client.conn.id, SELF.DataBase, function(_client){
-          if(_client !== undefined){
-            _client.SetSpeaking(true, SELF.DataBase);
-            SELF.UpdateServerGUI();
-          }
-        });
-         */
+        let client = LIBRARIES.NOVAClient.SelectBySocketID(socket.client.conn.id, SELF);
+        if(client !== undefined){
+          client.SetSpeaking(true, SELF);
+
+          SELF.UpdateServerGUI();
+        }
       });
 
       // L'utilisateur est en train de parler, nous enregisrons son flux audio dans un fichier.
@@ -338,27 +326,24 @@ class Main {
             console.log(`Transcription: ${transcription}`);
         })();
 
-        /*
-        LIBRARIES.NOVAClient.SelectBySocketID(socket.client.conn.id, SELF.DataBase, function(_client){
-          if(_client !== undefined){
-            _client.SetSpeaking(false, SELF.DataBase);
-            SELF.UpdateServerGUI();
-          }
-        });
-         */
+        let client = LIBRARIES.NOVAClient.SelectBySocketID(socket.client.conn.id, SELF);
+        if(client !== undefined){
+          client.SetSpeaking(false, SELF);
+
+          SELF.UpdateServerGUI();
+        }
       });
 
       // Lorsqu'un client NOVA se déconnecte du serveur NOVA.
       socket.on("disconnect", function(){
-        /*
-        LIBRARIES.NOVAClient.SelectBySocketID(socket.client.conn.id, SELF.DataBase, function(_client){
-          if(_client !== undefined){
-            _client.SetConnected(false, SELF.DataBase);
-            _client.SetSpeaking(false, SELF.DataBase);
-            SELF.UpdateServerGUI();
-          }
-        });
-         */
+
+        let client = LIBRARIES.NOVAClient.SelectBySocketID(socket.client.conn.id, SELF);
+        if(client !== undefined){
+          client.SetConnected(false, SELF);
+          client.SetSpeaking(false, SELF);
+
+          SELF.UpdateServerGUI();
+        }
       });
     });
   }
