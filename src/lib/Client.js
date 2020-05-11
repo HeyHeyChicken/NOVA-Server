@@ -79,13 +79,13 @@ class Client {
   static SelectBySocketID(_socketID, _main, _callback){
     Client._PrepareFile(_main);
 
-    return JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8")).find(x => x.SocketID === _socketID);
+    return Client._Convert(JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8")).find(x => x.SocketID === _socketID));
   }
 
   static SelectByID(_ID, _main){
     Client._PrepareFile(_main);
 
-    return JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8")).find(x => x.ID === _ID);
+    return Client._Convert(JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8")).find(x => x.ID === _ID));
   }
 
   static SelectAll(_main){
@@ -127,6 +127,10 @@ class Client {
     if (!LIBRARIES.FS.existsSync(PATH)) {
       LIBRARIES.FS.writeFileSync(PATH, JSON.stringify([]));
     }
+  }
+
+  static _Convert(_db){
+    return new Client(_db.ID, _db.Connected, _db.Name, _db.Speaking, _db.SocketID);
   }
 }
 
