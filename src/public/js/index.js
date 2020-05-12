@@ -53,7 +53,7 @@ const APP = new Vue({
   }
 });
 
-const SOCKET = io("http://localhost:8081");
+const SOCKET = io(window.location.hostname + ":8081");
 
 // Si la connection socket avec le serveur est réussie.
 SOCKET.on("connect", function() {
