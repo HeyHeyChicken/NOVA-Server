@@ -44,8 +44,8 @@ class Skill {
         const INDEX_PATH = DEPENDENCY_PATH + "index.js";
         if (LIBRARIES.FS.existsSync(INDEX_PATH)) {
             const LIBRARY = require(INDEX_PATH);
-            const SETTINGS = _main.SkillPermanentSettings.skills.findIndex(x => x.Path === SKILL_PATH).Settings;
-            new LIBRARY(_main, SETTINGS);
+            const SETTINGS = _main.SkillPermanentSettings.skills.find(x => x.Path === SKILL_PATH).Settings;
+            new LIBRARY(_main, SETTINGS, _directory);
         }
 
         // LOAD PUBLIC
