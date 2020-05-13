@@ -322,7 +322,7 @@ class Main {
           const transcription = response.results
               .map(result => result.alternatives[0].transcript)
               .join('\n');
-            console.log(`Transcription: ${transcription}`);
+          console.log(`Transcription: ${transcription}`);
         })();
 
         let client = LIBRARIES.NOVAClient.SelectBySocketID(socket.client.conn.id, SELF);
@@ -359,7 +359,7 @@ class Main {
 
       // On envoie à l'interface WEB la liste des skills officiels installables.
       socket.emit("set_skills", SELF.URL_Skills);
-      socket.emit("set_installed_skills", SELF.SkillPermanentSettings.installed);
+      socket.emit("set_installed_skills", SELF.SkillPermanentSettings.skills);
       socket.emit("set_house", SELF.House);
       socket.emit("set_language", SELF.Settings.Language);
       socket.emit("set_translation", SELF.Translation[SELF.Settings.Language]);

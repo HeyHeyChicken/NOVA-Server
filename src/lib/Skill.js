@@ -13,10 +13,10 @@ class Skill {
 
     /* Cette fonction permet de charger le skill dont le nom du dossier est passé en paramètre. */
     static Load(_directory, _main) {
-        const DEPENDENCY_PATH = _main.DirName + "/lib/skills/" + _directory + "/src/";
+        const ROOT_PATH = _main.DirName + "/lib/skills/";
+        const SKILL_PATH = ROOT_PATH + _directory + "/";
+        const DEPENDENCY_PATH = SKILL_PATH + "src/";
         const CORPUS_PATH = DEPENDENCY_PATH + "corpus/" + _main.Settings.Language + "/corpus.json";
-        const SETTINGS_PATH = DEPENDENCY_PATH + "settings.json";
-        const SETTINGS = JSON.parse(LIBRARIES.FS.readFileSync(SETTINGS_PATH, "utf8"));
 
         // LOAD CORPUS
         if(LIBRARIES.FS.existsSync(CORPUS_PATH)) {
@@ -43,9 +43,9 @@ class Skill {
         // LOAD INDEX
         const INDEX_PATH = DEPENDENCY_PATH + "index.js";
         if (LIBRARIES.FS.existsSync(INDEX_PATH)) {
-            const S = JSON.parse(LIBRARIES.FS.readFileSync(SETTINGS_PATH, "utf8")).Settings;
             const LIBRARY = require(INDEX_PATH);
-            new LIBRARY(_main, S);
+            const SETTINGS = _main.SkillPermanentSettings.skills.findIndex(x => x.Path === SKILL_PATH).Settings;
+            new LIBRARY(_main, SETTINGS);
         }
 
         // LOAD PUBLIC
@@ -65,7 +65,7 @@ class Skill {
             }
         }
 
-        _main.Log("The skill named \"" + SETTINGS.FolderName + "\" is loaded (" + _main.Settings.Language + ").", "green");
+        _main.Log("The skill named \"" + _directory + "\" is loaded (" + _main.Settings.Language + ").", "green");
     }
 
     /* Cette fonction permet de charger tous les skills installés. */
@@ -124,11 +124,11 @@ class Skill {
                         array.push(dependency + "@" + DEPENDENCIES[dependency]);
                     }
                     Skill.InstallDependances(_main, array, 0, function(){
-                        Skill.InstallStep2(_git, _main, _socket);
+                        Skill.InstallStep2(_git, DIR + new_skill_folder_name, _main, _socket);
                     });
                 }
                 else{
-                    Skill.InstallStep2(_git, _main, _socket);
+                    Skill.InstallStep2(_git, DIR + new_skill_folder_name, _main, _socket);
                 }
             });
         }
@@ -137,21 +137,41 @@ class Skill {
         }
     }
 
-    static InstallStep2(_git, _main, _socket) {
-        _main.URL_Skills.find(x => x.git === _git).installed = true;
+    static InstallStep2(_git, _folder, _main, _socket) {
+        const INDEX = _main.SkillPermanentSettings.skills.findIndex(x => x.GIT.URL === _git);
+        const PATH = _folder + "src/settings.json";
+        let settings = {};
 
-        if(!_main.SkillPermanentSettings.installed.includes(_git)) {
+        if(LIBRARIES.FS.existsSync(PATH)) {
+            const NEW_SETTINGS = JSON.parse(LIBRARIES.FS.readFileSync(PATH, "utf8"));
+            if(NEW_SETTINGS.Settings !== undefined){
+                settings = NEW_SETTINGS.Settings;
+            }
+        }
+
+        if(INDEX === -1) {
+
             const SPLIT = _git.split("/");
-            _main.SkillPermanentSettings.installed.push({
+            _main.SkillPermanentSettings.skills.push({
                 GIT: {
                     URL: _git,
                     Pseudo: SPLIT.slice(3, -1)[0],
                     Repository: SPLIT.slice(4)[0]
-                }
+                },
+                Settings: settings,
+                Path: _folder
             });
-            LIBRARIES.FS.writeFileSync(_main.DirName + "/lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
-            _main.LauncherIO.emit("reboot_server");
         }
+        else{
+            _main.SkillPermanentSettings.skills[INDEX].Path = _folder;
+            for(let setting in settings){
+                if(_main.SkillPermanentSettings.skills[INDEX].Settings[setting] === undefined){
+                    _main.SkillPermanentSettings.skills[INDEX].Settings[setting] = settings[setting];
+                }
+            }
+        }
+        LIBRARIES.FS.writeFileSync(_main.DirName + "/lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
+        _main.LauncherIO.emit("reboot_server");
     }
 
     // Cette fonction désinstalle un skill.
@@ -162,11 +182,8 @@ class Skill {
             const SKILL_DIR_NAME = SKILL.git.split("/").splice(-2, 2).join("_") + "/";
             LIBRARIES._FS.rmdirSync(SKILLS_DIR_PATH + SKILL_DIR_NAME); // On supprime le dossier du skill.
 
-            const INDEX = _main.SkillPermanentSettings.installed.findIndex(x => x.GIT.URL === _git)
-            if(INDEX >= 0){
-                _main.SkillPermanentSettings.installed.splice(INDEX, 1);
-                LIBRARIES.FS.writeFileSync(_main.DirName + "/lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
-            }
+            _main.SkillPermanentSettings.skills.find(x => x.GIT.URL === _git).Path = null;
+            LIBRARIES.FS.writeFileSync(_main.DirName + "/lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
             _main.LauncherIO.emit("reboot_server");
         }
         else{

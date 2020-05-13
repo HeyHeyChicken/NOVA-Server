@@ -28,10 +28,12 @@
             </b-card-header>
             <b-card-body>
                 <b-card-title>{{skill.title}}</b-card-title>
-                <div class="installed" v-if="skills.Installed.findIndex(x => x.GIT.URL === skill.git) > -1">
-                    <i class="fas fa-check"></i>
-                    <span>{{Dictionary.installed}}</span>
-                </div>
+                <slot v-if="skills.Installed.findIndex(x => x.GIT.URL === skill.git) > -1">
+                    <div class="installed" v-if="skills.Installed.find(x => x.GIT.URL === skill.git).Path !== null">
+                        <i class="fas fa-check"></i>
+                        <span>{{Dictionary.installed}}</span>
+                    </div>
+                </slot>
             </b-card-body>
         </b-card>
     </div>
