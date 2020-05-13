@@ -130,7 +130,6 @@ class Client {
   }
 
   static _Convert(_db){
-    console.log(_db);
     if(_db === undefined){
       return _db;
     }
