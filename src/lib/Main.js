@@ -25,11 +25,11 @@ class Main {
     this.InitialiseLauncherSocketClient();
 
     this.DirName = _dirname;
-    this.SkillPermanentSettings = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/lib/skills/skills.json", "utf8"));
-    this.Settings = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/settings.json", "utf8")); // On récupère les paramètres du serveur.
-    this.Translation = JSON.parse(LIBRARIES.FS.readFileSync(this.DirName + "/translation.json", "utf8")); // On récupère les traductions pour les GUI.
+    this.SkillPermanentSettings = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/skills.json"), "utf8"));
+    this.Settings = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/settings.json"), "utf8")); // On récupère les paramètres du serveur.
+    this.Translation = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/translation.json"), "utf8")); // On récupère les traductions pour les GUI.
 
-    this.HotWords = LIBRARIES.FS.readdirSync(this.DirName + "/public/hot_words").filter(x => x.endsWith(".pmdl")).map(x => x.slice(0, -5));
+    this.HotWords = LIBRARIES.FS.readdirSync(LIBRARIES.Path.join(this.DirName, "/public/hot_words")).filter(x => x.endsWith(".pmdl")).map(x => x.slice(0, -5));
 
     this.ClientSkillsPublic = {}; // Cet objet va contenir l'arbre des fichiers provenant des skills destinés à la GUI des clients.
 
@@ -141,7 +141,7 @@ class Main {
       return 0;
     });
 
-    this.RootPath = this.DirName + "/lib/GoogleTextToSpeech/";
+    this.RootPath = LIBRARIES.Path.join(this.DirName, "/lib/GoogleTextToSpeech/");
     this.KeyFile = LIBRARIES.FS.readdirSync(this.RootPath).filter(e => e.endsWith(".json"))[0];
     this.SST = new LIBRARIES.STT.SpeechClient({
       projectId: this.Settings.Google.TextToSpeech.ProjectID,
@@ -227,7 +227,7 @@ class Main {
     this.Express = LIBRARIES.Express(); // On initialise Express.
     this.Express.set("view engine", "ejs"); // On utilise le moteur de rendu "ejs" pour nos vues.
     this.Express.set("views", this.ExpressViewsDirectories);
-    this.Express.use(LIBRARIES.Express.static(SELF.DirName + "/public")); // On défini un dossier public.
+    this.Express.use(LIBRARIES.Express.static(LIBRARIES.Path.join(SELF.DirName, "/public"))); // On défini un dossier public.
     this.Express.get("/", function(req, res){
       res.render("index");
     });
@@ -297,14 +297,14 @@ class Main {
 
       // L'utilisateur est en train de parler, nous enregisrons son flux audio dans un fichier.
       socket.on("write_audio", function(_data){
-        LIBRARIES.FS.appendFile(SELF.DirName + "/voices/" + socket.client.conn.id + ".wav", _data, function (err) {
+        LIBRARIES.FS.appendFile(LIBRARIES.Path.join(SELF.DirName,"/voices/", socket.client.conn.id, ".wav"), _data, function (err) {
           if (err) throw err;
         });
       });
 
       // L'utilisateur a fini de parler, nous envoyons sa voix au serveur STT.
       socket.on("end_recording", function(){
-        const FILE = LIBRARIES.FS.readFileSync(SELF.DirName + "/voices/" + socket.client.conn.id + ".wav");
+        const FILE = LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(SELF.DirName, "/voices/", socket.client.conn.id, ".wav"));
         const AUDIO_BYTES = FILE.toString("base64");
         const REQUEST = {
           audio: {
@@ -379,14 +379,14 @@ class Main {
       // L'utilisateur demande à changer de langue
       socket.on("set_language", function(_language) {
         SELF.Settings.Language = _language;
-        LIBRARIES.FS.writeFileSync(SELF.DirName + "/settings.json", JSON.stringify(SELF.Settings, null, 4), "utf8");
+        LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
         SELF.LauncherIO.emit("reboot_server");
       });
 
       // L'utilisateur demande à changer le mot de déclenchement
       socket.on("set_hot_word", function(_hot_word) {
         SELF.Settings.HotWord = _hot_word;
-        LIBRARIES.FS.writeFileSync(SELF.DirName + "/settings.json", JSON.stringify(SELF.Settings, null, 4), "utf8");
+        LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
         SELF.LauncherIO.emit("reboot_server");
       });
     });
@@ -398,7 +398,7 @@ class Main {
   AddClientSkillsPublicFile(_skillName, _file){
     if(this.ClientSkillsPublic[_skillName] === undefined){
       this.ClientSkillsPublic[_skillName] = [];
-      const PATH = this.DirName + "/lib/skills/" + _skillName + "/src/public/CLIENT/";
+      const PATH = LIBRARIES.Path.join(this.DirName, "/lib/skills/",_skillName, "/src/public/CLIENT/");
       if(LIBRARIES.FS.existsSync(PATH)) {
         this.Express.use("/" + _skillName, LIBRARIES.Express.static(PATH)); // On défini un dossier public.
       }

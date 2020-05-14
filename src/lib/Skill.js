@@ -13,10 +13,10 @@ class Skill {
 
     /* Cette fonction permet de charger le skill dont le nom du dossier est passé en paramètre. */
     static Load(_directory, _main) {
-        const ROOT_PATH = _main.DirName + "/lib/skills/";
-        const SKILL_PATH = ROOT_PATH + _directory + "/";
-        const DEPENDENCY_PATH = SKILL_PATH + "src/";
-        const CORPUS_PATH = DEPENDENCY_PATH + "corpus/" + _main.Settings.Language + "/corpus.json";
+        const ROOT_PATH = LIBRARIES.Path.join(_main.DirName, "/lib/skills/");
+        const SKILL_PATH = LIBRARIES.Path.join(ROOT_PATH, _directory, "/");
+        const DEPENDENCY_PATH = LIBRARIES.Path.join(SKILL_PATH, "src/");
+        const CORPUS_PATH = LIBRARIES.Path.join(DEPENDENCY_PATH, "corpus/", _main.Settings.Language, "/corpus.json");
 
         // LOAD CORPUS
         if(LIBRARIES.FS.existsSync(CORPUS_PATH)) {
@@ -49,7 +49,7 @@ class Skill {
         }
 
         // LOAD PUBLIC
-        const PUBLIC_PATH = DEPENDENCY_PATH + "public/";
+        const PUBLIC_PATH = LIBRARIES.Path.join(DEPENDENCY_PATH, "public/");
         _main.AddClientSkillsPublicFile(_directory);
         if (LIBRARIES.FS.existsSync(PUBLIC_PATH)) {
             const FILES = LIBRARIES._FS.readdirSync(PUBLIC_PATH);
@@ -71,7 +71,7 @@ class Skill {
     /* Cette fonction permet de charger tous les skills installés. */
     static LoadAll(_main) {
         _main.Log("Start loading skills.", "green");
-        const DEPENDENCIES = LIBRARIES.FS.readdirSync(_main.DirName + "/lib/skills/", { withFileTypes: true }).filter(x => x.isDirectory()).map(x => x.name);
+        const DEPENDENCIES = LIBRARIES.FS.readdirSync(LIBRARIES.Path.join(_main.DirName, "/lib/skills/"), { withFileTypes: true }).filter(x => x.isDirectory()).map(x => x.name);
         for(let i = 0; i < DEPENDENCIES.length; i++) {
             Skill.Load(DEPENDENCIES[i], _main);
         }
@@ -98,11 +98,11 @@ class Skill {
         const skill = _main.URL_Skills.find(x => x.git === _git);
         if(skill !== undefined) {
 
-            const DIR = _main.DirName + "/lib/skills/";
-            const tmpFilePath = DIR + "temp.zip";
+            const DIR = LIBRARIES.Path.join(_main.DirName, "/lib/skills/");
+            const tmpFilePath = LIBRARIES.Path.join(DIR, "temp.zip");
 
             // On récupère le nom du futur dossier du skill.
-            LIBRARIES._FS.downloadFile(skill.git + "/archive/master.zip", tmpFilePath, _main, function (err) {
+            LIBRARIES._FS.downloadFile(LIBRARIES.Path.join(skill.git, "/archive/master.zip"), tmpFilePath, _main, function (err) {
                 const ZIP = new LIBRARIES.Zip(tmpFilePath);
                 let skill_folder_name = null;
                 ZIP.getEntries().forEach(function(zipEntry) {
@@ -139,7 +139,7 @@ class Skill {
 
     static InstallStep2(_git, _folder, _main, _socket) {
         const INDEX = _main.SkillPermanentSettings.skills.findIndex(x => x.GIT.URL === _git);
-        const PATH = _folder + "src/settings.json";
+        const PATH = LIBRARIES.Path.join(_folder, "src/settings.json");
         let settings = {};
 
         if(LIBRARIES.FS.existsSync(PATH)) {
@@ -170,7 +170,7 @@ class Skill {
                 }
             }
         }
-        LIBRARIES.FS.writeFileSync(_main.DirName + "/lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
+        LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(_main.DirName, "/lib/skills/skills.json"), JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
         _main.LauncherIO.emit("reboot_server");
     }
 
@@ -178,12 +178,12 @@ class Skill {
     static Uninstall(_git, _main, _socket){
         const SKILL = _main.URL_Skills.find(x => x.git === _git);
         if(SKILL !== undefined){
-            const SKILLS_DIR_PATH = _main.DirName + "/lib/skills/";
+            const SKILLS_DIR_PATH = LIBRARIES.Path.join(_main.DirName, "/lib/skills/");
             const SKILL_DIR_NAME = SKILL.git.split("/").splice(-2, 2).join("_") + "/";
             LIBRARIES._FS.rmdirSync(SKILLS_DIR_PATH + SKILL_DIR_NAME); // On supprime le dossier du skill.
 
             _main.SkillPermanentSettings.skills.find(x => x.GIT.URL === _git).Path = null;
-            LIBRARIES.FS.writeFileSync(_main.DirName + "/lib/skills/skills.json", JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
+            LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(_main.DirName, "/lib/skills/skills.json"), JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
             _main.LauncherIO.emit("reboot_server");
         }
         else{
