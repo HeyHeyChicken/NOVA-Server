@@ -14,8 +14,8 @@ class Skill {
     /* Cette fonction permet de charger le skill dont le nom du dossier est passé en paramètre. */
     static Load(_directory, _main) {
         const ROOT_PATH = LIBRARIES.Path.join(_main.DirName, "/lib/skills/");
-        const SKILL_PATH = LIBRARIES.Path.join(ROOT_PATH, _directory, "/");
-        const DEPENDENCY_PATH = LIBRARIES.Path.join(SKILL_PATH, "src/");
+        const SKILL_PATH = LIBRARIES.Path.join(ROOT_PATH, _directory);
+        const DEPENDENCY_PATH = LIBRARIES.Path.join(SKILL_PATH, "/src/");
         const CORPUS_PATH = LIBRARIES.Path.join(DEPENDENCY_PATH, "corpus/", _main.Settings.Language, "/corpus.json");
 
         // LOAD CORPUS
@@ -44,9 +44,6 @@ class Skill {
         const INDEX_PATH = DEPENDENCY_PATH + "index.js";
         if (LIBRARIES.FS.existsSync(INDEX_PATH)) {
             const LIBRARY = require(INDEX_PATH);
-            console.log("SCREEN ICI -->");
-            console.log(SKILL_PATH);
-            console.log("<-- SCREEN ICI");
             const SETTINGS = _main.SkillPermanentSettings.skills.find(x => x.Path === SKILL_PATH).Settings;
             new LIBRARY(_main, SETTINGS, _directory);
         }
