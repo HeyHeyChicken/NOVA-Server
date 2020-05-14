@@ -44,6 +44,9 @@ class Skill {
         const INDEX_PATH = DEPENDENCY_PATH + "index.js";
         if (LIBRARIES.FS.existsSync(INDEX_PATH)) {
             const LIBRARY = require(INDEX_PATH);
+            console.log("SCREEN ICI -->");
+            console.log(SKILL_PATH);
+            console.log("<-- SCREEN ICI");
             const SETTINGS = _main.SkillPermanentSettings.skills.find(x => x.Path === SKILL_PATH).Settings;
             new LIBRARY(_main, SETTINGS, _directory);
         }
