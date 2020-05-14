@@ -46,7 +46,7 @@ class FS {
         else{
             lib = LIBRARIES.HTTP;
         }
-        console.log(_url);
+
         lib.get(_url, function(_response) {
             // TODO : Gérer le cas 404.
             if ([301, 302].indexOf(_response.statusCode) > -1 ) {

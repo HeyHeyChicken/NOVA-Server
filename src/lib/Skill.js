@@ -102,7 +102,7 @@ class Skill {
             const tmpFilePath = LIBRARIES.Path.join(DIR, "temp.zip");
 
             // On récupère le nom du futur dossier du skill.
-            LIBRARIES._FS.downloadFile(LIBRARIES.Path.join(skill.git, "/archive/master.zip"), tmpFilePath, _main, function (err) {
+            LIBRARIES._FS.downloadFile(skill.git + "/archive/master.zip", tmpFilePath, _main, function (err) {
                 const ZIP = new LIBRARIES.Zip(tmpFilePath);
                 let skill_folder_name = null;
                 ZIP.getEntries().forEach(function(zipEntry) {
