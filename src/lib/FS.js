@@ -1,7 +1,8 @@
 const LIBRARIES = {
     FS: require("fs"),
     Path: require("path"),
-    HTTPS: require("https")
+    HTTPS: require("https"),
+    HTTP: require("http")
 };
 
 class FS {
