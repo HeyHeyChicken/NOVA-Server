@@ -117,10 +117,10 @@ class Skill {
                 });
                 ZIP.extractAllTo(DIR,true);
                 LIBRARIES.FS.unlink(tmpFilePath, function(){});
-                const new_skill_folder_name = skill.git.split("/").splice(-2, 2).join("_") + "/";
-                LIBRARIES.FS.renameSync(DIR + skill_folder_name, DIR + new_skill_folder_name);
+                const new_skill_folder_name = skill.git.split("/").splice(-2, 2).join("_");
+                LIBRARIES.FS.renameSync(DIR + skill_folder_name, DIR + new_skill_folder_name + "/");
 
-                const DEPENDENCIES = JSON.parse(LIBRARIES.FS.readFileSync(DIR + new_skill_folder_name + "package.json", "utf8")).dependencies;
+                const DEPENDENCIES = JSON.parse(LIBRARIES.FS.readFileSync(DIR + new_skill_folder_name + "/package.json", "utf8")).dependencies;
                 if(DEPENDENCIES !== undefined) {
                     let array = [];
                     for(let dependency in DEPENDENCIES) {
