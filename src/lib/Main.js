@@ -8,6 +8,7 @@ const LIBRARIES = {
   STT: require("@google-cloud/speech"),
   SocketIOClient: require("socket.io-client"),
   ChildProcess: require("child_process"),
+  Path: require("path"),
 
   NOVAClient: require("./Client"),
   GoogleTextToSpeech: require("./GoogleTextToSpeech/GoogleTextToSpeech"),
