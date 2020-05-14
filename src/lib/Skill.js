@@ -151,46 +151,39 @@ class Skill {
 
     /* Cette fonction permet d'installer un skill par son url GIT. */
     static Install(_git, _main, _socket) {
-        const skill = _main.URL_Skills.find(x => x.git === _git);
-        if(skill !== undefined) {
+        const DIR = LIBRARIES.Path.join(_main.DirName, "/lib/skills/");
+        const tmpFilePath = LIBRARIES.Path.join(DIR, "temp.zip");
 
-            const DIR = LIBRARIES.Path.join(_main.DirName, "/lib/skills/");
-            const tmpFilePath = LIBRARIES.Path.join(DIR, "temp.zip");
-
-            // On récupère le nom du futur dossier du skill.
-            LIBRARIES._FS.downloadFile(skill.git + "/archive/master.zip", tmpFilePath, _main, function (err) {
-                const ZIP = new LIBRARIES.Zip(tmpFilePath);
-                let skill_folder_name = null;
-                ZIP.getEntries().forEach(function(zipEntry) {
-                    if(zipEntry.isDirectory){
-                        if(zipEntry.entryName.split("/").length === 2) {
-                            skill_folder_name = zipEntry.entryName;
-                        }
+        // On récupère le nom du futur dossier du skill.
+        LIBRARIES._FS.downloadFile(_git + "/archive/master.zip", tmpFilePath, _main, function (err) {
+            const ZIP = new LIBRARIES.Zip(tmpFilePath);
+            let skill_folder_name = null;
+            ZIP.getEntries().forEach(function(zipEntry) {
+                if(zipEntry.isDirectory){
+                    if(zipEntry.entryName.split("/").length === 2) {
+                        skill_folder_name = zipEntry.entryName;
                     }
-                });
-                ZIP.extractAllTo(DIR,true);
-                LIBRARIES.FS.unlink(tmpFilePath, function(){});
-                const new_skill_folder_name = skill.git.split("/").splice(-2, 2).join("_");
-                LIBRARIES.FS.renameSync(DIR + skill_folder_name, DIR + new_skill_folder_name + "/");
-
-                const DEPENDENCIES = JSON.parse(LIBRARIES.FS.readFileSync(DIR + new_skill_folder_name + "/package.json", "utf8")).dependencies;
-                if(DEPENDENCIES !== undefined) {
-                    let array = [];
-                    for(let dependency in DEPENDENCIES) {
-                        array.push(dependency + "@" + DEPENDENCIES[dependency]);
-                    }
-                    Skill.InstallDependances(_main, array, 0, function(){
-                        Skill.InstallStep2(_git, DIR + new_skill_folder_name, _main, _socket);
-                    });
-                }
-                else{
-                    Skill.InstallStep2(_git, DIR + new_skill_folder_name, _main, _socket);
                 }
             });
-        }
-        else{
-            _main.Log("Skill with GIT : \"" + _git + "\" not found.", "red");
-        }
+            ZIP.extractAllTo(DIR,true);
+            LIBRARIES.FS.unlink(tmpFilePath, function(){});
+            const new_skill_folder_name = _git.split("/").splice(-2, 2).join("_");
+            LIBRARIES.FS.renameSync(DIR + skill_folder_name, DIR + new_skill_folder_name + "/");
+
+            const DEPENDENCIES = JSON.parse(LIBRARIES.FS.readFileSync(DIR + new_skill_folder_name + "/package.json", "utf8")).dependencies;
+            if(DEPENDENCIES !== undefined) {
+                let array = [];
+                for(let dependency in DEPENDENCIES) {
+                    array.push(dependency + "@" + DEPENDENCIES[dependency]);
+                }
+                Skill.InstallDependances(_main, array, 0, function(){
+                    Skill.InstallStep2(_git, DIR + new_skill_folder_name, _main, _socket);
+                });
+            }
+            else{
+                Skill.InstallStep2(_git, DIR + new_skill_folder_name, _main, _socket);
+            }
+        });
     }
 
     static InstallStep2(_git, _folder, _main, _socket) {
