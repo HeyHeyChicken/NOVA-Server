@@ -85,7 +85,13 @@ SOCKET.on("set_house", function(_house) {
 
 // Si le serveur envoie une mise à jour de la liste des clients NOVA.
 SOCKET.on("set_skills", function(_skills) {
-  APP.skills.Library = _skills;
+  APP.skills.Library = _skills.sort(function(a, b){
+    if (a.title < b.title)
+      return -1;
+    else if (a.title > b.title)
+      return 1;
+    return 0;
+  });
 });
 
 // Si le serveur envoie une mise à jour de la liste des clients NOVA.

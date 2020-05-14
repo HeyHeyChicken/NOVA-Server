@@ -2,6 +2,7 @@ const LIBRARIES = {
     FS: require("fs"),
     Path: require("path"),
     Zip: require("adm-zip"),
+    Express: require("express"),
 
     _FS: require("./FS")
 };
@@ -40,13 +41,65 @@ class Skill {
             }
         }
 
+        // LOAD RESOURCES
+        const RESOURCES_PATH = LIBRARIES.Path.join(SKILL_PATH, "/resources/");
+        if (LIBRARIES.FS.existsSync(RESOURCES_PATH)) {
+            const SKILL = {
+                title: "",
+                description: "",
+                wallpaper: "",
+                icon: "",
+                git: "",
+                screenshots: []
+            };
+            // Infos
+            const INFOS_PATH = LIBRARIES.Path.join(RESOURCES_PATH, "nova-info.json");
+            if (LIBRARIES.FS.existsSync(INFOS_PATH)) {
+                const INFOS = JSON.parse(LIBRARIES.FS.readFileSync(INFOS_PATH, "utf8"));
+                SKILL.title = INFOS.Title;
+                SKILL.description = INFOS.Description;
+            }
+            const LOGO_PATH = LIBRARIES.Path.join(RESOURCES_PATH, "nova-icon.png");
+            const WALLPAPER_PATH = LIBRARIES.Path.join(RESOURCES_PATH, "nova-wallpaper.jpg");
+            if (LIBRARIES.FS.existsSync(LOGO_PATH) || LIBRARIES.FS.existsSync(WALLPAPER_PATH)) {
+                _main.Express.use("/" + _directory, LIBRARIES.Express.static(RESOURCES_PATH));
+            }
+            // Icon
+            if (LIBRARIES.FS.existsSync(LOGO_PATH)) {
+                SKILL.icon = "/" + _directory + "/nova-icon.png";
+            }
+            // Wallpaper
+            if (LIBRARIES.FS.existsSync(WALLPAPER_PATH)) {
+                SKILL.wallpaper = "/" + _directory + "/nova-wallpaper.jpg";
+            }
+            // Git
+            SKILL.git = _main.SkillPermanentSettings.skills.find(x => x.Path === LIBRARIES.Path.join(_main.DirName, "/lib/skills/", _directory)).GIT.URL;
+            // Screenshots
+            const SCREENSHOTS_PATH = LIBRARIES.Path.join(RESOURCES_PATH, "screenshots");
+            if (LIBRARIES.FS.existsSync(SCREENSHOTS_PATH)) {
+                const SCREENSHOTS = LIBRARIES.FS.readdirSync(SCREENSHOTS_PATH).filter(x => x.endsWith(".jpg"))
+                for(let index = 0; index < SCREENSHOTS.length; index++){
+                    SKILL.screenshots.push("/" + _directory + "/screenshots/" + SCREENSHOTS[index]);
+                }
+            }
+
+            const INDEX = _main.URL_Skills.findIndex(x => x.git === SKILL.git);
+            if(INDEX === -1){
+                _main.URL_Skills.push(SKILL);
+            }
+            else{
+                for(let attr in SKILL){
+                    if(SKILL[attr] !== "" && SKILL[attr] !== undefined && SKILL[attr] !== null){
+                        _main.URL_Skills[INDEX][attr] = SKILL[attr];
+                    }
+                }
+            }
+        }
+
         // LOAD INDEX
         const INDEX_PATH = DEPENDENCY_PATH + "index.js";
         if (LIBRARIES.FS.existsSync(INDEX_PATH)) {
             const LIBRARY = require(INDEX_PATH);
-            console.log("SCREEN ICI -->");
-            console.log(SKILL_PATH);
-            console.log("<-- SCREEN ICI");
             const SETTINGS = _main.SkillPermanentSettings.skills.find(x => x.Path === SKILL_PATH).Settings;
             new LIBRARY(_main, SETTINGS, _directory);
         }

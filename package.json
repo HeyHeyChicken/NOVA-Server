@@ -23,6 +23,9 @@
     "google-tts-api": "0.0.4",
     "http": "0.0.1-security",
     "https": "^1.0.0",
+    "path": "^0.12.7",
+    "querystring": "^0.2.0",
+    "request": "^2.88.2",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
     "wav": "^1.0.2"

@@ -96,7 +96,7 @@ class Main {
       },
       {
         title: "Amberdata",
-        description: "This skill will allow your NOVA assistant to know the value of your cryocurrency portfolio.",
+        description: "This skill will allow your NOVA assistant to know the value of your cryptocurrency portfolio.",
         wallpaper: "https://amberdata.io/_nuxt/images/illu_buildings.svg",
         icon: "https://res-5.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/vyxcs9ljdxau8jtz0aia",
         git: "https://github.com/HeyHeyChicken/NOVA-Amberdata",
@@ -134,13 +134,7 @@ class Main {
         git: "https://github.com/HeyHeyChicken/NOVA-DateAndTime",
         screenshots: ["https://i.ibb.co/Wsjy0dM/Date-And-Time.jpg"]
       }
-    ].sort(function(a, b){
-      if (a.title < b.title)
-        return -1;
-      else if (a.title > b.title)
-        return 1;
-      return 0;
-    });
+    ];
 
     this.RootPath = LIBRARIES.Path.join(this.DirName, "/lib/GoogleTextToSpeech/");
     this.KeyFile = LIBRARIES.FS.readdirSync(this.RootPath).filter(e => e.endsWith(".json"))[0];
@@ -358,7 +352,7 @@ class Main {
 
       socket.emit("set_clients", LIBRARIES.NOVAClient.SelectAll(SELF));
 
-      // On envoie à l'interface WEB la liste des skills officiels installables.
+      // On envoie à l'interface WEB la liste des skills installables.
       socket.emit("set_skills", SELF.URL_Skills);
       socket.emit("set_installed_skills", SELF.SkillPermanentSettings.skills);
       socket.emit("set_house", SELF.House);
