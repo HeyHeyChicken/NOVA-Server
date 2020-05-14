@@ -16,8 +16,8 @@
     "installed": "Installed",
     "search": "Search",
     "search_placeholder": "Search the skill you want",
-    "install_from_zip": "Install from ZIP",
-    "choose_file": "Choose file"
+    "install_from_git": "Install from GitHub",
+    "install_from_git_placeholder": "Past the link here"
   },
   "fr-FR": {
     "dashboard": "Tableau de bord",
@@ -36,7 +36,7 @@
     "installed": "Installé",
     "search": "Rechercher",
     "search_placeholder": "Recherchez le skill que vous souhaitez",
-    "install_from_zip": "Installer à partir d'un fichier ZIP",
-    "choose_file": "Choisissez le fichier"
+    "install_from_git": "Installer à partir de GitHub",
+    "install_from_git_placeholder": "Collez le lien ici"
   }
 }

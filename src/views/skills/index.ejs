@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col col-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="col col-12 col-sm-12 col-md-12 col-lg-6">
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">{{ Dictionary.search }}</span>
@@ -7,18 +7,16 @@
             <input v-model="skillSearch" type="text" :placeholder="Dictionary.search_placeholder" class="form-control">
         </div>
     </div>
-    <div class="col col-12 col-sm-6 col-md-6 col-lg-6">
-        <!--
+    <div class="col col-12 col-sm-12 col-md-12 col-lg-6">
         <div class="input-group">
             <div class="input-group-prepend">
-                <span class="input-group-text">{{ Dictionary.install_from_zip }}</span>
+                <span class="input-group-text">{{ Dictionary.install_from_git }}</span>
             </div>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input">
-                <label class="custom-file-label">{{ Dictionary.choose_file }}</label>
+            <input type="text" :placeholder="Dictionary.install_from_git_placeholder" class="form-control">
+            <div @click="install_skill_from_git" class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">{{Dictionary.install}}</button>
             </div>
         </div>
-        -->
     </div>
     <div v-if="skill.title.includes(skillSearch) === true" class="col col-12 col-sm-12 col-md-6 col-lg-4" v-for="(skill,index) in skills.Library">
         <b-card no-body v-b-modal="'modal-skill'+index">

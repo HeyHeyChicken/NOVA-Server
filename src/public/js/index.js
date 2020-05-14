@@ -19,6 +19,10 @@ const ROOM_COMPONENT = Vue.component("novaroom", {
 const APP = new Vue({
   el: "#app",
   methods: {
+    install_skill_from_git: function(event) {
+      this.ShowSpinner = true;
+      SOCKET.emit("install_skill", event.target.closest(".input-group").getElementsByTagName("input")[0].value);
+    },
     set_language: function(event) {
       this.ShowSpinner = true;
       SOCKET.emit("set_language", event.target.value);
