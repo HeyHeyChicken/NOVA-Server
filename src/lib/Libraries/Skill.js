@@ -10,9 +10,10 @@ class Skill {
   }
 
   SaveSettings(){
+    const SELF = this;
     const INDEX = this.Main.SkillPermanentSettings.skills.findIndex(function(element, index, array){
       if(element.Path !== null){
-        if(element.Path.endsWith(this.Folder)){
+        if(element.Path.endsWith(SELF.Folder)){
           return true;
         }
       }
