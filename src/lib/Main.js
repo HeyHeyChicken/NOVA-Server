@@ -47,91 +47,103 @@ class Main {
 
     this.URL_Skills = [
       {
+        title: "Convert",
+        description: "This skill will allow your assistant to convert a lot of things...",
+        git: "https://github.com/constantgillet/NOVA-Convert",
+        wallpaper: "https://raw.githubusercontent.com/constantgillet/NOVA-Convert/master/resources/nova-wallpaper.jpg",
+        icon: "https://raw.githubusercontent.com/constantgillet/NOVA-Convert/master/resources/nova-icon.png",
+        screenshots: [
+            "https://raw.githubusercontent.com/constantgillet/NOVA-Convert/master/resources/screenshots/1.jpg"
+        ]
+      },
+      {
         title: "Chrome Auto Launcher",
         description: "This skill will allow your client to launch automatically Chrome at boot.",
+        git: "https://github.com/HeyHeyChicken/NOVA-ChromeAutoLauncher",
         wallpaper: "https://www.journaldugeek.com/content/uploads/2019/08/googlechrome.png",
         icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Google_Chrome_icon_%282011%29.svg/1024px-Google_Chrome_icon_%282011%29.svg.png",
-        git: "https://github.com/HeyHeyChicken/NOVA-ChromeAutoLauncher",
         screenshots: []
       },
       {
         title: "Spotify",
         description: "This skill will allow your NOVA assistant to play you some Spotify music.",
-        wallpaper: "https://www.ecopetit.cat/wpic/mpic/111-1110552_spotify-hd.png",
-        icon: "https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png",
         git: "https://github.com/HeyHeyChicken/NOVA-Spotify",
-        screenshots: []
+        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Spotify/master/resources/nova-wallpaper.jpg",
+        icon: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Spotify/master/resources/nova-icon.png",
+        screenshots: [
+            "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Spotify/master/resources/screenshots/1.jpg"
+        ]
       },
       {
         title: "Chrome Speech To text",
         description: "This skill will allow your NOVA assistant understand what you say for free and unlimited, but you'll have to use the Google Chrome browser for your clients.",
+        git: "https://github.com/HeyHeyChicken/NOVA-Chrome-Speech-To-Text",
         wallpaper: "https://cloud.google.com/images/products/speech/speech-api-lead.png?hl=fr",
         icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Google_Chrome_icon_%282011%29.svg/1024px-Google_Chrome_icon_%282011%29.svg.png",
-        git: "https://github.com/HeyHeyChicken/NOVA-Chrome-Speech-To-Text",
         screenshots: []
       },
       {
         title: "Device IP Address",
         description: "This skill will allow you to know your assistant IP address.",
+        git: "https://github.com/HeyHeyChicken/NOVA-Device-IP-Address",
         wallpaper: "https://bitfix.be/wp-content/uploads/2017/01/127.0.0.1-Wallpaper.png",
         icon: "https://cdn.icon-icons.com/icons2/37/PNG/512/IPaddress_IP_3219.png",
-        git: "https://github.com/HeyHeyChicken/NOVA-Device-IP-Address",
         screenshots: ["https://i.ibb.co/S5XRskB/screenshot.jpg"]
       },
       {
         title: "HomePod Sounds",
         description: "This skill will allow your assistant to play the system sounds of the HomePod.",
+        git: "https://github.com/HeyHeyChicken/NOVA-HomePod-Sounds",
         wallpaper: "https://s1.dmcdn.net/v/N0O2u1QRCkSPkpXaf/x1080",
         icon: "https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/do-more-siri-homepod-social-card.jpg",
-        git: "https://github.com/HeyHeyChicken/NOVA-HomePod-Sounds",
         screenshots: []
       },
       {
         title: "TuneIn",
         description: "This skill will allow your assistant to play you radio.",
+        git: "https://github.com/HeyHeyChicken/NOVA-TuneIn",
         wallpaper: "https://store-images.s-microsoft.com/image/apps.61349.9007199266246398.fab84bd6-dd10-4a80-9137-0a0428d5234f.0dfd8a2d-25e4-4765-ad8e-703d58c0ec3d",
         icon: "https://www.underconsideration.com/brandnew/archives/tunein_2017_monogram.jpg",
-        git: "https://github.com/HeyHeyChicken/NOVA-TuneIn",
         screenshots: []
       },
       {
         title: "Amberdata",
         description: "This skill will allow your NOVA assistant to know the value of your cryptocurrency portfolio.",
-        wallpaper: "https://amberdata.io/_nuxt/images/illu_buildings.svg",
-        icon: "https://res-5.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/vyxcs9ljdxau8jtz0aia",
         git: "https://github.com/HeyHeyChicken/NOVA-Amberdata",
-        screenshots: ["https://i.ibb.co/cwpLSr8/Amberdata.jpg"]
+        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Amberdata/master/resources/nova-wallpaper.jpg",
+        icon: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Amberdata/master/resources/nova-icon.png",
+        screenshots: ["https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Amberdata/master/resources/screenshots/1.jpg"]
       },
       {
         title: "Count",
         description: "This skill will allow your assistant to count.",
+        git: "https://github.com/HeyHeyChicken/NOVA-Count",
         wallpaper: "https://www.dictionary.com/e/wp-content/uploads/2019/10/slideshow-Large-numbers_1_1000x700.jpg",
         icon: "data:image/png;base64,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",
-        git: "https://github.com/HeyHeyChicken/NOVA-Count",
         screenshots: ["https://i.ibb.co/xH3FdxN/Count.jpg"]
       },
       {
         title: "ChatBot",
         description: 'This skill will allow you to say "Hello", "Goodbye", and more to your assistant.',
+        git: "https://github.com/HeyHeyChicken/NOVA-ChatBot",
         wallpaper: "https://www.spn.asso.fr/wp-content/uploads/2019/08/Chatbot-Cafe%CC%81-Techno-SPN.jpg",
         icon: "https://medias3.prestastore.com/835054-pbig/chat-bot-for-social-networking.jpg",
-        git: "https://github.com/HeyHeyChicken/NOVA-ChatBot",
         screenshots: ["https://i.ibb.co/PgGG5FR/ChatBot.jpg"]
       },
       {
         title: "Random",
         description: "Roll the dice, ask for a random number between 10 and 325, and control the randomness!",
+        git: "https://github.com/HeyHeyChicken/NOVA-Random",
         wallpaper: "https://ichef.bbci.co.uk/news/720/cpsprodpb/37B5/production/_89716241_thinkstockphotos-523060154.jpg",
         icon: "https://static.thenounproject.com/png/603655-200.png",
-        git: "https://github.com/HeyHeyChicken/NOVA-Random",
         screenshots: ["https://i.ibb.co/7JJ7qPC/Random.jpg"]
       },
       {
         title: "DateAndTime",
         description: "This skill will allow you to know the current date and the current time.",
+        git: "https://github.com/HeyHeyChicken/NOVA-DateAndTime",
         wallpaper: "https://images-eu.ssl-images-amazon.com/images/I/71a-uS3N0mL.png",
         icon: "https://www.yourdictionary.com/images/definitions/lg/11728.time.jpg",
-        git: "https://github.com/HeyHeyChicken/NOVA-DateAndTime",
         screenshots: ["https://i.ibb.co/Wsjy0dM/Date-And-Time.jpg"]
       }
     ];
