@@ -10,7 +10,14 @@ class Skill {
   }
 
   SaveSettings(){
-    const INDEX = this.Main.SkillPermanentSettings.skills.findIndex(x => x.Path.endsWith(this.Folder));
+    const INDEX = this.Main.SkillPermanentSettings.skills.findIndex(function(element, index, array){
+      if(element.Path !== null){
+        if(element.Path.endsWith(this.Folder)){
+          return true;
+        }
+      }
+      return false;
+    });
     this.Main.SkillPermanentSettings.skills[INDEX].Settings = this.Settings;
     LIBRARIES.FS.writeFileSync(this.Main.DirName + "/lib/skills/skills.json", JSON.stringify(this.Main.SkillPermanentSettings, null, 4), "utf8");
   }
