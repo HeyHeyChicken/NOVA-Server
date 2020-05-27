@@ -38,6 +38,14 @@ const APP = new Vue({
     uninstall_skill: function(event) {
       this.ShowSpinner = true;
       SOCKET.emit("uninstall_skill", event.target.closest("button").getAttribute("data-git"));
+    },
+    cancelJsonEditing: function(event){
+      this.JsonEditing = !this.JsonEditing;
+      SOCKET.emit("get_Installed");
+    },
+    validateJsonEditing: function(event){
+      this.JsonEditing = !this.JsonEditing;
+      SOCKET.emit("set_Installed", JSON.stringify(this.skills.Installed));
     }
   },
   data: {
@@ -53,7 +61,13 @@ const APP = new Vue({
     AlreadyConnected: false,
     skillSearch: "",
     hotWords: "",
-    hotWord: ""
+    hotWord: "",
+    JsonEditing: false,
+    JsonEditorOptions: {
+      onChange(json){
+        console.log("You updated settings");
+      }
+    }
   }
 });
 

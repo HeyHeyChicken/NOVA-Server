@@ -17,7 +17,10 @@
     "search": "Search",
     "search_placeholder": "Search the skill you want",
     "install_from_git": "Install from GitHub",
-    "install_from_git_placeholder": "Past the link here"
+    "install_from_git_placeholder": "Past the link here",
+    "settings": "Settings",
+    "cancel": "Cancel",
+    "validate": "Validate"
   },
   "fr-FR": {
     "dashboard": "Tableau de bord",
@@ -37,6 +40,9 @@
     "search": "Rechercher",
     "search_placeholder": "Recherchez le skill que vous souhaitez",
     "install_from_git": "Installer à partir de GitHub",
-    "install_from_git_placeholder": "Collez le lien ici"
+    "install_from_git_placeholder": "Collez le lien ici",
+    "settings": "Réglages",
+    "cancel": "Annuler",
+    "validate": "Valider"
   }
 }

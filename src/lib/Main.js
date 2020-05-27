@@ -373,24 +373,36 @@ class Main {
       socket.emit("set_hot_words", SELF.HotWords);
       socket.emit("set_hot_word", SELF.Settings.HotWord);
 
-      // L'utilisateur demande à installer un skill
+      // Si l'utilisateur demande à changer les rélages d'un skill.
+      socket.on("set_Installed", function(_skills){
+        SELF.SkillPermanentSettings.skills = JSON.parse(_skills);
+        LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/lib/skills/skills.json"), JSON.stringify(SELF.SkillPermanentSettings, null, 4), "utf8");
+        SELF.LauncherIO.emit("reboot_server");
+      });
+
+      // L'utilisateur demande à récupérer la liste des skills installés.
+      socket.on("get_Installed", function(){
+        socket.emit("set_installed_skills", SELF.SkillPermanentSettings.skills);
+      });
+
+      // L'utilisateur demande à installer un skill.
       socket.on("install_skill", function(_git){
         LIBRARIES.Skill.Install(_git, SELF, socket);
       });
 
-      // L'utilisateur demande à desinstaller un skill
+      // L'utilisateur demande à desinstaller un skill.
       socket.on("uninstall_skill", function(_git){
         LIBRARIES.Skill.Uninstall(_git, SELF, socket);
       });
 
-      // L'utilisateur demande à changer de langue
+      // L'utilisateur demande à changer de langue.
       socket.on("set_language", function(_language) {
         SELF.Settings.Language = _language;
         LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
         SELF.LauncherIO.emit("reboot_server");
       });
 
-      // L'utilisateur demande à changer le mot de déclenchement
+      // L'utilisateur demande à changer le mot de déclenchement.
       socket.on("set_hot_word", function(_hot_word) {
         SELF.Settings.HotWord = _hot_word;
         LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
