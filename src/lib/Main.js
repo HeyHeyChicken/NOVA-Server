@@ -30,7 +30,7 @@ class Main {
     this.Settings = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/settings.json"), "utf8")); // On récupère les paramètres du serveur.
     this.Translation = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/translation.json"), "utf8")); // On récupère les traductions pour les GUI.
 
-    this.HotWords = LIBRARIES.FS.readdirSync(LIBRARIES.Path.join(this.DirName, "/public/hot_words")).filter(x => x.endsWith(".pmdl")).map(x => x.slice(0, -5));
+    this.HotWords = LIBRARIES.FS.readdirSync(LIBRARIES.Path.join(this.DirName, "/public/hot_words")).filter(x => x.endsWith(".pmdl") || x.endsWith(".umdl"));
 
     this.ClientSkillsPublic = {}; // Cet objet va contenir l'arbre des fichiers provenant des skills destinés à la GUI des clients.
 

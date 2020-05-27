@@ -18,7 +18,7 @@
             </div>
             <select v-model="hotWord" class="custom-select" @change="set_hot_word">
                 <option selected>{{ Dictionary.choose }}</option>
-                <option :key="index" :value="item" v-for="(item, index) in hotWords">{{item}}</option>
+                <option :key="index" :value="item" v-for="(item, index) in hotWords">{{ item.slice(0, -5).split("_").join(" ") }}</option>
             </select>
         </div>
     </div>
