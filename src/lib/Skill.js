@@ -154,7 +154,7 @@ class Skill {
         const NEW_SKILL_FOLDER_NAME = _git.split("/").splice(-2, 2).join("_");
         const FOLDER_SKILL = LIBRARIES.Path.join(FOLDER_SKILLS, NEW_SKILL_FOLDER_NAME);
 
-        _main.Terminal("git clone " + _git + ".git " + FOLDER_SKILL, null, function(_error_code, _messages){
+        _main.Terminal("git clone " + _git + " " + FOLDER_SKILL, null, function(_error_code, _messages){
             if(_error_code === 0){
                 const DEPENDENCIES = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(FOLDER_SKILL, "/package.json"), "utf8")).dependencies;
                 if(DEPENDENCIES !== undefined) {
