@@ -150,6 +150,11 @@ class Skill {
 
     /* Cette fonction permet d'installer un skill par son url GIT. */
     static Install(_git, _main, _socket) {
+        const END_GIT = ".git";
+        if(_git.endsWith(END_GIT)){
+            _git = _git.slice(0, END_GIT.length * -1);
+        }
+
         const FOLDER_SKILLS = LIBRARIES.Path.join(_main.DirName, "/lib/skills/");
         const NEW_SKILL_FOLDER_NAME = _git.split("/").splice(-2, 2).join("_");
         const FOLDER_SKILL = LIBRARIES.Path.join(FOLDER_SKILLS, NEW_SKILL_FOLDER_NAME);
