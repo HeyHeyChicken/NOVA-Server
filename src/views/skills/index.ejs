@@ -19,7 +19,7 @@
         </div>
     </div>
     <div v-if="skill.title.includes(skillSearch) === true" class="col col-12 col-sm-12 col-md-6 col-lg-4" v-for="(skill,index) in skills.Library">
-        <b-card no-body v-b-modal="'modal-skill'+index">
+        <b-card no-body v-b-modal="'modal-skill'+index" @click="JsonEditing = false">
             <b-card-header>
                 <div class="wallpaper" :style="{ backgroundImage: 'url(' + skill.wallpaper + ')' }"></div>
                 <div class="icon" :style="{ backgroundImage: 'url(' + skill.icon + ')' }"></div>
