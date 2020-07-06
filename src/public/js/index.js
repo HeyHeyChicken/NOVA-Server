@@ -54,6 +54,7 @@ const APP = new Vue({
       Installed: []
     },
     Language: null,
+    DarkMode: true,
     Dictionary: {},
     NovaClients: [],
     House: {},
@@ -70,6 +71,10 @@ const APP = new Vue({
     }
   }
 });
+
+/* ################################################################################################################ */
+/* ### SOCKETS #################################################################################################### */
+/* ################################################################################################################ */
 
 const SOCKET = io(window.location.hostname + ":8081");
 
@@ -127,6 +132,16 @@ SOCKET.on("set_language", function(_data) {
   APP.Language = _data;
 });
 
+// Si le serveur a le dark theme activé, on l'affiche.
+SOCKET.on("set_dark_mode", function(_data) {
+  APP.DarkMode = _data
+});
+
+/* ################################################################################################################ */
+/* ### FUNCTIONS ################################################################################################## */
+/* ################################################################################################################ */
+
+// Cette fonction n'a pour l'instant aucun intérêt.
 function InitMap() {
   map = L.map("map").setView([47, 2.3488], 5);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);

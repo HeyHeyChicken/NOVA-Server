@@ -369,6 +369,7 @@ class Main {
       socket.emit("set_installed_skills", SELF.SkillPermanentSettings.skills);
       socket.emit("set_house", SELF.House);
       socket.emit("set_language", SELF.Settings.Language);
+      socket.emit("set_dark_mode", SELF.Settings.DarkMode);
       socket.emit("set_translation", SELF.Translation[SELF.Settings.Language]);
       socket.emit("set_hot_words", SELF.HotWords);
       socket.emit("set_hot_word", SELF.Settings.HotWord);

@@ -9,5 +9,6 @@
         },
         "CustomSearchAPI": null
     },
-    "HotWord": "Nova.pmdl"
+    "HotWord": "Nova.pmdl",
+    "DarkMode": false
 }

@@ -1,0 +1,72 @@
+html{
+  > body{
+    background-color: #202328;
+
+    > #app{
+      input, select{
+        &:focus{
+          border-color: #045089;
+        }
+      }
+
+      > header{
+        background-color: #18191D;
+        border: none;
+
+        > .nav {
+          > li {
+            > a {
+              &:not(.active) {
+                color: #757575;
+              }
+
+              &.active{
+                color: white;
+
+                &:after{
+                  content: "";
+                  position: absolute;
+                  top: 0px;
+                  left: 0px;
+                  height: 100%;
+                  width: 120%;
+                  background-color: #2196F3;
+                  z-index: -1;
+                  border-radius: 0px 10px 10px 0px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      > main {
+        >.tab-content{
+          >.tab-pane{
+            &#home{
+              >.container{
+                >.row{
+                  >.col{
+                    >.card{
+                      border: none;
+                    }
+                  }
+                }
+              }
+            }
+
+            >.container{
+              >.row{
+                >.col{
+                  > h1{
+                    color: white;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

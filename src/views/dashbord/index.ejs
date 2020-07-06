@@ -1,4 +1,7 @@
 <div class="row">
+    <div class="col col-12">
+        <h1>{{ Dictionary.dashboard }}</h1>
+    </div>
     <div class="col col-12 col-sm-12 col-md-6 col-lg-4" v-for="client in NovaClients">
         <b-card class="client" :class="{ connected: client.Connected, active: client.Speaking }">
             <div class="grey"></div>
@@ -7,17 +10,11 @@
             </div>
             <input name="ID" class="hide" type="number" :value="client.ID" readonly>
             <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">{{ Dictionary.name }}</span>
-                </div>
-                <input type="text" class="form-control" :placeholder="Dictionary.no_name" :value="client.Name">
+                <input type="text" class="form-control" :placeholder="Dictionary.name" :value="client.Name">
             </div>
             <div class="input-group">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">{{ Dictionary.room }}</label>
-                </div>
                 <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>{{ Dictionary.choose }}</option>
+                    <option selected>{{ Dictionary.chooseRoom }}</option>
                     <option :value="room.title" v-for="room in House.Rooms">{{room.title}}</option>
                 </select>
             </div>
