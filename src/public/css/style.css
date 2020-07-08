@@ -267,7 +267,7 @@ html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col 
   padding: 15px;
 }
 html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col > .card > .card-footer > .input-group {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col > .card > .card-footer > .input-group > input {
   border: none;
@@ -286,7 +286,7 @@ html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col 
   background-color: transparent;
   border-color: #E0E5EC;
   width: 35px;
-  padding: 0px;
+  padding: 0;
   text-align: center;
 }
 html > body > #app > main > .tab-content > .tab-pane#home > .container > .row > .col > .card {
@@ -320,7 +320,7 @@ html > body > #app > main > .tab-content > .tab-pane#home > .container > .row > 
   -moz-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  top: 0px;
+  top: 0;
   left: 50%;
 }
 html > body > #app > main > .tab-content > .tab-pane#home > .container > .row > .col > .card > .card-body > .grey {
@@ -360,7 +360,7 @@ html > body > #app > main > .tab-content > .tab-pane#skills > .container > .row 
   overflow: hidden;
 }
 html > body > #app > main > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-header {
-  padding: 0px;
+  padding: 0;
   position: relative;
 }
 html > body > #app > main > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-header > .icon, html > body > #app > main > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-header > .wallpaper {
@@ -394,7 +394,7 @@ html > body > #app > main > .tab-content > .tab-pane#skills > .container > .row 
   position: relative;
 }
 html > body > #app > main > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-body > .card-title {
-  margin: 0px;
+  margin: 0;
   font-size: 16px;
 }
 html > body > #app > main > .tab-content > .tab-pane#skills > .container > .row > .col > .card > .card-body > .installed {
@@ -412,7 +412,7 @@ html > body > #app > main > .tab-content > .tab-pane#skills > .container > .row 
   border-radius: 100px;
   border: 1px solid #E0E5EC;
   color: white;
-  padding: 0px 5px;
+  padding: 0 5px;
   line-height: 28px;
   height: 28px;
   min-width: 28px;
@@ -457,8 +457,8 @@ html > body > #app > main > .tab-content > .tab-pane#house > .container > .row >
   text-align: center;
   width: 100%;
   display: block;
-  bottom: 0px;
-  left: 0px;
+  bottom: 0;
+  left: 0;
   background-color: #e9ecef;
   border-top: 1px solid #ced4da;
   padding: 6px 12px;
