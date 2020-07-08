@@ -1,61 +1,75 @@
+//- ############################################################################################################################
+//- ### IMPORTS ################################################################################################################
+//- ############################################################################################################################
+
+@import "lib/SCSS-Mixins/SCSS-Mixins";
+
+//- ############################################################################################################################
+//- ### VARIABLES ##############################################################################################################
+//- ############################################################################################################################
+
 $nav_size: 62px;
 $border_color: #E0E5EC;
 $message_color: #2196F3;
 
-@keyframes spin {
+//- ############################################################################################################################
+//- ### SCSS ###################################################################################################################
+//- ############################################################################################################################
+
+@include keyframes(spin){
   0% {
-    transform: rotate(0deg);
+    @include transform(rotate(0deg));
   }
   100% {
-    transform: rotate(360deg);
+    @include transform(rotate(360deg));
   }
 }
 
-@keyframes microphone {
-	0% {
-      height: 45px;
-      width: 45px;
-	}
-	10% {
-      height: 55px;
-      width: 55px;
-	}
-	20% {
-      height: 42px;
-      width: 42px;
-	}
-	30% {
-      height: 50px;
-      width: 50px;
-	}
-	40% {
-      height: 45px;
-      width: 45px;
-	}
-	50% {
-      height: 55px;
-      width: 55px;
-	}
-	60% {
-      height: 50px;
-      width: 50px;
-	}
-	70% {
-      height: 60px;
-      width: 60px;
-	}
-	80% {
-      height: 50px;
-      width: 50px;
-	}
-	90% {
-      height: 55px;
-      width: 55px;
-	}
-	100% {
-      height: 45px;
-      width: 45px;
-	}
+@include keyframes(microphone){
+  0% {
+    height: 45px;
+    width: 45px;
+  }
+  10% {
+    height: 55px;
+    width: 55px;
+  }
+  20% {
+    height: 42px;
+    width: 42px;
+  }
+  30% {
+    height: 50px;
+    width: 50px;
+  }
+  40% {
+    height: 45px;
+    width: 45px;
+  }
+  50% {
+    height: 55px;
+    width: 55px;
+  }
+  60% {
+    height: 50px;
+    width: 50px;
+  }
+  70% {
+    height: 60px;
+    width: 60px;
+  }
+  80% {
+    height: 50px;
+    width: 50px;
+  }
+  90% {
+    height: 55px;
+    width: 55px;
+  }
+  100% {
+    height: 45px;
+    width: 45px;
+  }
 }
 
 html{
@@ -107,7 +121,7 @@ html{
         > .center{
           top: 50%;
           left: 50%;
-          transform: translate(-50%, -50%);
+          @include transform(translate(-50%, -50%));
 
           > div{
             height: 50px;
@@ -115,8 +129,8 @@ html{
             border-width: 4px;
             border-style: solid;
             border-color: $message_color transparent transparent transparent;
-            animation: spin 0.5s linear infinite;
-            border-radius: 50%;
+            @include animation(spin 0.5s linear infinite);
+            @include border-radius(50%);
           }
         }
       }
@@ -128,7 +142,7 @@ html{
 
         &:focus{
           outline: none;
-          box-shadow: none;
+          @include box-shadow(none);
         }
       }
 
@@ -142,6 +156,7 @@ html{
         width: $nav_size;
         background-color: white;
         left: 0px;
+        z-index: 2;
 
         > .nav{
           background-color: transparent;
@@ -152,7 +167,7 @@ html{
           position: absolute;
           top: 50%;
           left: 50%;
-          transform: translate(-50%, -50%);
+          @include transform(translate(-50%, -50%));
           width: 100%;
 
           > li{
@@ -165,7 +180,7 @@ html{
               height: 100%;
               padding: 0px;
               cursor: pointer;
-              border-radius: 0px;
+              @include border-radius(0px);
               border: none;
               text-decoration: none;
               position: relative;
@@ -174,7 +189,7 @@ html{
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                transform: translate(-50%, -50%);
+                @include transform(translate(-50%, -50%));
               }
 
               &:focus{
@@ -203,6 +218,7 @@ html{
         width: calc(100% - #{$nav_size});
         padding: 15px;
         overflow: auto;
+        z-index: 1;
 
         > .background{
           position: absolute;
@@ -245,7 +261,7 @@ html{
 
                         > input{
                           border: none;
-                          border-radius: 100px;
+                          @include border-radius(100px);
                           background-color: #F2F2F2;
                           font-size: 14px;
                           margin-right: 15px;
@@ -253,7 +269,7 @@ html{
 
                         > .input-group-append{
                           > button{
-                            border-radius: 50%;
+                            @include border-radius(50%);
                             color: $message_color;
                             background-color: transparent;
                             border-color: $border_color;
@@ -274,7 +290,7 @@ html{
                 > .row {
                   > .col {
                     > .card {
-                      border-radius: 10px;
+                      @include border-radius(10px);
                       border-color: $border_color;
 
                       &.connected {
@@ -309,8 +325,8 @@ html{
 
                         > .grey, > .mic {
                           position: absolute;
-                          border-radius: 50%;
-                          transform: translate(-50%, -50%);
+                          @include border-radius(50%);
+                          @include transform(translate(-50%, -50%));
                           top: 0px;
                           left: 50%;
                         }
@@ -330,7 +346,7 @@ html{
                             position: absolute;
                             top: 50%;
                             left: 50%;
-                            transform: translate(-50%, -50%);
+                            @include transform(translate(-50%, -50%));
                           }
                         }
 
@@ -372,14 +388,14 @@ html{
                         }
 
                         > .icon{
-                          border-radius: 0.25rem;
+                          @include border-radius(0.25rem);
                           height: 60px;
                           width: 60px;
                           border: 1px solid $border_color;
                           position: absolute;
                           left: 15px;
                           top: 100%;
-                          transform: translateY(-50%);
+                          @include transform(translateY(-50%));
                         }
 
                         > .wallpaper{
@@ -400,11 +416,11 @@ html{
 
                         > .installed{
                           position: absolute;
-                          transform: translateY(-50%);
+                          @include transform(translateY(-50%));
                           top: 50%;
                           right: 15px;
                           background-color: #4CAF50;
-                          border-radius: 100px;
+                          @include border-radius(100px);
                           border: 1px solid #E0E5EC;
                           color: white;
                           padding: 0px 5px;
@@ -418,7 +434,7 @@ html{
                               position: absolute;
                               top: 50%;
                               left: 50%;
-                              transform: translate(-50%, -50%);
+                              @include transform(translate(-50%, -50%));
                             }
 
                             > span{
@@ -454,7 +470,7 @@ html{
                   > .col{
                     > .map{
                       height: 300px;
-                      border-radius: 0.25rem;
+                      @include border-radius(0.25rem);
                       border: 1px solid #ced4da;
                       background-color: white;
                     }
@@ -495,14 +511,14 @@ html{
 
                       > .square{
                         width: 100%;
-                        border-radius: 0.25rem;
+                        @include border-radius(0.25rem);
                         background-color: white;
                         position: relative;
                         cursor: pointer;
 
                         > i, > svg{
                           left: 50%;
-                          transform: translate(-50%, -50%);
+                          @include transform(translate(-50%, -50%));
                           font-size: 40px;
                         }
 
@@ -534,10 +550,10 @@ html{
                 position: absolute;
                 top: 50%;
                 left: calc(25px + 13px / 2);
-                transform: translate(-50%, -50%);
+                @include transform(translate(-50%, -50%));
                 height: 50px;
                 width: 50px;
-                border-radius: 0.25rem;
+                @include border-radius(0.25rem);
                 border: 1px solid $border_color;
                 background-color: white;
                 background-position: center center;
@@ -570,7 +586,7 @@ html{
               border: 1px solid rgba(27, 31, 35, 0.2);
               font-size: 12px;
               font-weight: 600;
-              border-radius: 0.25em;
+              @include border-radius(0.25rem);
               text-decoration: none;
               height: 24px;
               box-sizing: content-box;

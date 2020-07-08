@@ -2,7 +2,6 @@
   "en-US": {
     "dashboard": "Dashboard",
     "skills": "Skills",
-    "house": "House",
     "name": "Name",
     "room": "Room",
     "choose": "Choose...",
@@ -25,7 +24,6 @@
   "fr-FR": {
     "dashboard": "Tableau de bord",
     "skills": "Compétences",
-    "house": "Maison",
     "name": "Nom",
     "room": "Pièce",
     "choose": "Veuillez renseigner ce champ...",

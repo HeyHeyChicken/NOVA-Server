@@ -1,1 +1,187 @@
-html>body{background-color:#202328}html>body>#app input:focus,html>body>#app select:focus{border-color:#045089}html>body>#app>header{background-color:#18191d;border:none}html>body>#app>header>.nav>li>a:not(.active){color:#757575}html>body>#app>header>.nav>li>a.active{color:#fff}html>body>#app>header>.nav>li>a.active:after{content:"";position:absolute;top:0px;left:0px;height:100%;width:120%;background-color:#2196f3;z-index:-1;border-radius:0px 10px 10px 0px}html>body>#app>main>.tab-content>.tab-pane#home>.container>.row>.col>.card{border:none}html>body>#app>main>.tab-content>.tab-pane>.container>.row>.col>h1{color:#fff}
+/*!
+ * SCSS Mixins 1.1.1
+ * https://github.com/HeyHeyChicken/SCSS-Mixins/
+ * @license MIT licensed
+ *
+ * Copyright (C) 2019 Duval Antoine (HeyHeyChicken)
+ */
+/*!
+ * SCSS Mixins 1.1.1
+ * https://github.com/HeyHeyChicken/SCSS-Mixins/
+ * @license MIT licensed
+ *
+ * Copyright (C) 2019 Duval Antoine (HeyHeyChicken)
+ */
+.shadow_1, html > body > #app > header {
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.shadow_1_inset {
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 5px 0 rgba(0, 0, 0, 0.12) inset, 0 3px 1px -2px rgba(0, 0, 0, 0.2) inset;
+  -moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 5px 0 rgba(0, 0, 0, 0.12) inset, 0 3px 1px -2px rgba(0, 0, 0, 0.2) inset;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 5px 0 rgba(0, 0, 0, 0.12) inset, 0 3px 1px -2px rgba(0, 0, 0, 0.2) inset;
+}
+
+.shadow_2, html > body > #app > header > .nav > li > a:after {
+  -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+
+.shadow_2_inset {
+  -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 10px 0 rgba(0, 0, 0, 0.12) inset, 0 2px 4px -1px rgba(0, 0, 0, 0.3) inset;
+  -moz-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 10px 0 rgba(0, 0, 0, 0.12) inset, 0 2px 4px -1px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 10px 0 rgba(0, 0, 0, 0.12) inset, 0 2px 4px -1px rgba(0, 0, 0, 0.3) inset;
+}
+
+.shadow_3 {
+  -webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+}
+
+.shadow_3_inset {
+  -webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 18px 0 rgba(0, 0, 0, 0.12) inset, 0 3px 5px -1px rgba(0, 0, 0, 0.3) inset;
+  -moz-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 18px 0 rgba(0, 0, 0, 0.12) inset, 0 3px 5px -1px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 18px 0 rgba(0, 0, 0, 0.12) inset, 0 3px 5px -1px rgba(0, 0, 0, 0.3) inset;
+}
+
+.shadow_4 {
+  -webkit-box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+
+.shadow_4_inset {
+  -webkit-box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14) inset, 0 3px 14px 2px rgba(0, 0, 0, 0.12) inset, 0 5px 5px -3px rgba(0, 0, 0, 0.3) inset;
+  -moz-box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14) inset, 0 3px 14px 2px rgba(0, 0, 0, 0.12) inset, 0 5px 5px -3px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14) inset, 0 3px 14px 2px rgba(0, 0, 0, 0.12) inset, 0 5px 5px -3px rgba(0, 0, 0, 0.3) inset;
+}
+
+.shadow_5 {
+  -webkit-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+.shadow_5_inset {
+  -webkit-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14) inset, 0 6px 30px 5px rgba(0, 0, 0, 0.12) inset, 0 8px 10px -5px rgba(0, 0, 0, 0.3) inset;
+  -moz-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14) inset, 0 6px 30px 5px rgba(0, 0, 0, 0.12) inset, 0 8px 10px -5px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14) inset, 0 6px 30px 5px rgba(0, 0, 0, 0.12) inset, 0 8px 10px -5px rgba(0, 0, 0, 0.3) inset;
+}
+
+/*!
+ * SCSS Mixins 1.1.1
+ * https://github.com/HeyHeyChicken/SCSS-Mixins/
+ * @license MIT licensed
+ *
+ * Copyright (C) 2019 Duval Antoine (HeyHeyChicken)
+ */
+.shadow_1, html > body > #app > header {
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.shadow_1_inset {
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 5px 0 rgba(0, 0, 0, 0.12) inset, 0 3px 1px -2px rgba(0, 0, 0, 0.2) inset;
+  -moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 5px 0 rgba(0, 0, 0, 0.12) inset, 0 3px 1px -2px rgba(0, 0, 0, 0.2) inset;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 5px 0 rgba(0, 0, 0, 0.12) inset, 0 3px 1px -2px rgba(0, 0, 0, 0.2) inset;
+}
+
+.shadow_2, html > body > #app > header > .nav > li > a:after {
+  -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+
+.shadow_2_inset {
+  -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 10px 0 rgba(0, 0, 0, 0.12) inset, 0 2px 4px -1px rgba(0, 0, 0, 0.3) inset;
+  -moz-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 10px 0 rgba(0, 0, 0, 0.12) inset, 0 2px 4px -1px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 10px 0 rgba(0, 0, 0, 0.12) inset, 0 2px 4px -1px rgba(0, 0, 0, 0.3) inset;
+}
+
+.shadow_3 {
+  -webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+}
+
+.shadow_3_inset {
+  -webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 18px 0 rgba(0, 0, 0, 0.12) inset, 0 3px 5px -1px rgba(0, 0, 0, 0.3) inset;
+  -moz-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 18px 0 rgba(0, 0, 0, 0.12) inset, 0 3px 5px -1px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14) inset, 0 1px 18px 0 rgba(0, 0, 0, 0.12) inset, 0 3px 5px -1px rgba(0, 0, 0, 0.3) inset;
+}
+
+.shadow_4 {
+  -webkit-box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+
+.shadow_4_inset {
+  -webkit-box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14) inset, 0 3px 14px 2px rgba(0, 0, 0, 0.12) inset, 0 5px 5px -3px rgba(0, 0, 0, 0.3) inset;
+  -moz-box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14) inset, 0 3px 14px 2px rgba(0, 0, 0, 0.12) inset, 0 5px 5px -3px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14) inset, 0 3px 14px 2px rgba(0, 0, 0, 0.12) inset, 0 5px 5px -3px rgba(0, 0, 0, 0.3) inset;
+}
+
+.shadow_5 {
+  -webkit-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+.shadow_5_inset {
+  -webkit-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14) inset, 0 6px 30px 5px rgba(0, 0, 0, 0.12) inset, 0 8px 10px -5px rgba(0, 0, 0, 0.3) inset;
+  -moz-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14) inset, 0 6px 30px 5px rgba(0, 0, 0, 0.12) inset, 0 8px 10px -5px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14) inset, 0 6px 30px 5px rgba(0, 0, 0, 0.12) inset, 0 8px 10px -5px rgba(0, 0, 0, 0.3) inset;
+}
+
+html > body {
+  background-color: #202328;
+}
+html > body > #app input:focus, html > body > #app select:focus {
+  border-color: #045089;
+}
+html > body > #app > header {
+  background-color: #18191D;
+  border: none;
+}
+html > body > #app > header > .nav > li > a:after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  width: 120%;
+  background-color: #2196F3;
+  z-index: -1;
+  -webkit-border-radius: 0px 10px 10px 0px;
+  -moz-border-radius: 0px 10px 10px 0px;
+  border-radius: 0px 10px 10px 0px;
+  -webkit-transition: left 0.2s ease-in-out;
+  -moz-transition: left 0.2s ease-in-out;
+  -o-transition: left 0.2s ease-in-out;
+  transition: left 0.2s ease-in-out;
+}
+html > body > #app > header > .nav > li > a:not(.active) {
+  color: #757575;
+}
+html > body > #app > header > .nav > li > a:not(.active):after {
+  left: -85px;
+}
+html > body > #app > header > .nav > li > a.active {
+  color: white;
+}
+html > body > #app > header > .nav > li > a.active:after {
+  left: 0px;
+}
+html > body > #app > main > .tab-content > .tab-pane#home > .container > .row > .col > .card {
+  border: none;
+}
+html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col > h1 {
+  color: white;
+}
+
+/*# sourceMappingURL=darkMode.css.map */

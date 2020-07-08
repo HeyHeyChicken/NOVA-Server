@@ -1,0 +1,174 @@
+/*!
+ * SCSS Mixins 1.1.1
+ * https://github.com/HeyHeyChicken/SCSS-Mixins/
+ * @license MIT licensed
+ *
+ * Copyright (C) 2019 Duval Antoine (HeyHeyChicken)
+ */
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin selection-color($background, $text: "initial") {
+  &::selection {
+    background: $background;
+    color: $text;
+  }
+
+  &::-moz-selection {
+    background: $background;
+    color: $text;
+  }
+}
+
+@mixin box-sizing($args) {
+  -webkit-box-sizing: $args;
+  -moz-box-sizing: $args;
+  box-sizing: $args;
+}
+
+@mixin appearance($args) {
+  -webkit-appearance: $args;
+  -moz-appearance: $args;
+  -ms-appearance: $args;
+  appearance: $args;
+}
+
+@mixin user-select($args) {
+  -webkit-touch-callout: $args;
+  -webkit-user-select: $args;
+  -moz-user-select: $args;
+  -ms-user-select: $args;
+  user-select: $args;
+}
+
+@mixin filter($args) {
+  -webkit-filter: $args;
+  -moz-filter: $args;
+  -ms-filter: $args;
+  filter: $args;
+}
+
+@mixin animation($args) {
+  -webkit-animation: $args;
+  -moz-animation: $args;
+  -o-animation: $args;
+  animation: $args;
+}
+
+@mixin animation-delay($args) {
+  -webkit-animation-delay: $args;
+  animation-delay: $args;
+}
+
+@mixin transform-origin($x, $y) {
+  -webkit-transform-origin: $x $y;
+  -ms-transform-origin: $x $y;
+  -moz-transform-origin: $x $y;
+  -o-transform-origin: $x $y;
+  transform-origin: $x $y;
+}
+
+@mixin align-items($align) {
+  -webkit-align-items: $align;
+  -moz-align-items: $align;
+  -ms-align-items: $align;
+  align-items: $align;
+}
+
+@mixin transform($function) {
+  -webkit-transform: $function;
+  -ms-transform: $function;
+  -moz-transform: $function;
+  -o-transform: $function;
+  transform: $function;
+}
+
+@mixin box-shadow($left, $top: null, $radius: null, $color: null) {
+  -webkit-box-shadow: $left $top $radius $color;
+  -moz-box-shadow: $left $top $radius $color;
+  box-shadow: $left $top $radius $color;
+}
+
+@mixin all_box_shadow($name, $not_inset, $inset) {
+  .shadow_#{$name} {
+    @include box-shadow($not_inset);
+  }
+
+  .shadow_#{$name}_inset {
+    @include box-shadow($inset);
+  }
+}
+
+@mixin transition($property, $duration: "", $easing: "") {
+  -webkit-transition: $property #{$duration} #{$easing};
+  -moz-transition: $property #{$duration} #{$easing};
+  -o-transition: $property #{$duration} #{$easing};
+  transition: $property #{$duration} #{$easing};
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin selection {
+  ::-moz-selection {
+    @content;
+  }
+
+  ::selection {
+    @content;
+  }
+}
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+  $src: null;
+
+  $extmods: (
+          eot: "?",
+          svg: "#" + str-replace($name, " ", "_")
+  );
+
+  $formats: (
+          otf: "opentype",
+          ttf: "truetype"
+  );
+
+  @each $ext in $exts {
+    $extmod: if(
+                    map-has-key($extmods, $ext),
+                    $ext + map-get($extmods, $ext),
+                    $ext
+    );
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src: append(
+                    $src,
+                    url(quote($path + "." + $extmod)) format(quote($format)),
+                    comma
+    );
+  }
+
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: $src;
+  }
+}

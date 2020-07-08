@@ -1,5 +1,5 @@
 {
-    "Language": "fr-FR",
+    "Language": "en-US",
     "WebServerPort": 8080,
     "Google": {
         "TextToSpeech": {
@@ -10,5 +10,5 @@
         "CustomSearchAPI": null
     },
     "HotWord": "Nova.pmdl",
-    "DarkMode": false
+    "DarkMode": true
 }
