@@ -137,7 +137,7 @@
   }
 }
 html > body {
-  margin: 0px;
+  margin: 0;
   background-color: #f5f7fb;
   font-family: "Roboto", sans-serif;
 }
@@ -158,8 +158,8 @@ html > body > #app .hide {
 }
 html > body > #app > #spinner {
   position: fixed;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
   z-index: 1051;
@@ -168,8 +168,8 @@ html > body > #app > #spinner > .background, html > body > #app > #spinner > .ce
   position: absolute;
 }
 html > body > #app > #spinner > .background {
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
   background-color: white;
@@ -200,7 +200,7 @@ html > body > #app > #spinner > .center > div {
 html > body > #app input, html > body > #app select {
   font-size: 13px;
   height: 56px;
-  padding: 0px 15px;
+  padding: 0 15px;
 }
 html > body > #app input:focus, html > body > #app select:focus {
   outline: none;
@@ -211,18 +211,18 @@ html > body > #app input:focus, html > body > #app select:focus {
 html > body > #app > header, html > body > #app > main {
   position: absolute;
   height: 100%;
-  top: 0px;
+  top: 0;
 }
 html > body > #app > header {
   width: 62px;
   background-color: white;
-  left: 0px;
+  left: 0;
   z-index: 2;
 }
 html > body > #app > header > .nav {
   background-color: transparent;
   box-sizing: border-box;
-  padding: 30px 0px;
+  padding: 30px 0;
   max-height: 100%;
   border: none;
   position: absolute;
@@ -237,13 +237,13 @@ html > body > #app > header > .nav {
 }
 html > body > #app > header > .nav > li {
   height: 62px;
-  margin: 0px;
+  margin: 0;
   width: 100%;
 }
 html > body > #app > header > .nav > li > a {
   width: 100%;
   height: 100%;
-  padding: 0px;
+  padding: 0;
   cursor: pointer;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -276,7 +276,7 @@ html > body > #app > header > .nav > li > a > svg {
   font-size: 18px;
 }
 html > body > #app > main {
-  right: 0px;
+  right: 0;
   width: calc(100% - 62px);
   padding: 15px;
   overflow: auto;
@@ -284,8 +284,8 @@ html > body > #app > main {
 }
 html > body > #app > main > .background {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
   z-index: -1;
@@ -330,7 +330,7 @@ html > body .modal > .modal-dialog > .modal-content > header > h5 > .icon {
   background-size: cover;
 }
 html > body .modal > .modal-dialog > .modal-content > header > h5 > .title {
-  font-weight: 1000;
+  font-weight: 900;
 }
 html > body .modal > .modal-dialog > .modal-content > header > h5 > a.author {
   font-size: 0.8rem;
