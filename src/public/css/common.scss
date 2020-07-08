@@ -1,0 +1,271 @@
+//- ############################################################################################################################
+//- ### IMPORTS ################################################################################################################
+//- ############################################################################################################################
+
+@import "lib/SCSS-Mixins/SCSS-Mixins";
+@import "shadows";
+
+//- ############################################################################################################################
+//- ### VARIABLES ##############################################################################################################
+//- ############################################################################################################################
+
+$nav_size: 62px;
+$border_color: #E0E5EC;
+$message_color: #2196F3;
+
+//- ############################################################################################################################
+//- ### SCSS ###################################################################################################################
+//- ############################################################################################################################
+
+@include keyframes(spin){
+  0% {
+    @include transform(rotate(0deg));
+  }
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+
+html{
+  > body{
+    margin: 0px;
+    background-color: #f5f7fb;
+    font-family: "Roboto", sans-serif;
+
+    > #app{
+      height: 100%;
+
+      .custom-file-label{
+        &:after{
+          content: none;
+        }
+      }
+
+      [role="button"]{
+        outline: none;
+      }
+
+      .hide{
+        opacity: 0;
+        position: fixed;
+        top: -100vh;
+        left: -100vw;
+      }
+
+      > #spinner{
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        z-index: 1051;
+
+        > .background, > .center{
+          position: absolute;
+        }
+
+        > .background{
+          top: 0px;
+          left: 0px;
+          height: 100%;
+          width: 100%;
+          background-color: white;
+        }
+
+        > .center{
+          top: 50%;
+          left: 50%;
+          @include transform(translate(-50%, -50%));
+
+          > div{
+            height: 50px;
+            width: 50px;
+            border-width: 4px;
+            border-style: solid;
+            border-color: $message_color transparent transparent transparent;
+            @include animation(spin 0.5s linear infinite);
+            @include border-radius(50%);
+          }
+        }
+      }
+
+      input, select{
+        font-size: 13px;
+        height: 56px;
+        padding: 0px 15px;
+
+        &:focus{
+          outline: none;
+          @include box-shadow(none);
+        }
+      }
+
+      > header, > main{
+        position: absolute;
+        height: 100%;
+        top: 0px;
+      }
+
+      > header{
+        width: $nav_size;
+        background-color: white;
+        left: 0px;
+        z-index: 2;
+        @extend .shadow_1;
+
+        > .nav{
+          background-color: transparent;
+          box-sizing: border-box;
+          padding: 30px 0px;
+          max-height: 100%;
+          border: none;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          @include transform(translate(-50%, -50%));
+          width: 100%;
+
+          > li{
+            height: $nav_size;
+            margin: 0px;
+            width: 100%;
+
+            > a{
+              width: 100%;
+              height: 100%;
+              padding: 0px;
+              cursor: pointer;
+              @include border-radius(0px);
+              border: none;
+              text-decoration: none;
+              position: relative;
+
+              > svg, > i{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                @include transform(translate(-50%, -50%));
+              }
+
+              &:focus{
+                outline: 0;
+              }
+
+              &.active{
+                background-color: transparent;
+                color: #045089;
+              }
+
+              &:not(.active){
+                color: #9aa0ac;
+              }
+
+              > svg{
+                font-size: 18px;
+              }
+            }
+          }
+        }
+      }
+
+      > main{
+        right: 0px;
+        width: calc(100% - #{$nav_size});
+        padding: 15px;
+        overflow: auto;
+        z-index: 1;
+
+        > .background{
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          height: 100%;
+          width: 100%;
+          z-index: -1;
+        }
+
+        > .tab-content{
+          height: 100%;
+
+          > .tab-pane{
+            min-height: 100%;
+
+            > .container{
+              > .row{
+                > .col{
+                  padding-top: 15px;
+                  padding-bottom: 15px;
+
+                  > h1{
+                    color: black;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .modal{
+      > .modal-dialog{
+        > .modal-content{
+          > header{
+            position: relative;
+            padding-left: 50px + 16px;
+
+            > h5{
+              line-height: 1;
+
+              > .icon{
+                position: absolute;
+                top: 50%;
+                left: calc(25px + 13px / 2);
+                @include transform(translate(-50%, -50%));
+                height: 50px;
+                width: 50px;
+                @include border-radius(0.25rem);
+                border: 1px solid $border_color;
+                background-color: white;
+                background-position: center center;
+                background-size: cover;
+              }
+
+              > .title{
+                font-weight: 1000;
+              }
+
+              > a.author{
+                font-size: 0.8rem;
+              }
+            }
+          }
+
+          > .modal-body{
+            padding: 15px;
+
+            > .carousel{
+              margin-bottom: 15px;
+            }
+          }
+
+          > .modal-footer{
+            > .github-button{
+              color: #24292e;
+              background-color: #eff3f6;
+              padding: 6px 12px;
+              border: 1px solid rgba(27, 31, 35, 0.2);
+              font-size: 12px;
+              font-weight: 600;
+              @include border-radius(0.25rem);
+              text-decoration: none;
+              height: 24px;
+              box-sizing: content-box;
+              line-height: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

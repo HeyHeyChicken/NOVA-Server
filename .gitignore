@@ -7,3 +7,7 @@ sqlite.db
 .idea/
 /src/public/hot_words/*.json
 /src/lib/DB/Client.json
+/src/public/css/lib/SCSS-Mixins/SCSS-Mixins.css
+/src/public/css/lib/SCSS-Mixins/SCSS-Mixins.css.map
+/src/public/css/shadows.css
+/src/public/css/shadows.css.map
