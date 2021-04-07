@@ -152,14 +152,12 @@ class Main {
       }
     ];
 
-    /*
     this.RootPath = LIBRARIES.Path.join(this.DirName, "/lib/TextToSpeech/Google/");
     this.KeyFile = LIBRARIES.FS.readdirSync(this.RootPath).filter(e => e.endsWith(".json"))[0];
-    this.SST = new LIBRARIES.STT.SpeechClient({
+    this.STT = new LIBRARIES.STT.SpeechClient({
       projectId: this.Settings.Google.TextToSpeech.ProjectID,
       keyFilename: this.RootPath + this.KeyFile
     });
-    */
 
     // PREPARING HOUSE
     this.House = new LIBRARIES.House("Logement");
@@ -207,7 +205,8 @@ class Main {
 
   // Cette fonction transforme un texte en voix et l'envoie au client.
   TTS(_socket, _text, _callback){
-    this.GoogleTextToSpeech.TTS(_socket, _text, _callback);
+    //this.GoogleTextToSpeech.TTS(_socket, _text, _callback);
+    this.MacTextToSpeech.TTS(_socket, _text, _callback);
   }
 
   // Cette fonction initialise la conection socket avec le launcher.
@@ -310,14 +309,14 @@ class Main {
 
       // L'utilisateur est en train de parler, nous enregisrons son flux audio dans un fichier.
       socket.on("write_audio", function(_data){
-        LIBRARIES.FS.appendFile(LIBRARIES.Path.join(SELF.DirName,"/voices/", socket.client.conn.id, ".wav"), _data, function (err) {
+        LIBRARIES.FS.appendFile(LIBRARIES.Path.join(SELF.DirName,"/voices/", socket.client.conn.id + ".wav"), _data, function (err) {
           if (err) throw err;
         });
       });
 
       // L'utilisateur a fini de parler, nous envoyons sa voix au serveur STT.
       socket.on("end_recording", function(){
-        const FILE = LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(SELF.DirName, "/voices/", socket.client.conn.id, ".wav"));
+        const FILE = LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(SELF.DirName, "/voices/", socket.client.conn.id + ".wav"));
         const AUDIO_BYTES = FILE.toString("base64");
         const REQUEST = {
           audio: {
@@ -330,12 +329,14 @@ class Main {
           }
         };
         (async () => {
-          console.log("gg");
-          const [response] = await SELF.SST.recognize(REQUEST);
+          const [response] = await SELF.STT.recognize(REQUEST);
           const transcription = response.results
               .map(result => result.alternatives[0].transcript)
               .join('\n');
-          console.log(`Transcription: ${transcription}`);
+          if(transcription != ""){
+            socket.emit("cs_message", transcription);
+            SELF.Manager.process(transcription, socket);
+          }
         })();
 
         let client = LIBRARIES.NOVAClient.SelectBySocketID(socket.client.conn.id, SELF);
