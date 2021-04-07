@@ -11,7 +11,7 @@ const LIBRARIES = {
   Path: require("path"),
 
   NOVAClient: require("./Client"),
-  GoogleTextToSpeech: require("./GoogleTextToSpeech/GoogleTextToSpeech"),
+  MacTextToSpeech: require("./TextToSpeech/Mac/MacTextToSpeech"),
   Manager: require("./Manager"),
   House: require("./House"),
   Skill: require("./Skill")
@@ -46,8 +46,8 @@ class Main {
     this.ServerIO = null; // Ce serveur socket relie le serveur à son interface.
     this.WavWriters = {}; // Cet objet contiens les modules qui récupèrent la voix pour la convertir en fichier.
 
-    this.GoogleTextToSpeech = new LIBRARIES.GoogleTextToSpeech(this); // On initialise le service TTS de Google.
-    this.Manager = new LIBRARIES.Manager(this.GoogleTextToSpeech); // Cette entité permet de convertir la demande utilisateur en action tout en extrayant les données importantes.
+    this.MacTextToSpeech = new LIBRARIES.MacTextToSpeech(this);
+    this.Manager = new LIBRARIES.Manager(this.MacTextToSpeech); // Cette entité permet de convertir la demande utilisateur en action tout en extrayant les données importantes.
 
     this.URL_Skills = [
       {
@@ -152,12 +152,14 @@ class Main {
       }
     ];
 
-    this.RootPath = LIBRARIES.Path.join(this.DirName, "/lib/GoogleTextToSpeech/");
+    /*
+    this.RootPath = LIBRARIES.Path.join(this.DirName, "/lib/TextToSpeech/Google/");
     this.KeyFile = LIBRARIES.FS.readdirSync(this.RootPath).filter(e => e.endsWith(".json"))[0];
     this.SST = new LIBRARIES.STT.SpeechClient({
       projectId: this.Settings.Google.TextToSpeech.ProjectID,
       keyFilename: this.RootPath + this.KeyFile
     });
+    */
 
     // PREPARING HOUSE
     this.House = new LIBRARIES.House("Logement");
