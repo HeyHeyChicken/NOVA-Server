@@ -29,6 +29,10 @@ class Main {
     this.SkillPermanentSettings = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/skills.json"), "utf8"));
     this.Settings = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/settings.json"), "utf8")); // On récupère les paramètres du serveur.
     this.Translation = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/translation.json"), "utf8")); // On récupère les traductions pour les GUI.
+    this.Languages = {};
+    for(let key in this.Translation){
+      this.Languages[key] = this.Translation[key].language_name;
+    }
 
     this.HotWords = LIBRARIES.FS.readdirSync(LIBRARIES.Path.join(this.DirName, "/public/hot_words")).filter(x => x.endsWith(".pmdl") || x.endsWith(".umdl"));
 
@@ -369,6 +373,7 @@ class Main {
       socket.emit("set_installed_skills", SELF.SkillPermanentSettings.skills);
       socket.emit("set_house", SELF.House);
       socket.emit("set_language", SELF.Settings.Language);
+      socket.emit("set_languages", SELF.Languages);
       socket.emit("set_dark_mode", SELF.Settings.DarkMode);
       socket.emit("set_translation", SELF.Translation[SELF.Settings.Language]);
       socket.emit("set_hot_words", SELF.HotWords);

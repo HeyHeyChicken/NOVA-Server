@@ -9,8 +9,7 @@
             </div>
             <select v-model="Language" class="custom-select" @change="set_language">
                 <option selected>{{ Dictionary.choose }}</option>
-                <option value="fr-FR">🇫🇷 Français</option>
-                <option value="en-US">🇬🇧 English</option>
+                <option :key="index" :value="index" v-for="(item, index) in Languages">{{ item }}</option>
             </select>
         </div>
     </div>
@@ -25,6 +24,19 @@
             </select>
         </div>
     </div>
+    <!--
+    <div class="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">{{ Dictionary.tts }}</span>
+            </div>
+            <select v-model="hotWord" class="custom-select" @change="set_hot_word">
+                <option selected>{{ Dictionary.choose }}</option>
+                <option :key="index" :value="item" v-for="(item, index) in Languages">{{ item.slice(0, -5).split("_").join(" ") }}</option>
+            </select>
+        </div>
+    </div>
+    -->
     <!--
     <div class="col col-12">
       <div class="input-group">

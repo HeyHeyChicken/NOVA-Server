@@ -54,6 +54,7 @@ const APP = new Vue({
       Installed: []
     },
     Language: null,
+    Languages: [],
     DarkMode: true,
     Dictionary: {},
     NovaClients: [],
@@ -130,6 +131,12 @@ SOCKET.on("set_translation", function(_data) {
 // Si le serveur envoie une mise à jour de la langue.
 SOCKET.on("set_language", function(_data) {
   APP.Language = _data;
+});
+
+// Si le serveur envoie une mise à jour de la liste des langues disponibles.
+SOCKET.on("set_languages", function(_data) {
+  APP.Languages = _data;
+  console.log(APP.Languages);
 });
 
 // Si le serveur a le dark theme activé, on l'affiche.

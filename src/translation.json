@@ -1,5 +1,6 @@
 {
   "en-US": {
+    "language_name": "\uD83C\uDDEC\uD83C\uDDE7 English",
     "dashboard": "Dashboard",
     "skills": "Skills",
     "name": "Name",
@@ -19,9 +20,11 @@
     "install_from_git_placeholder": "Past the link here",
     "settings": "Settings",
     "cancel": "Cancel",
-    "validate": "Validate"
+    "validate": "Validate",
+    "tts": "Text to speech"
   },
   "fr-FR": {
+    "language_name": "\uD83C\uDDEB\uD83C\uDDF7 Français",
     "dashboard": "Tableau de bord",
     "skills": "Compétences",
     "name": "Nom",
@@ -41,6 +44,7 @@
     "install_from_git_placeholder": "Collez le lien ici",
     "settings": "Réglages",
     "cancel": "Annuler",
-    "validate": "Valider"
+    "validate": "Valider",
+    "tts": "Texte vers parole (TTS)"
   }
 }
