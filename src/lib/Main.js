@@ -154,10 +154,16 @@ class Main {
 
     this.RootPath = LIBRARIES.Path.join(this.DirName, "/lib/TextToSpeech/Google/");
     this.KeyFile = LIBRARIES.FS.readdirSync(this.RootPath).filter(e => e.endsWith(".json"))[0];
-    this.STT = new LIBRARIES.STT.SpeechClient({
-      projectId: this.Settings.Google.TextToSpeech.ProjectID,
-      keyFilename: this.RootPath + this.KeyFile
-    });
+    this.STT = null;
+    if(this.KeyFile == undefined){
+      SELF.Log("Can't initialise STT, you have to put your json file into this folder : \"" + this.RootPath + "\".", "red");
+    }
+    else{
+      this.STT = new LIBRARIES.STT.SpeechClient({
+        projectId: this.Settings.Google.TextToSpeech.ProjectID,
+        keyFilename: this.RootPath + this.KeyFile
+      });
+    }
 
     // PREPARING HOUSE
     this.House = new LIBRARIES.House("Logement");
@@ -316,7 +322,8 @@ class Main {
 
       // L'utilisateur a fini de parler, nous envoyons sa voix au serveur STT.
       socket.on("end_recording", function(){
-        const FILE = LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(SELF.DirName, "/voices/", socket.client.conn.id + ".wav"));
+        const PATH = LIBRARIES.Path.join(SELF.DirName, "/voices/", socket.client.conn.id + ".wav");
+        const FILE = LIBRARIES.FS.readFileSync(PATH);
         const AUDIO_BYTES = FILE.toString("base64");
         const REQUEST = {
           audio: {
@@ -329,14 +336,20 @@ class Main {
           }
         };
         (async () => {
-          const [response] = await SELF.STT.recognize(REQUEST);
-          const transcription = response.results
-              .map(result => result.alternatives[0].transcript)
-              .join('\n');
-          if(transcription != ""){
-            socket.emit("cs_message", transcription);
-            SELF.Manager.process(transcription, socket);
+          if(SELF.STT != null){
+            const [response] = await SELF.STT.recognize(REQUEST);
+            const transcription = response.results
+                .map(result => result.alternatives[0].transcript)
+                .join('\n');
+            if(transcription != ""){
+              socket.emit("cs_message", transcription);
+              SELF.Manager.process(transcription, socket);
+            }
           }
+          else{
+            SELF.Log("The STT service isn't initialised.", "red");
+          }
+          LIBRARIES.FS.unlink(PATH, function(){});
         })();
 
         let client = LIBRARIES.NOVAClient.SelectBySocketID(socket.client.conn.id, SELF);
