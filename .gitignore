@@ -1,5 +1,5 @@
 node_modules/
-**/src/public/mp3/*.mp3
+**/src/public/mp3/*/*.mp3
 **/src/lib/GoogleTextToSpeech/*.json
 **/src/lib/skills/*
 **/src/voices/*.wav

@@ -11,7 +11,6 @@ const LIBRARIES = {
   Path: require("path"),
 
   NOVAClient: require("./Client"),
-  MacTextToSpeech: require("./TextToSpeech/Mac/MacTextToSpeech"),
   Manager: require("./Manager"),
   House: require("./House"),
   Skill: require("./Skill")
@@ -46,8 +45,7 @@ class Main {
     this.ServerIO = null; // Ce serveur socket relie le serveur à son interface.
     this.WavWriters = {}; // Cet objet contiens les modules qui récupèrent la voix pour la convertir en fichier.
 
-    this.MacTextToSpeech = new LIBRARIES.MacTextToSpeech(this);
-    this.Manager = new LIBRARIES.Manager(this.MacTextToSpeech); // Cette entité permet de convertir la demande utilisateur en action tout en extrayant les données importantes.
+    this.Manager = new LIBRARIES.Manager(this); // Cette entité permet de convertir la demande utilisateur en action tout en extrayant les données importantes.
 
     this.URL_Skills = [
       {
@@ -209,12 +207,6 @@ class Main {
     });
   }
 
-  // Cette fonction transforme un texte en voix et l'envoie au client.
-  TTS(_socket, _text, _callback){
-    //this.GoogleTextToSpeech.TTS(_socket, _text, _callback);
-    this.MacTextToSpeech.TTS(_socket, _text, _callback);
-  }
-
   // Cette fonction initialise la conection socket avec le launcher.
   InitialiseLauncherSocketClient(){
     const SELF = this;
@@ -255,6 +247,10 @@ class Main {
     this.HTTP.listen(this.Settings.WebServerPort, function(){
       SELF.Log("You can access the server's GUI on http://localhost:" + SELF.Settings.WebServerPort + ".", "green");
     });
+  }
+
+  // Cette fonction est en attente d'un module de Text To Speech.
+  TTS(_socket, _text, _callback){
   }
 
   // Cette fonction initialise le serveur socket reliant le serveur NOVA aux clients NOVA.
@@ -338,10 +334,11 @@ class Main {
         (async () => {
           if(SELF.STT != null){
             const [response] = await SELF.STT.recognize(REQUEST);
-            const transcription = response.results
+            let transcription = response.results
                 .map(result => result.alternatives[0].transcript)
                 .join('\n');
             if(transcription != ""){
+              transcription = transcription.charAt(0).toUpperCase() + transcription.slice(1);
               socket.emit("cs_message", transcription);
               SELF.Manager.process(transcription, socket);
             }

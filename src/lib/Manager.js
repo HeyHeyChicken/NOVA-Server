@@ -3,8 +3,8 @@ const LIBRARIES = {
 };
 
 class Manager {
-  constructor(_textToSpeech) {
-    this.TextToSpeech = _textToSpeech;
+  constructor(_main) {
+    this.Main = _main;
     this.Intents = {};
 
     this._checkIntentExistence("none");
@@ -117,8 +117,9 @@ class Manager {
 
   /* Cette fonction vérifie si un intent existe, si non, elle le crée. */
   _checkIntentExistence(_intentName){
+    const SELF = this;
     if(this.Intents[_intentName] === undefined){
-      this.Intents[_intentName] = new LIBRARIES.Intent(this.TextToSpeech, _intentName);
+      this.Intents[_intentName] = new LIBRARIES.Intent(SELF.Main, _intentName);
     }
   }
 

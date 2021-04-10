@@ -3,8 +3,8 @@ const LIBRARIES = {
 };
 
 class Intent {
-  constructor(_textToSpeech, _name) {
-    this.TextToSpeech = _textToSpeech;
+  constructor(_main, _name) {
+    this.Main = _main;
     this.Name = _name;
     this.Documents = [];
     this.Answers = [];
@@ -42,7 +42,7 @@ class Intent {
       }
 
       _socket.emit("sc_message", new LIBRARIES.Message(_answer, true));
-      this.TextToSpeech.TTS(_socket, _answer);
+      this.Main.TTS(_socket, _answer, undefined);
     }
   }
 
@@ -54,7 +54,7 @@ class Intent {
       }
 
       _socket.emit("sc_message", new LIBRARIES.Message(text, true));
-      this.TextToSpeech.TTS(_socket, text);
+      this.Main.TTS(_socket, text, undefined);
     }
   }
 }
