@@ -149,18 +149,18 @@ class Main {
       },
       {
         title: "TTS - Mac",
-        description: "This skill will allow you to know the current date and the current time.",
+        description: "This skill will allow your assistant to answer you (no connection needed) with the Mac's Siri voice.",
         git: "https://github.com/HeyHeyChicken/NOVA-TTS-Mac",
-        wallpaper: "https://images-eu.ssl-images-amazon.com/images/I/71a-uS3N0mL.png",
-        icon: "https://www.yourdictionary.com/images/definitions/lg/11728.time.jpg",
+        wallpaper: "https://github.com/HeyHeyChicken/NOVA-TTS-Mac/blob/master/resources/nova-wallpaper.png",
+        icon: "https://github.com/HeyHeyChicken/NOVA-TTS-Mac/blob/master/resources/nova-icon.png",
         screenshots: []
       },
       {
         title: "TTS - Google",
-        description: "This skill will allow you to know the current date and the current time.",
+        description: "This skill will allow your assistant to answer you (connection needed) with the Google's voice.",
         git: "https://github.com/HeyHeyChicken/NOVA-TTS-Google",
         wallpaper: "https://images-eu.ssl-images-amazon.com/images/I/71a-uS3N0mL.png",
-        icon: "https://www.yourdictionary.com/images/definitions/lg/11728.time.jpg",
+        icon: "https://github.com/HeyHeyChicken/NOVA-TTS-Google/blob/main/resources/nova-icon.png",
         screenshots: []
       }
     ];
