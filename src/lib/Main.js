@@ -149,18 +149,7 @@ class Main {
       }
     ];
 
-    this.RootPath = LIBRARIES.Path.join(this.DirName, "/lib/TextToSpeech/Google/");
-    this.KeyFile = LIBRARIES.FS.readdirSync(this.RootPath).filter(e => e.endsWith(".json"))[0];
     this.STT = null;
-    if(this.KeyFile == undefined){
-      SELF.Log("Can't initialise STT, you have to put your json file into this folder : \"" + this.RootPath + "\".", "red");
-    }
-    else{
-      this.STT = new LIBRARIES.STT.SpeechClient({
-        projectId: this.Settings.Google.TextToSpeech.ProjectID,
-        keyFilename: this.RootPath + this.KeyFile
-      });
-    }
 
     // PREPARING HOUSE
     this.House = new LIBRARIES.House("Logement");
