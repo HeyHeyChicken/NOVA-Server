@@ -143,24 +143,24 @@ class Main {
         title: "DateAndTime",
         description: "This skill will allow you to know the current date and the current time.",
         git: "https://github.com/HeyHeyChicken/NOVA-DateAndTime",
-        wallpaper: "https://images-eu.ssl-images-amazon.com/images/I/71a-uS3N0mL.png",
-        icon: "https://www.yourdictionary.com/images/definitions/lg/11728.time.jpg",
-        screenshots: ["https://i.ibb.co/Wsjy0dM/Date-And-Time.jpg"]
+        wallpaper: "https://github.com/HeyHeyChicken/NOVA-DateAndTime/blob/master/resources/nova-wallpaper.png?raw=true",
+        icon: "https://github.com/HeyHeyChicken/NOVA-DateAndTime/blob/master/resources/nova-icon.png?raw=true",
+        screenshots: ["https://github.com/HeyHeyChicken/NOVA-DateAndTime/blob/master/resources/screenshots/1.jpg?raw=true"]
       },
       {
         title: "TTS - Mac",
         description: "This skill will allow your assistant to answer you (no connection needed) with the Mac's Siri voice.",
         git: "https://github.com/HeyHeyChicken/NOVA-TTS-Mac",
-        wallpaper: "https://github.com/HeyHeyChicken/NOVA-TTS-Mac/blob/master/resources/nova-wallpaper.png",
-        icon: "https://github.com/HeyHeyChicken/NOVA-TTS-Mac/blob/master/resources/nova-icon.png",
+        wallpaper: "https://github.com/HeyHeyChicken/NOVA-TTS-Mac/blob/master/resources/nova-wallpaper.png?raw=true",
+        icon: "https://github.com/HeyHeyChicken/NOVA-TTS-Mac/blob/master/resources/nova-icon.png?raw=true",
         screenshots: []
       },
       {
         title: "TTS - Google",
         description: "This skill will allow your assistant to answer you (connection needed) with the Google's voice.",
         git: "https://github.com/HeyHeyChicken/NOVA-TTS-Google",
-        wallpaper: "https://images-eu.ssl-images-amazon.com/images/I/71a-uS3N0mL.png",
-        icon: "https://github.com/HeyHeyChicken/NOVA-TTS-Google/blob/main/resources/nova-icon.png",
+        wallpaper: "https://github.com/HeyHeyChicken/NOVA-TTS-Google/blob/main/resources/nova-wallpaper.png?raw=true",
+        icon: "https://github.com/HeyHeyChicken/NOVA-TTS-Google/blob/main/resources/nova-icon.png?raw=true",
         screenshots: []
       }
     ];
