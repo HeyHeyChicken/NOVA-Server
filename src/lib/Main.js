@@ -5,7 +5,6 @@ const LIBRARIES = {
   SocketIO: require("socket.io"),
   FS: require("fs"),
   WAV: require("wav"),
-  STT: require("@google-cloud/speech"),
   SocketIOClient: require("socket.io-client"),
   ChildProcess: require("child_process"),
   Path: require("path"),
