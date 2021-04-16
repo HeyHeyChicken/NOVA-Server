@@ -56,7 +56,7 @@ class Main {
         screenshots: [
             "https://raw.githubusercontent.com/constantgillet/NOVA-Convert/master/resources/screenshots/1.jpg"
         ]
-      },
+      },/*
       {
         title: "Chrome Auto Launcher",
         description: "This skill will allow your client to launch automatically Chrome at boot.",
@@ -64,7 +64,7 @@ class Main {
         wallpaper: "https://www.journaldugeek.com/content/uploads/2019/08/googlechrome.png",
         icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Google_Chrome_icon_%282011%29.svg/1024px-Google_Chrome_icon_%282011%29.svg.png",
         screenshots: []
-      },
+      },*/
       {
         title: "Spotify",
         description: "This skill will allow your NOVA assistant to play you some Spotify music.",
@@ -74,7 +74,7 @@ class Main {
         screenshots: [
             "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Spotify/master/resources/screenshots/1.jpg"
         ]
-      },
+      },/*
       {
         title: "Chrome Speech To text",
         description: "This skill will allow your NOVA assistant understand what you say for free and unlimited, but you'll have to use the Google Chrome browser for your clients.",
@@ -82,7 +82,7 @@ class Main {
         wallpaper: "https://cloud.google.com/images/products/speech/speech-api-lead.png?hl=fr",
         icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Google_Chrome_icon_%282011%29.svg/1024px-Google_Chrome_icon_%282011%29.svg.png",
         screenshots: []
-      },
+      },*/
       {
         title: "Device IP Address",
         description: "This skill will allow you to know your assistant IP address.",
@@ -98,7 +98,7 @@ class Main {
         wallpaper: "https://s1.dmcdn.net/v/N0O2u1QRCkSPkpXaf/x1080",
         icon: "https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/do-more-siri-homepod-social-card.jpg",
         screenshots: []
-      },
+      },/*
       {
         title: "TuneIn",
         description: "This skill will allow your assistant to play you radio.",
@@ -106,7 +106,7 @@ class Main {
         wallpaper: "https://store-images.s-microsoft.com/image/apps.61349.9007199266246398.fab84bd6-dd10-4a80-9137-0a0428d5234f.0dfd8a2d-25e4-4765-ad8e-703d58c0ec3d",
         icon: "https://www.underconsideration.com/brandnew/archives/tunein_2017_monogram.jpg",
         screenshots: []
-      },
+      },*/
       {
         title: "Amberdata",
         description: "This skill will allow your NOVA assistant to know the value of your cryptocurrency portfolio.",
@@ -146,6 +146,22 @@ class Main {
         wallpaper: "https://images-eu.ssl-images-amazon.com/images/I/71a-uS3N0mL.png",
         icon: "https://www.yourdictionary.com/images/definitions/lg/11728.time.jpg",
         screenshots: ["https://i.ibb.co/Wsjy0dM/Date-And-Time.jpg"]
+      },
+      {
+        title: "TTS - Mac",
+        description: "This skill will allow you to know the current date and the current time.",
+        git: "https://github.com/HeyHeyChicken/NOVA-TTS-Mac",
+        wallpaper: "https://images-eu.ssl-images-amazon.com/images/I/71a-uS3N0mL.png",
+        icon: "https://www.yourdictionary.com/images/definitions/lg/11728.time.jpg",
+        screenshots: []
+      },
+      {
+        title: "TTS - Google",
+        description: "This skill will allow you to know the current date and the current time.",
+        git: "https://github.com/HeyHeyChicken/NOVA-TTS-Google",
+        wallpaper: "https://images-eu.ssl-images-amazon.com/images/I/71a-uS3N0mL.png",
+        icon: "https://www.yourdictionary.com/images/definitions/lg/11728.time.jpg",
+        screenshots: []
       }
     ];
 
