@@ -127,8 +127,8 @@ class Main {
         title: "ChatBot",
         description: 'This skill will allow you to say "Hello", "Goodbye", and more to your assistant.',
         git: "https://github.com/HeyHeyChicken/NOVA-ChatBot",
-        wallpaper: "https://www.spn.asso.fr/wp-content/uploads/2019/08/Chatbot-Cafe%CC%81-Techno-SPN.jpg",
-        icon: "https://medias3.prestastore.com/835054-pbig/chat-bot-for-social-networking.jpg",
+        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-ChatBot/master/resources/nova-wallpaper.png",
+        icon: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-ChatBot/master/resources/nova-icon.png?raw=true",
         screenshots: ["https://i.ibb.co/PgGG5FR/ChatBot.jpg"]
       },
       {

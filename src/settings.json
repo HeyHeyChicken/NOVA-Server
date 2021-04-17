@@ -1,14 +1,6 @@
 {
-    "Language": "en-US",
+    "Language": "fr-FR",
     "WebServerPort": 8080,
-    "Google": {
-        "TextToSpeech": {
-            "PlaybackRate": 1,
-            "ProjectID": null,
-            "Gender": "FEMALE"
-        },
-        "CustomSearchAPI": null
-    },
     "HotWord": "Nova.pmdl",
     "DarkMode": false
 }
