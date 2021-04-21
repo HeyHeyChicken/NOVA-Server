@@ -162,6 +162,14 @@ class Main {
         wallpaper: "https://github.com/HeyHeyChicken/NOVA-TTS-Google/blob/main/resources/nova-wallpaper.png?raw=true",
         icon: "https://github.com/HeyHeyChicken/NOVA-TTS-Google/blob/main/resources/nova-icon.png?raw=true",
         screenshots: []
+      },
+      {
+        title: "STT - Google",
+        description: "This skill will allow your assistant to understand you (connection needed) with the Google's STT service.",
+        git: "https://github.com/HeyHeyChicken/NOVA-STT-Google",
+        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-STT-Google/master/resources/nova-wallpaper.png",
+        icon: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-STT-Google/master/resources/nova-icon.png",
+        screenshots: []
       }
     ];
 
@@ -323,35 +331,15 @@ class Main {
       // L'utilisateur a fini de parler, nous envoyons sa voix au serveur STT.
       socket.on("end_recording", function(){
         const PATH = LIBRARIES.Path.join(SELF.DirName, "/voices/", socket.client.conn.id + ".wav");
-        const FILE = LIBRARIES.FS.readFileSync(PATH);
-        const AUDIO_BYTES = FILE.toString("base64");
-        const REQUEST = {
-          audio: {
-            content: AUDIO_BYTES
-          },
-          config: {
-            encoding: "LINEAR16",
-            //sampleRateHertz: 16000,
-            languageCode: SELF.Settings.Language
-          }
-        };
-        (async () => {
-          if(SELF.STT != null){
-            const [response] = await SELF.STT.recognize(REQUEST);
-            let transcription = response.results
-                .map(result => result.alternatives[0].transcript)
-                .join('\n');
-            if(transcription != ""){
-              transcription = transcription.charAt(0).toUpperCase() + transcription.slice(1);
-              socket.emit("cs_message", transcription);
-              SELF.Manager.process(transcription, socket);
-            }
-          }
-          else{
-            SELF.Log("The STT service isn't initialised.", "red");
-          }
-          LIBRARIES.FS.unlink(PATH, function(){});
-        })();
+        if(SELF.STT != null){
+          SELF.STT.Recognize(PATH, function(_message){
+            socket.emit("cs_message", _message);
+            SELF.Manager.process(_message, socket);
+          });
+        }
+        else{
+          SELF.Log("No STT service initialised.", "red");
+        }
 
         let client = LIBRARIES.NOVAClient.SelectBySocketID(socket.client.conn.id, SELF);
         if(client !== undefined){
