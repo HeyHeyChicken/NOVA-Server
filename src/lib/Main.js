@@ -170,6 +170,14 @@ class Main {
         wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-STT-Google/master/resources/nova-wallpaper.png",
         icon: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-STT-Google/master/resources/nova-icon.png",
         screenshots: []
+      },
+      {
+        title: "Picovoice - Hot Word Detection",
+        description: "...",
+        git: "https://github.com/HeyHeyChicken/NOVA-Picovoice-Hot-Word-Detection",
+        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Picovoice-Hot-Word-Detection/main/resources/nova-wallpaper.jpg",
+        icon: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Picovoice-Hot-Word-Detection/main/resources/nova-icon.png",
+        screenshots: []
       }
     ];
 
@@ -330,9 +338,11 @@ class Main {
 
       // L'utilisateur a fini de parler, nous envoyons sa voix au serveur STT.
       socket.on("end_recording", function(){
+        console.log("GG");
         const PATH = LIBRARIES.Path.join(SELF.DirName, "/voices/", socket.client.conn.id + ".wav");
         if(SELF.STT != null){
           SELF.STT.Recognize(PATH, function(_message){
+            console.log("7" +_message+ "7");
             socket.emit("cs_message", _message);
             SELF.Manager.process(_message, socket);
           });
