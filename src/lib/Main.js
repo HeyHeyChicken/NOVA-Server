@@ -95,7 +95,7 @@ class Main {
         title: "HomePod Sounds",
         description: "This skill will allow your assistant to play the system sounds of the HomePod.",
         git: "https://github.com/HeyHeyChicken/NOVA-HomePod-Sounds",
-        wallpaper: "https://s1.dmcdn.net/v/N0O2u1QRCkSPkpXaf/x1080",
+        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-HomePod-Sounds/master/resources/nova-wallpaper.jpg",
         icon: "https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/do-more-siri-homepod-social-card.jpg",
         screenshots: []
       },/*

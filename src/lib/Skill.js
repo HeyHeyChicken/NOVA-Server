@@ -177,6 +177,7 @@ class Skill {
             }
             else{
                 _main.Log("Can't install the skill (\"" + _git + "\").", "red");
+                _main.LauncherIO.emit("reboot_server");
             }
         });
     }

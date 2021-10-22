@@ -20,8 +20,11 @@ const APP = new Vue({
   el: "#app",
   methods: {
     install_skill_from_git: function(event) {
-      this.ShowSpinner = true;
-      SOCKET.emit("install_skill", event.target.closest(".input-group").getElementsByTagName("input")[0].value);
+      const URL = event.target.closest(".input-group").getElementsByTagName("input")[0].value;
+      if(URL != ""){
+        this.ShowSpinner = true;
+        SOCKET.emit("install_skill", URL);
+      }
     },
     set_language: function(event) {
       this.ShowSpinner = true;

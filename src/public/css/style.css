@@ -256,6 +256,33 @@
     width: 45px;
   }
 }
+html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col .input-group > .input-group-prepend, html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col .input-group > .input-group-append {
+  min-height: 100%;
+}
+html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col .input-group > .input-group-prepend > .input-group-text, html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col .input-group > .input-group-prepend > .btn, html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col .input-group > .input-group-append > .input-group-text, html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col .input-group > .input-group-append > .btn {
+  height: 100%;
+}
+html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col .input-group > .input-group-prepend > .input-group-text, html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col .input-group > .input-group-append > .input-group-text {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col .input-group > .input-group-prepend > .btn, html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col .input-group > .input-group-append > .btn {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col .input-group > .custom-select {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col .custom-select {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out;
+  cursor: pointer;
+}
+html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col .custom-select:focus {
+  border-color: black;
+}
 html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col > .card {
   border-color: #E0E5EC;
 }
@@ -297,6 +324,9 @@ html > body > #app > main > .tab-content > .tab-pane#home > .container > .row > 
 }
 html > body > #app > main > .tab-content > .tab-pane#home > .container > .row > .col > .card.connected > .card-body > .mic {
   background-color: #2196F3;
+}
+html > body > #app > main > .tab-content > .tab-pane#home > .container > .row > .col > .card.connected > .card-body > .input-group > select {
+  width: 100%;
 }
 html > body > #app > main > .tab-content > .tab-pane#home > .container > .row > .col > .card.connected.active > .card-body > .grey {
   animation-duration: 3s;
@@ -447,11 +477,11 @@ html > body > #app > main > .tab-content > .tab-pane#house > .container > .row >
   background-color: white;
 }
 html > body > #app > main > .tab-content > .tab-pane#house > .container > .row > .col > .room.has_title > .square {
-  padding-top: calc(100% - 1px * 2);
+  padding-top: calc(100% - 2px);
   border: 1px solid #ced4da;
 }
 html > body > #app > main > .tab-content > .tab-pane#house > .container > .row > .col > .room.has_title > .square > i, html > body > #app > main > .tab-content > .tab-pane#house > .container > .row > .col > .room.has_title > .square > svg {
-  top: calc(50% - 37px / 2);
+  top: calc(50% - 18.5px);
 }
 html > body > #app > main > .tab-content > .tab-pane#house > .container > .row > .col > .room.has_title > .square > span {
   text-align: center;
@@ -464,7 +494,7 @@ html > body > #app > main > .tab-content > .tab-pane#house > .container > .row >
   padding: 6px 12px;
 }
 html > body > #app > main > .tab-content > .tab-pane#house > .container > .row > .col > .room:not(.has_title) > .square {
-  padding-top: calc(100% - 3px * 2);
+  padding-top: calc(100% - 6px);
   border: 3px dashed #ced4da;
 }
 html > body > #app > main > .tab-content > .tab-pane#house > .container > .row > .col > .room:not(.has_title) > .square > i, html > body > #app > main > .tab-content > .tab-pane#house > .container > .row > .col > .room:not(.has_title) > .square > svg {
