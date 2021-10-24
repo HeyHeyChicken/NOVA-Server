@@ -1,0 +1,15 @@
+/*!
+ * SCSS Mixins 1.1.1
+ * https://github.com/HeyHeyChicken/SCSS-Mixins/
+ * @license MIT licensed
+ *
+ * Copyright (C) 2019 Duval Antoine (HeyHeyChicken)
+ */
+html > body {
+  background-color: #f5f7fb;
+}
+html > body > #app input:focus, html > body > #app select:focus {
+  border-color: #045089;
+}
+
+/*# sourceMappingURL=Light.css.map */

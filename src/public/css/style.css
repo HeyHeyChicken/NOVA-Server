@@ -320,7 +320,6 @@ html > body > #app > main > .tab-content > .tab-pane#home > .container > .row > 
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
-  border-color: #E0E5EC;
 }
 html > body > #app > main > .tab-content > .tab-pane#home > .container > .row > .col > .card.connected > .card-body > .mic {
   background-color: #2196F3;

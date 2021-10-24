@@ -1,6 +1,5 @@
 {
     "Language": "fr-FR",
     "WebServerPort": 8080,
-    "HotWord": "Nova.pmdl",
-    "DarkMode": true
+    "Theme": "Dark.css"
 }

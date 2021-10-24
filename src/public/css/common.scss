@@ -29,7 +29,6 @@ $message_color: #2196F3;
 html{
   > body{
     margin: 0;
-    background-color: #f5f7fb;
     font-family: "Roboto", sans-serif;
 
     > #app{
@@ -195,10 +194,6 @@ html{
                 > .col{
                   padding-top: 15px;
                   padding-bottom: 15px;
-
-                  > h1{
-                    color: black;
-                  }
                 }
               }
             }

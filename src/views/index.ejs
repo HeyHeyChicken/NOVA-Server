@@ -14,7 +14,7 @@
   </head>
   <body>
     <div id="app">
-      <link rel="stylesheet" v-if="DarkMode === true" href="./css/darkMode.css" />
+      <link rel="stylesheet" :href="themePath" />
       <div v-if="ShowSpinner === true" id="spinner">
         <div class="background"></div>
         <div class="center">

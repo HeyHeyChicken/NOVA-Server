@@ -30,9 +30,11 @@ const APP = new Vue({
       this.ShowSpinner = true;
       SOCKET.emit("set_language", event.target.value);
     },
-    set_hot_word: function(event){
-      this.ShowSpinner = true;
-      SOCKET.emit("set_hot_word", event.target.value);
+    set_theme: function(event){
+      this.themePath = "./css/theme/" + event.target.value;
+      //this.ShowSpinner = true;
+      // TODO WTF ?
+      SOCKET.emit("set_theme", event.target.value);
     },
     install_skill: function(event) {
       this.ShowSpinner = true;
@@ -58,15 +60,15 @@ const APP = new Vue({
     },
     Language: null,
     Languages: [],
-    DarkMode: true,
     Dictionary: {},
     NovaClients: [],
     House: {},
     ShowSpinner: false,
     AlreadyConnected: false,
     skillSearch: "",
-    hotWords: "",
-    hotWord: "",
+    themes: "",
+    theme: "",
+    themePath: "",
     JsonEditing: false,
     JsonEditorOptions: {
       onChange(json){
@@ -97,12 +99,13 @@ SOCKET.on("set_clients", function(_NovaClients) {
   APP.NovaClients = _NovaClients;
 });
 
-SOCKET.on("set_hot_words", function(_hotWords) {
-  APP.hotWords = _hotWords;
+SOCKET.on("set_themes", function(_themes) {
+  APP.themes = _themes;
 });
 
-SOCKET.on("set_hot_word", function(_hotWord) {
-  APP.hotWord = _hotWord;
+SOCKET.on("set_theme", function(_theme) {
+  APP.theme = _theme
+  APP.themePath = "./css/theme/" + APP.theme;
 });
 
 // Si le serveur envoie une mise à jour de ???
@@ -140,11 +143,6 @@ SOCKET.on("set_language", function(_data) {
 SOCKET.on("set_languages", function(_data) {
   APP.Languages = _data;
   console.log(APP.Languages);
-});
-
-// Si le serveur a le dark theme activé, on l'affiche.
-SOCKET.on("set_dark_mode", function(_data) {
-  APP.DarkMode = _data
 });
 
 /* ################################################################################################################ */

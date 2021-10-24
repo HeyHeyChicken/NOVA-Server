@@ -155,7 +155,6 @@ html{
                   > .col {
                     > .card {
                       @include border-radius(10px);
-                      border-color: $border_color;
 
                       &.connected {
                         > .card-body {

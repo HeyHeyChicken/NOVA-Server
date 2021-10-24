@@ -21,7 +21,8 @@
     "settings": "Settings",
     "cancel": "Cancel",
     "validate": "Validate",
-    "tts": "Text to speech"
+    "tts": "Text to speech",
+    "theme": "Theme"
   },
   "fr-FR": {
     "language_name": "\uD83C\uDDEB\uD83C\uDDF7 Français",
@@ -45,6 +46,7 @@
     "settings": "Réglages",
     "cancel": "Annuler",
     "validate": "Valider",
-    "tts": "Texte vers parole (TTS)"
+    "tts": "Texte vers parole (TTS)",
+    "theme": "Thème"
   }
 }

@@ -138,7 +138,6 @@
 }
 html > body {
   margin: 0;
-  background-color: #f5f7fb;
   font-family: "Roboto", sans-serif;
 }
 html > body > #app {
@@ -300,9 +299,6 @@ html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col 
   padding-top: 15px;
   padding-bottom: 15px;
 }
-html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col > h1 {
-  color: black;
-}
 html > body .modal > .modal-dialog > .modal-content > header {
   position: relative;
   padding-left: 66px;
@@ -313,7 +309,7 @@ html > body .modal > .modal-dialog > .modal-content > header > h5 {
 html > body .modal > .modal-dialog > .modal-content > header > h5 > .icon {
   position: absolute;
   top: 50%;
-  left: calc(25px + 13px / 2);
+  left: 31.5px;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);

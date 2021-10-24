@@ -32,7 +32,8 @@ class Main {
       this.Languages[key] = this.Translation[key].language_name;
     }
 
-    this.HotWords = LIBRARIES.FS.readdirSync(LIBRARIES.Path.join(this.DirName, "/public/hot_words")).filter(x => x.endsWith(".pmdl") || x.endsWith(".umdl"));
+    this.HotWords = LIBRARIES.FS.readdirSync(LIBRARIES.Path.join(this.DirName, "public", "hot_words")).filter(x => x.endsWith(".pmdl") || x.endsWith(".umdl"));
+    this.Themes = LIBRARIES.FS.readdirSync(LIBRARIES.Path.join(this.DirName, "public", "css", "theme")).filter(x => x.endsWith(".css"));
 
     this.ClientSkillsPublic = {}; // Cet objet va contenir l'arbre des fichiers provenant des skills destinés à la GUI des clients.
 
@@ -389,10 +390,9 @@ class Main {
       socket.emit("set_house", SELF.House);
       socket.emit("set_language", SELF.Settings.Language);
       socket.emit("set_languages", SELF.Languages);
-      socket.emit("set_dark_mode", SELF.Settings.DarkMode);
       socket.emit("set_translation", SELF.Translation[SELF.Settings.Language]);
-      socket.emit("set_hot_words", SELF.HotWords);
-      socket.emit("set_hot_word", SELF.Settings.HotWord);
+      socket.emit("set_themes", SELF.Themes);
+      socket.emit("set_theme", SELF.Settings.Theme);
 
       // Si l'utilisateur demande à changer les rélages d'un skill.
       socket.on("set_Installed", function(_skills){
@@ -419,14 +419,14 @@ class Main {
       // L'utilisateur demande à changer de langue.
       socket.on("set_language", function(_language) {
         SELF.Settings.Language = _language;
-        LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
+        LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
         SELF.LauncherIO.emit("reboot_server");
       });
 
       // L'utilisateur demande à changer le mot de déclenchement.
-      socket.on("set_hot_word", function(_hot_word) {
-        SELF.Settings.HotWord = _hot_word;
-        LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
+      socket.on("set_theme", function(_theme) {
+        SELF.Settings.Theme = _theme;
+        LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
         SELF.LauncherIO.emit("reboot_server");
       });
     });
