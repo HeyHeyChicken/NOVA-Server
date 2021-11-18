@@ -91,7 +91,7 @@ html > body > #app > header > .nav > li > a {
 html > body > #app > header > .nav > li > a:after {
   content: "";
   position: absolute;
-  top: 0px;
+  top: 0;
   height: 100%;
   width: 120%;
   background-color: #2196F3;
@@ -114,13 +114,16 @@ html > body > #app > header > .nav > li > a.active {
   color: white;
 }
 html > body > #app > header > .nav > li > a.active:after {
-  left: 0px;
+  left: 0;
 }
 html > body > #app > main > .tab-content > .tab-pane#home > .container > .row > .col > .card {
   border: none;
 }
 html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col > h1 {
   color: white;
+}
+html > body > #app > main > .tab-content > .tab-pane > .container > .row > .col > .card > .card-footer > .input-group > .input-group-append > button {
+  border-color: #202328;
 }
 
 /*# sourceMappingURL=Dark.css.map */

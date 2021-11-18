@@ -15,9 +15,11 @@ $transition_time: 0.2s;
 //- ### SCSS ###################################################################################################################
 //- ############################################################################################################################
 
+$background_color: #202328;
+
 html{
   > body{
-    background-color: #202328;
+    background-color: $background_color;
 
     > #app{
       input, select{
@@ -38,7 +40,7 @@ html{
               &:after{
                 content: "";
                 position: absolute;
-                top: 0px;
+                top: 0;
                 height: 100%;
                 width: 120%;
                 background-color: #2196F3;
@@ -60,7 +62,7 @@ html{
                 color: white;
 
                 &:after{
-                  left: 0px;
+                  left: 0;
                 }
               }
             }
@@ -88,6 +90,18 @@ html{
                 >.col{
                   > h1{
                     color: white;
+                  }
+
+                  > .card{
+                    > .card-footer{
+                      > .input-group{
+                        > .input-group-append{
+                          > button{
+                            border-color: $background_color;
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
