@@ -173,10 +173,10 @@ class Main {
         screenshots: []
       },
       {
-        title: "Picovoice - Hot Word Detection",
-        description: "...",
-        git: "https://github.com/HeyHeyChicken/NOVA-Picovoice-Hot-Word-Detection",
-        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Picovoice-Hot-Word-Detection/main/resources/nova-wallpaper.jpg",
+        title: "Wake Word - Porcupine",
+        description: "This skill will allow your assistant to detect wake words with porcupine.",
+        git: "https://github.com/HeyHeyChicken/NOVA-WakeWord-Porcupine",
+        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-WakeWord-Porcupine/master/resources/nova-wallpaper.jpg",
         icon: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Picovoice-Hot-Word-Detection/main/resources/nova-icon.png",
         screenshots: []
       }
@@ -282,7 +282,8 @@ class Main {
     this.ClientIO.on("connection", function(socket){
       socket.emit("set_skills_public_files", SELF.ClientSkillsPublic);
       socket.emit("set_language", SELF.Settings.Language);
-      socket.emit("set_hot_word", SELF.Settings.HotWord);
+      //socket.emit("set_hot_word", SELF.Settings.HotWord);
+      socket.emit("set_theme", SELF.Settings.Theme);
 
       // Lorsque l'utilisateur envoie un message au serveur.
       socket.on("cs_message", function(_message){
@@ -339,11 +340,9 @@ class Main {
 
       // L'utilisateur a fini de parler, nous envoyons sa voix au serveur STT.
       socket.on("end_recording", function(){
-        console.log("GG");
         const PATH = LIBRARIES.Path.join(SELF.DirName, "/voices/", socket.client.conn.id + ".wav");
         if(SELF.STT != null){
           SELF.STT.Recognize(PATH, function(_message){
-            console.log("7" +_message+ "7");
             socket.emit("cs_message", _message);
             SELF.Manager.process(_message, socket);
           });
