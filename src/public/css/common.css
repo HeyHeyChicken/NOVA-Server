@@ -159,8 +159,8 @@ html > body > #app > #spinner {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   z-index: 1051;
 }
 html > body > #app > #spinner > .background, html > body > #app > #spinner > .center {
@@ -198,8 +198,16 @@ html > body > #app > #spinner > .center > div {
 }
 html > body > #app input, html > body > #app select {
   font-size: 13px;
-  height: 56px;
   padding: 0 15px;
+}
+html > body > #app input:not([type=checkbox]), html > body > #app select:not([type=checkbox]) {
+  height: 56px;
+}
+html > body > #app input[type=checkbox], html > body > #app select[type=checkbox] {
+  margin-right: 10px;
+}
+html > body > #app input.full, html > body > #app select.full {
+  width: 100%;
 }
 html > body > #app input:focus, html > body > #app select:focus {
   outline: none;
@@ -268,11 +276,22 @@ html > body > #app > header > .nav > li > a.active {
   background-color: transparent;
   color: #045089;
 }
+html > body > #app > header > .nav > li > a.logo:after {
+  background-color: white;
+}
 html > body > #app > header > .nav > li > a:not(.active) {
   color: #9aa0ac;
 }
 html > body > #app > header > .nav > li > a > svg {
   font-size: 18px;
+}
+html > body > #app > header > .nav > li > a > img {
+  max-width: 60%;
+  max-height: 60%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 html > body > #app > main {
   right: 0;

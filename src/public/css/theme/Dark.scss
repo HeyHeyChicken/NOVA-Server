@@ -28,6 +28,12 @@ html{
         }
       }
 
+      > #spinner{
+        > .background{
+          background-color: $background_color;
+        }
+      }
+
       > header{
         background-color: #18191D;
         border: none;

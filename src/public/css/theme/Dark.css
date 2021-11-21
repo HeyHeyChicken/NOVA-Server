@@ -78,6 +78,9 @@ html > body {
 html > body > #app input:focus, html > body > #app select:focus {
   border-color: #045089;
 }
+html > body > #app > #spinner > .background {
+  background-color: #202328;
+}
 html > body > #app > header {
   background-color: #18191D;
   border: none;

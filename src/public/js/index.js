@@ -27,8 +27,18 @@ const APP = new Vue({
       }
     },
     set_language: function(event) {
-      this.ShowSpinner = true;
-      SOCKET.emit("set_language", event.target.value);
+      if(event.target.value != ""){
+        this.ShowSpinner = true;
+        SOCKET.emit("set_language", event.target.value);
+      }
+    },
+    ReadAndAcceptLicenseAgreement: function(event) {
+      this.TutorialIndex++;
+      SOCKET.emit("read_and_accept_license_agreement");
+    },
+    EndTutorial: function(event) {
+      this.DoneTutorial = true;
+      SOCKET.emit("end_tutorial");
     },
     set_theme: function(event){
       this.themePath = "./css/theme/" + event.target.value;
@@ -62,7 +72,10 @@ const APP = new Vue({
     Languages: [],
     Dictionary: {},
     NovaClients: [],
-    House: {},
+    DoneTutorial: null,
+    LicenseKey: "null",
+    TutorialIndex: 0,
+    LicenseAgreementReadedAndAccepted: false,
     ShowSpinner: false,
     AlreadyConnected: false,
     skillSearch: "",
@@ -108,11 +121,6 @@ SOCKET.on("set_theme", function(_theme) {
   APP.themePath = "./css/theme/" + APP.theme;
 });
 
-// Si le serveur envoie une mise à jour de ???
-SOCKET.on("set_house", function(_house) {
-  APP.House = _house;
-});
-
 // Si le serveur envoie une mise à jour de la liste des clients NOVA.
 SOCKET.on("set_skills", function(_skills) {
   APP.skills.Library = _skills.sort(function(a, b){
@@ -134,6 +142,11 @@ SOCKET.on("set_translation", function(_data) {
   APP.Dictionary = _data;
 });
 
+// Si le serveur envoie la cle le license
+SOCKET.on("set_license_key", function(_data) {
+  APP.LicenseKey = _data;
+});
+
 // Si le serveur envoie une mise à jour de la langue.
 SOCKET.on("set_language", function(_data) {
   APP.Language = _data;
@@ -142,7 +155,11 @@ SOCKET.on("set_language", function(_data) {
 // Si le serveur envoie une mise à jour de la liste des langues disponibles.
 SOCKET.on("set_languages", function(_data) {
   APP.Languages = _data;
-  console.log(APP.Languages);
+});
+
+// Si le serveur envoie une mise à jour de l'état de completion du tuto
+SOCKET.on("set_done_tutorial", function(_data) {
+  APP.DoneTutorial = _data;
 });
 
 /* ################################################################################################################ */

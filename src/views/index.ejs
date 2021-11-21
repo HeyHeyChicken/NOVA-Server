@@ -23,17 +23,22 @@
       </div>
       <header>
         <ul class="nav nav-tabs">
-          <li class="nav-item">
+          <li v-if="DoneTutorial !== true" class="nav-item">
+            <a class="nav-link active logo" data-toggle="tab">
+              <img src="/img/favicon.png"></i>
+            </a>
+          </li>
+          <li v-if="DoneTutorial === true" class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#home" :title="Dictionary.dashboard">
               <i class="fas fa-tachometer-alt"></i>
             </a>
           </li>
-          <li class="nav-item">
+          <li v-if="DoneTutorial === true" class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#skills" :title="Dictionary.skills">
               <i class="fas fa-box"></i>
             </a>
           </li>
-          <li class="nav-item">
+          <li v-if="DoneTutorial === true" class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#house" :title="Dictionary.house">
               <i class="fas fa-cog"></i>
             </a>
@@ -42,7 +47,7 @@
       </header>
       <main>
         <div class="background"></div>
-        <div class="tab-content">
+        <div v-if="DoneTutorial === true" class="tab-content">
           <div class="tab-pane fade show active" id="home">
             <div class="container">
               <%- include('./dashbord/index.ejs') %>
@@ -59,9 +64,9 @@
             </div>
           </div>
         </div>
+        <%- include('./tutorial/index.ejs') %>
       </main>
       <%- include('./skills/modal.ejs') %>
-      <%- include('./settings/modal.ejs') %>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>

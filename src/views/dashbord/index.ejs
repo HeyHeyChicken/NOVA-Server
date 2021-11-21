@@ -12,12 +12,6 @@
             <div class="input-group">
                 <input type="text" class="form-control" :placeholder="Dictionary.name" :value="client.Name">
             </div>
-            <div class="input-group">
-                <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>{{ Dictionary.chooseRoom }}</option>
-                    <option :value="room.title" v-for="room in House.Rooms">{{room.title}}</option>
-                </select>
-            </div>
         </b-card>
     </div>
 </div>

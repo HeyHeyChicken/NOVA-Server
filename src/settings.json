@@ -1,5 +1,7 @@
 {
-    "Language": "fr-FR",
+    "Language": "en-US",
     "WebServerPort": 8080,
-    "Theme": "Dark.css"
+    "Theme": "Dark.css",
+    "DoneTutorial": false,
+    "LicenseKey": ""
 }

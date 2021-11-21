@@ -1,0 +1,41 @@
+<div v-if="DoneTutorial === false" id="tutorial">
+    <b-tabs v-model="TutorialIndex">
+        <b-tab :active="LicenseKey == 'null'"></b-tab>
+        <b-tab :active="LicenseKey == ''">
+            <b-card>
+                <i class="fas fa-file-signature"></i>
+                <h2>{{ Dictionary.license_agreement }}</h2>
+                <iframe type="application/pdf" src="./license.pdf#toolbar=0&navpanes=0"></iframe>
+                <b-form-checkbox v-model="LicenseAgreementReadedAndAccepted">{{ Dictionary.license_agreement_readed_and_accepted }}</b-form-checkbox>
+                <template #footer>
+                    <b-button :disabled="!LicenseAgreementReadedAndAccepted" @click="ReadAndAcceptLicenseAgreement" variant="primary">{{ Dictionary.accept }}</b-button>
+                </template>
+            </b-card>
+        </b-tab>
+        <b-tab :active="LicenseKey != 'null' && LicenseKey != ''">
+            <b-card>
+                <i class="fas fa-globe-europe"></i>
+                <h2>{{ Dictionary.choose_a_language }}</h2>
+                <div class="input-group">
+                    <select v-model="Language" class="custom-select full" @change="set_language">
+                        <option disabled selected>{{ Dictionary.choose }}</option>
+                        <option :key="index" :value="index" v-for="(item, index) in Languages">{{ item }}</option>
+                    </select>
+                </div>
+                <template #footer>
+                    <b-button @click="TutorialIndex++" variant="primary">{{ Dictionary.continue }}</b-button>
+                </template>
+            </b-card>
+        </b-tab>
+        <b-tab>
+            <b-card>
+                <i class="fas fa-question"></i>
+                <h2>{{ Dictionary.tuto_title }}</h2>
+                <p style="text-align: left" v-html="Dictionary.tuto_description"></p>
+                <template #footer>
+                    <b-button @click="EndTutorial" variant="primary">{{ Dictionary.continue }}</b-button>
+                </template>
+            </b-card>
+        </b-tab>
+    </b-tabs>
+</div>

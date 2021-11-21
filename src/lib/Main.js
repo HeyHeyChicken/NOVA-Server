@@ -11,7 +11,6 @@ const LIBRARIES = {
 
   NOVAClient: require("./Client"),
   Manager: require("./Manager"),
-  House: require("./House"),
   Skill: require("./Skill")
 };
 
@@ -26,6 +25,7 @@ class Main {
     this.DirName = _dirname;
     this.SkillPermanentSettings = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/skills.json"), "utf8"));
     this.Settings = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/settings.json"), "utf8")); // On récupère les paramètres du serveur.
+
     this.Translation = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/translation.json"), "utf8")); // On récupère les traductions pour les GUI.
     this.Languages = {};
     for(let key in this.Translation){
@@ -184,14 +184,6 @@ class Main {
 
     this.STT = null;
 
-    // PREPARING HOUSE
-    this.House = new LIBRARIES.House("Logement");
-    this.House.AddRoom("Salle de bain", "fas fa-bath");
-    this.House.AddRoom("Chambre", "fas fa-bed");
-    this.House.AddRoom("Cuisine", "fas fa-blender");
-    this.House.AddRoom("Salon", "fas fa-tv");
-    this.House.AddRoom("Toilettes", "fas fa-toilet");
-
     this.InitialiseServers(); // On initialise les serveurs de NOVA.
     LIBRARIES.Skill.LoadAll(this); // On charge les skills du serveur NOVA.
   }
@@ -262,6 +254,9 @@ class Main {
     this.Express.get("/", function(req, res){
       res.render("index");
     });
+    this.Express.get("/license.pdf", function(req, res){
+      res.sendFile(LIBRARIES.Path.join(LIBRARIES.Path.dirname(SELF.DirName), "non-commercial-license.pdf"));
+    });
     this.HTTP = LIBRARIES.HTTP.createServer(this.Express);
     this.InitialiseSocketClient();
     this.InitialiseSocketServer();
@@ -282,8 +277,8 @@ class Main {
     this.ClientIO.on("connection", function(socket){
       socket.emit("set_skills_public_files", SELF.ClientSkillsPublic);
       socket.emit("set_language", SELF.Settings.Language);
-      //socket.emit("set_hot_word", SELF.Settings.HotWord);
       socket.emit("set_theme", SELF.Settings.Theme);
+      socket.emit("set_done_tutorial", SELF.Settings.DoneTutorial);
 
       // Lorsque l'utilisateur envoie un message au serveur.
       socket.on("cs_message", function(_message){
@@ -386,12 +381,13 @@ class Main {
       // On envoie à l'interface WEB la liste des skills installables.
       socket.emit("set_skills", SELF.URL_Skills);
       socket.emit("set_installed_skills", SELF.SkillPermanentSettings.skills);
-      socket.emit("set_house", SELF.House);
-      socket.emit("set_language", SELF.Settings.Language);
       socket.emit("set_languages", SELF.Languages);
+      socket.emit("set_language", SELF.Settings.Language);
       socket.emit("set_translation", SELF.Translation[SELF.Settings.Language]);
       socket.emit("set_themes", SELF.Themes);
       socket.emit("set_theme", SELF.Settings.Theme);
+      socket.emit("set_license_key", SELF.Settings.LicenseKey);
+      socket.emit("set_done_tutorial", SELF.Settings.DoneTutorial);
 
       // Si l'utilisateur demande à changer les rélages d'un skill.
       socket.on("set_Installed", function(_skills){
@@ -403,6 +399,18 @@ class Main {
       // L'utilisateur demande à récupérer la liste des skills installés.
       socket.on("get_Installed", function(){
         socket.emit("set_installed_skills", SELF.SkillPermanentSettings.skills);
+      });
+
+      // L'utilisateur a lu et accepté le contrat de license
+      socket.on("read_and_accept_license_agreement", function(){
+        SELF.Settings.LicenseKey = "non-commercial-and-evaluation";
+        LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
+      });
+
+      // L'utilisateur a fini le tuto
+      socket.on("end_tutorial", function(){
+        SELF.Settings.DoneTutorial = true;
+        LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
       });
 
       // L'utilisateur demande à installer un skill.
@@ -417,9 +425,11 @@ class Main {
 
       // L'utilisateur demande à changer de langue.
       socket.on("set_language", function(_language) {
-        SELF.Settings.Language = _language;
-        LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
-        SELF.LauncherIO.emit("reboot_server");
+        if(_language != ""){
+          SELF.Settings.Language = _language;
+          LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
+          SELF.LauncherIO.emit("reboot_server");
+        }
       });
 
       // L'utilisateur demande à changer le mot de déclenchement.
