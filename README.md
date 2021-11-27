@@ -1,7 +1,5 @@
 <div align="center">
-    <a href="//nova-assistant.com" rel="nofollow">
-        <img src="https://github.com/HeyHeyChicken/NOVA-Server/blob/master/resources/github-logo.svg" alt="NOVA" width="300">
-    </a>
+    <img src="https://github.com/HeyHeyChicken/NOVA/blob/master/resources/github-logo.svg" alt="NOVA" width="300">
     <br>
     NOVA - Server is the central server for your favorite voice assistant.<br>
 </div>
