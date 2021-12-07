@@ -47,145 +47,131 @@ class Main {
 
     this.Manager = new LIBRARIES.Manager(this); // Cette entité permet de convertir la demande utilisateur en action tout en extrayant les données importantes.
 
-    this.URL_Skills = [
-      {
-        title: "Convert",
-        description: "This skill will allow your assistant to convert a lot of things...",
-        git: "https://github.com/constantgillet/NOVA-Convert",
-        wallpaper: "https://raw.githubusercontent.com/constantgillet/NOVA-Convert/master/resources/nova-wallpaper.jpg",
-        icon: "https://raw.githubusercontent.com/constantgillet/NOVA-Convert/master/resources/nova-icon.png",
-        screenshots: [
-            "https://raw.githubusercontent.com/constantgillet/NOVA-Convert/master/resources/screenshots/1.jpg"
-        ]
-      },/*
-      {
-        title: "Chrome Auto Launcher",
-        description: "This skill will allow your client to launch automatically Chrome at boot.",
-        git: "https://github.com/HeyHeyChicken/NOVA-ChromeAutoLauncher",
-        wallpaper: "https://www.journaldugeek.com/content/uploads/2019/08/googlechrome.png",
-        icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Google_Chrome_icon_%282011%29.svg/1024px-Google_Chrome_icon_%282011%29.svg.png",
-        screenshots: []
-      },*/
-      {
-        title: "Spotify",
-        description: "This skill will allow your NOVA assistant to play you some Spotify music.",
-        git: "https://github.com/HeyHeyChicken/NOVA-Spotify",
-        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Spotify/master/resources/nova-wallpaper.jpg",
-        icon: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Spotify/master/resources/nova-icon.png",
-        screenshots: [
-            "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Spotify/master/resources/screenshots/1.jpg"
-        ]
-      },/*
-      {
-        title: "Chrome Speech To text",
-        description: "This skill will allow your NOVA assistant understand what you say for free and unlimited, but you'll have to use the Google Chrome browser for your clients.",
-        git: "https://github.com/HeyHeyChicken/NOVA-Chrome-Speech-To-Text",
-        wallpaper: "https://cloud.google.com/images/products/speech/speech-api-lead.png?hl=fr",
-        icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Google_Chrome_icon_%282011%29.svg/1024px-Google_Chrome_icon_%282011%29.svg.png",
-        screenshots: []
-      },*/
-      {
-        title: "Device IP Address",
-        description: "This skill will allow you to know your assistant IP address.",
-        git: "https://github.com/HeyHeyChicken/NOVA-Device-IP-Address",
-        wallpaper: "https://bitfix.be/wp-content/uploads/2017/01/127.0.0.1-Wallpaper.png",
-        icon: "https://cdn.icon-icons.com/icons2/37/PNG/512/IPaddress_IP_3219.png",
-        screenshots: ["https://i.ibb.co/S5XRskB/screenshot.jpg"]
-      },
-      {
-        title: "HomePod Sounds",
-        description: "This skill will allow your assistant to play the system sounds of the HomePod.",
-        git: "https://github.com/HeyHeyChicken/NOVA-HomePod-Sounds",
-        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-HomePod-Sounds/master/resources/nova-wallpaper.jpg",
-        icon: "https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/do-more-siri-homepod-social-card.jpg",
-        screenshots: []
-      },/*
-      {
-        title: "TuneIn",
-        description: "This skill will allow your assistant to play you radio.",
-        git: "https://github.com/HeyHeyChicken/NOVA-TuneIn",
-        wallpaper: "https://store-images.s-microsoft.com/image/apps.61349.9007199266246398.fab84bd6-dd10-4a80-9137-0a0428d5234f.0dfd8a2d-25e4-4765-ad8e-703d58c0ec3d",
-        icon: "https://www.underconsideration.com/brandnew/archives/tunein_2017_monogram.jpg",
-        screenshots: []
-      },*/
-      {
-        title: "Amberdata",
-        description: "This skill will allow your NOVA assistant to know the value of your cryptocurrency portfolio.",
-        git: "https://github.com/HeyHeyChicken/NOVA-Amberdata",
-        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Amberdata/master/resources/nova-wallpaper.jpg",
-        icon: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Amberdata/master/resources/nova-icon.png",
-        screenshots: ["https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Amberdata/master/resources/screenshots/1.jpg"]
-      },
-      {
-        title: "Count",
-        description: "This skill will allow your assistant to count.",
-        git: "https://github.com/HeyHeyChicken/NOVA-Count",
-        wallpaper: "https://www.dictionary.com/e/wp-content/uploads/2019/10/slideshow-Large-numbers_1_1000x700.jpg",
-        icon: "data:image/png;base64,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",
-        screenshots: ["https://i.ibb.co/xH3FdxN/Count.jpg"]
-      },
-      {
-        title: "ChatBot",
-        description: 'This skill will allow you to say "Hello", "Goodbye", and more to your assistant.',
-        git: "https://github.com/HeyHeyChicken/NOVA-ChatBot",
-        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-ChatBot/master/resources/nova-wallpaper.png",
-        icon: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-ChatBot/master/resources/nova-icon.png?raw=true",
-        screenshots: ["https://i.ibb.co/PgGG5FR/ChatBot.jpg"]
-      },
-      {
-        title: "Random",
-        description: "Roll the dice, ask for a random number between 10 and 325, and control the randomness!",
-        git: "https://github.com/HeyHeyChicken/NOVA-Random",
-        wallpaper: "https://ichef.bbci.co.uk/news/720/cpsprodpb/37B5/production/_89716241_thinkstockphotos-523060154.jpg",
-        icon: "https://static.thenounproject.com/png/603655-200.png",
-        screenshots: ["https://i.ibb.co/7JJ7qPC/Random.jpg"]
-      },
-      {
-        title: "DateAndTime",
-        description: "This skill will allow you to know the current date and the current time.",
-        git: "https://github.com/HeyHeyChicken/NOVA-DateAndTime",
-        wallpaper: "https://github.com/HeyHeyChicken/NOVA-DateAndTime/blob/master/resources/nova-wallpaper.png?raw=true",
-        icon: "https://github.com/HeyHeyChicken/NOVA-DateAndTime/blob/master/resources/nova-icon.png?raw=true",
-        screenshots: ["https://github.com/HeyHeyChicken/NOVA-DateAndTime/blob/master/resources/screenshots/1.jpg?raw=true"]
-      },
-      {
-        title: "TTS - Mac",
-        description: "This skill will allow your assistant to answer you (no connection needed) with the Mac's Siri voice.",
-        git: "https://github.com/HeyHeyChicken/NOVA-TTS-Mac",
-        wallpaper: "https://github.com/HeyHeyChicken/NOVA-TTS-Mac/blob/master/resources/nova-wallpaper.png?raw=true",
-        icon: "https://github.com/HeyHeyChicken/NOVA-TTS-Mac/blob/master/resources/nova-icon.png?raw=true",
-        screenshots: []
-      },
-      {
-        title: "TTS - Google",
-        description: "This skill will allow your assistant to answer you (connection needed) with the Google's voice.",
-        git: "https://github.com/HeyHeyChicken/NOVA-TTS-Google",
-        wallpaper: "https://github.com/HeyHeyChicken/NOVA-TTS-Google/blob/main/resources/nova-wallpaper.png?raw=true",
-        icon: "https://github.com/HeyHeyChicken/NOVA-TTS-Google/blob/main/resources/nova-icon.png?raw=true",
-        screenshots: []
-      },
-      {
-        title: "STT - Google",
-        description: "This skill will allow your assistant to understand you (connection needed) with the Google's STT service.",
-        git: "https://github.com/HeyHeyChicken/NOVA-STT-Google",
-        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-STT-Google/master/resources/nova-wallpaper.png",
-        icon: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-STT-Google/master/resources/nova-icon.png",
-        screenshots: []
-      },
-      {
-        title: "Wake Word - Porcupine",
-        description: "This skill will allow your assistant to detect wake words with porcupine.",
-        git: "https://github.com/HeyHeyChicken/NOVA-WakeWord-Porcupine",
-        wallpaper: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-WakeWord-Porcupine/master/resources/nova-wallpaper.jpg",
-        icon: "https://raw.githubusercontent.com/HeyHeyChicken/NOVA-Picovoice-Hot-Word-Detection/main/resources/nova-icon.png",
-        screenshots: []
-      }
-    ];
-
     this.STT = null;
 
-    this.InitialiseServers(); // On initialise les serveurs de NOVA.
-    LIBRARIES.Skill.LoadAll(this); // On charge les skills du serveur NOVA.
+    this.URL_Skills = [
+      /*
+    {
+      title: "Convert",
+      description: "This skill will allow your assistant to convert a lot of things...",
+      git: "https://github.com/constantgillet/NOVA-Convert",
+      wallpaper: "https://raw.githubusercontent.com/constantgillet/NOVA-Convert/master/resources/nova-wallpaper.jpg",
+      icon: "https://raw.githubusercontent.com/constantgillet/NOVA-Convert/master/resources/nova-icon.png",
+      screenshots: [
+          "https://raw.githubusercontent.com/constantgillet/NOVA-Convert/master/resources/screenshots/1.jpg"
+      ]
+    },
+    {
+      title: "Chrome Auto Launcher",
+      description: "This skill will allow your client to launch automatically Chrome at boot.",
+      git: "https://github.com/HeyHeyChicken/NOVA-ChromeAutoLauncher",
+      wallpaper: "https://www.journaldugeek.com/content/uploads/2019/08/googlechrome.png",
+      icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Google_Chrome_icon_%282011%29.svg/1024px-Google_Chrome_icon_%282011%29.svg.png",
+      screenshots: []
+    },
+    {
+      title: "Chrome Speech To text",
+      description: "This skill will allow your NOVA assistant understand what you say for free and unlimited, but you'll have to use the Google Chrome browser for your clients.",
+      git: "https://github.com/HeyHeyChicken/NOVA-Chrome-Speech-To-Text",
+      wallpaper: "https://cloud.google.com/images/products/speech/speech-api-lead.png?hl=fr",
+      icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Google_Chrome_icon_%282011%29.svg/1024px-Google_Chrome_icon_%282011%29.svg.png",
+      screenshots: []
+    },
+    {
+      title: "TuneIn",
+      description: "This skill will allow your assistant to play you radio.",
+      git: "https://github.com/HeyHeyChicken/NOVA-TuneIn",
+      wallpaper: "https://store-images.s-microsoft.com/image/apps.61349.9007199266246398.fab84bd6-dd10-4a80-9137-0a0428d5234f.0dfd8a2d-25e4-4765-ad8e-703d58c0ec3d",
+      icon: "https://www.underconsideration.com/brandnew/archives/tunein_2017_monogram.jpg",
+      screenshots: []
+    },*/
+    ];
+
+    this.URL_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/github_skill_list.json"), "utf8"));
+
+    if(this.URL_Skills.length == 0){
+      this.RefreshSkillsList(function(){
+        SELF.InitialiseServers(); // On initialise les serveurs de NOVA.
+        LIBRARIES.Skill.LoadAll(SELF); // On charge les skills du serveur NOVA.
+      });
+    }
+    else{
+      SELF.InitialiseServers(); // On initialise les serveurs de NOVA.
+      LIBRARIES.Skill.LoadAll(SELF); // On charge les skills du serveur NOVA.
+    }
+  }
+
+  HTTPSJsonGet(_hostname, _path, _callback){
+    const SELF = this;
+    LIBRARIES.HTTPS.get({
+      hostname: _hostname,
+      path: _path,
+      headers: { 'User-Agent': 'Mozilla/5.0' }
+    }, (response) => {
+      let request_data = "";
+
+      response.on("data", (chunk) => {
+        request_data += chunk;
+      });
+
+      response.on("end", () => {
+        _callback(JSON.parse(request_data));
+      });
+
+    }).on("error", (error) => {
+      SELF.Log(error.message, "red");
+      _callback(null);
+    });
+  }
+
+  // Cette fonction met à jour la liste des skills disponibles à être installés.
+  RefreshSkillsList(_callback){
+    const SELF = this;
+    SELF.HTTPSJsonGet("api.github.com","/search/repositories?q=+topic:nova-assistant-skill+is:public", function(skills){
+      let apiRateLimitExceeded = false;
+      for(let index = 0; index < skills.items.length; index++){
+        let skill = {
+          id: skills.items[index].id,
+          title: skills.items[index].name,
+          description: skills.items[index].description,
+          git: skills.items[index].html_url,
+          wallpaper: "https://raw.githubusercontent.com/" + skills.items[index].full_name + "/master/resources/nova-wallpaper.png",
+          icon: "https://raw.githubusercontent.com/" + skills.items[index].full_name + "/master/resources/nova-icon.png",
+          screenshots: []
+        };
+
+        // ON PART CHERCHER LES SCREENSHOTS
+        SELF.HTTPSJsonGet("api.github.com","/repos/" + skills.items[index].full_name + "/contents/resources/screenshots", function(data){
+          if(!apiRateLimitExceeded){
+            if(data.message != undefined){
+              if(data.message.startsWith("API rate limit exceeded")){
+                SELF.Log("GitHub: " + data.message + "(" + data.documentation_url + ")", "red");
+                apiRateLimitExceeded = true;
+              }
+            }
+            if(!apiRateLimitExceeded){
+              if(data.message != "Not Found"){
+                for(let j = 1; j <= data.length; j++){
+                  const CURRENT = data.filter(function(x) { return x.name == j + ".jpg"; });
+                  if(CURRENT.length == 1){
+                    skill.screenshots.push(CURRENT[0].download_url);
+                  }
+                }
+              }
+            }
+          }
+          SELF.URL_Skills.push(skill);
+
+          if(index == skills.items.length - 1){
+            SELF.URL_Skills.sort((a, b) => (a.title > b.title) ? 1 : -1);
+            LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/lib/skills/github_skill_list.json"), JSON.stringify(SELF.URL_Skills, null, 4), "utf8");
+            if(_callback != undefined){
+              _callback();
+            }
+          }
+        });
+      }
+    });
   }
 
   // Cette fonction exécute des commandes terminales sur le poste du client.
@@ -394,6 +380,16 @@ class Main {
         SELF.SkillPermanentSettings.skills = JSON.parse(_skills);
         LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/lib/skills/skills.json"), JSON.stringify(SELF.SkillPermanentSettings, null, 4), "utf8");
         SELF.LauncherIO.emit("reboot_server");
+      });
+
+      // Si l'utilisateur demande à rafraichir la liste des skills
+      socket.on("refresh_skills_list", function(){
+        const OLD_SKILLS_LIST = SELF.URL_Skills;
+        SELF.URL_Skills = [];
+
+        SELF.RefreshSkillsList(function(){
+          socket.emit("set_skills", SELF.URL_Skills);
+        });
       });
 
       // L'utilisateur demande à récupérer la liste des skills installés.

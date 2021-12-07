@@ -1,3 +1,91 @@
 {
-    "skills": []
+    "skills": [
+        {
+            "GIT": {
+                "URL": "https://github.com/HeyHeyChicken/NOVA-TTS-Google",
+                "Pseudo": "HeyHeyChicken",
+                "Repository": "NOVA-TTS-Google"
+            },
+            "Settings": {
+                "type": null,
+                "project_id": null,
+                "private_key_id": null,
+                "private_key": null,
+                "client_email": null,
+                "client_id": null,
+                "auth_uri": null,
+                "token_uri": null,
+                "auth_provider_x509_cert_url": null,
+                "client_x509_cert_url": null,
+                "PlaybackRate": 1,
+                "Gender": "FEMALE"
+            },
+            "Path": null
+        },
+        {
+            "GIT": {
+                "URL": "https://github.com/HeyHeyChicken/NOVA-TTS-Mac",
+                "Pseudo": "HeyHeyChicken",
+                "Repository": "NOVA-TTS-Mac"
+            },
+            "Settings": {},
+            "Path": "/Users/antoine/WebstormProjects/NOVA-Server/src/lib/skills/HeyHeyChicken_NOVA-TTS-Mac"
+        },
+        {
+            "GIT": {
+                "URL": "https://github.com/HeyHeyChicken/NOVA-ChatBot",
+                "Pseudo": "HeyHeyChicken",
+                "Repository": "NOVA-ChatBot"
+            },
+            "Settings": {},
+            "Path": "/Users/antoine/WebstormProjects/NOVA-Server/src/lib/skills/HeyHeyChicken_NOVA-ChatBot"
+        },
+        {
+            "GIT": {
+                "URL": "https://github.com/HeyHeyChicken/NOVA-HomePod-Sounds",
+                "Pseudo": "HeyHeyChicken",
+                "Repository": "NOVA-HomePod-Sounds"
+            },
+            "Settings": {},
+            "Path": "/Users/antoine/WebstormProjects/NOVA-Server/src/lib/skills/HeyHeyChicken_NOVA-HomePod-Sounds"
+        },
+        {
+            "GIT": {
+                "URL": "https://github.com/HeyHeyChicken/NOVA-STT-Google",
+                "Pseudo": "HeyHeyChicken",
+                "Repository": "NOVA-STT-Google"
+            },
+            "Settings": {
+                "type": "service_account",
+                "project_id": "nova-272413",
+                "private_key_id": "a5765ab0a15d2b529b782a298b3d84f15372ed43",
+                "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC5c7RC57Oj6ZWq\nEjuGRVJ5Z864mZkj6ot/PnDOfNAsiuhCeGmdA5xvRWvhAdxWWKXs9ykxqIPeTdQQ\ndTjHCdKSMHBkF8V/ZAOaxBsBCi21xB+HAw3BJDp4nvBYXA8wRRKsJ3Np6+ffWJTt\nABU7RLLVu9diWERrpdaWzwujGUBtxa31kT2pZhotAC7Q7GGZZ83wR20btPqc2EBH\nfJOD+kprk/4/ghMouhY6tt8FluWk9py2w+iDsCn4YwnoP4SH+2Vqui5eCI2W+FmN\n5JoGXWdRfTejT66XZ0BgRrc6wWgyH2i0Z37w4sOXTmx1CwaTRIVIJtgD2CPpP9hh\ndGFy5NyvAgMBAAECggEAGaE6rHRxM0S5ARl7+IE5dhCOqpyFDvL/TG/zZIDYvw8u\nLOGPVw/aCCwZTgN/0WnMT1o+ld+q5IeaY0aQDjyhSWrrCCpGNTuRSUuzn7UpvrvY\nJO9FxgedEnEvg5wAIrT+cPm9eEoOGvlBu8S4f8nCyB8pvoG3EwQxtViaockqSlaR\nVCYxE0Q5WncalOeA52SJAYoSS4kPn2lndJbDIX5FFcLmM0db7JshXSFXpT09cZQR\nu2mw3a9ux4C8jDOPVj8nr+QQaSu+dWMfu4WWmxfp+l0pF+C5t3ytHAWhoufHtb8i\nS6amAD8TfdRfWqH4qWdfWjoO6s16fe5GcO1Yqc5sIQKBgQD+MD4NUWY+Ov7lhxAF\nJczheVBqw1zV3zoUnditC4BFMdKzwmYTa+A6K0YOP2+OLeEqI8VEVIm8AHGeiYmo\nggDXe9Iq5i4uxqd1J+t9WNf6FnscpUYi5N8cWWscrvHeRGGpI8ODNy8E7YtNVSfB\nzmskyYGyCumlvb8F2XF3i0NeHQKBgQC6xg32h7XwjxEVskRcVQBTNoxTP7dJUf7n\ni7FTCU0tP0HzmVRmSComceABKkKM5kCBGQ9Av7RhCOCver7hIp/6dTAiwA4CrXMU\nTDJCToTxtQ8yoTQMRogpW8MPnvPoNpU8HQgHvaDyavs9c70wLCUkTYnLM1VgVuVI\nSNF2a+8cOwKBgQD4SQkjmyICoT+/1Zi5Xn3ss8HwNxnkMqKZ5sDx7m0BqbQFMFri\nl5mzV/ebDS2bNIde0QfsQaM0Bz70O6ZB+ZJ26RSWILZ1rEd/8Vld271DJFhm161V\ngjfIijNNFjldAXBfdXaRIgMEjj9mb0phTY5spYPQ9EXbRidjwEzMFzTbpQKBgF/m\nJXE5yU9VBh6vw63s7xfK4E42XvPEqC9XaJsMIZZj7ocXaWCDGTFYMv4mJrmV1/Tx\nWwWR6RoRptwzGCMc1iuRVD/jgM4bJQV9AilNi7FXmBAU+VZ8OJmTxhoVMYM/02xk\nM6VV1nfiOlIZRUCgyglTzraJCwNGWr+8s+AsFz/VAoGAVhxc1iqCvfz4zmzTm8Yd\npSluaH9CIIc0BCzWEBWwQyM91bM6LfYM5jyDoy6HD80bPbRo5sKL7pURTNORUzry\nzYIeucsbiHL2ulLXZW5QlcGGLh/vW3zczqV4RS9wN9dcuL31w5fMEZZOexUW+VQe\nA0c066f9PvDrlKFVLniVVVs=\n-----END PRIVATE KEY-----\n",
+                "client_email": "nova-358@nova-272413.iam.gserviceaccount.com",
+                "client_id": 116685054613458600000,
+                "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                "token_uri": "https://oauth2.googleapis.com/token",
+                "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+                "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nova-358%40nova-272413.iam.gserviceaccount.com"
+            },
+            "Path": "/Users/antoine/WebstormProjects/NOVA-Server/src/lib/skills/HeyHeyChicken_NOVA-STT-Google"
+        },
+        {
+            "GIT": {
+                "URL": "https://github.com/HeyHeyChicken/NOVA-WakeWord-Porcupine",
+                "Pseudo": "HeyHeyChicken",
+                "Repository": "NOVA-WakeWord-Porcupine"
+            },
+            "Settings": {},
+            "Path": "/Users/antoine/WebstormProjects/NOVA-Server/src/lib/skills/HeyHeyChicken_NOVA-WakeWord-Porcupine"
+        },
+        {
+            "GIT": {
+                "URL": "https://github.com/HeyHeyChicken/NOVA-Webhooks",
+                "Pseudo": "HeyHeyChicken",
+                "Repository": "NOVA-Webhooks"
+            },
+            "Settings": {},
+            "Path": "/Users/antoine/WebstormProjects/NOVA-Server/src/lib/skills/HeyHeyChicken_NOVA-Webhooks"
+        }
+    ]
 }

@@ -40,6 +40,9 @@ const APP = new Vue({
       this.DoneTutorial = true;
       SOCKET.emit("end_tutorial");
     },
+    refresh_skills_list: function(event){
+      SOCKET.emit("refresh_skills_list");
+    },
     set_theme: function(event){
       this.themePath = "./css/theme/" + event.target.value;
       //this.ShowSpinner = true;
