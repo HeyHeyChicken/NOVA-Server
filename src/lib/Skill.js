@@ -155,30 +155,33 @@ class Skill {
             _git = _git.slice(0, END_GIT.length * -1);
         }
 
-        const FOLDER_SKILLS = LIBRARIES.Path.join(_main.DirName, "/lib/skills/");
-        const NEW_SKILL_FOLDER_NAME = _git.split("/").splice(-2, 2).join("_");
-        const FOLDER_SKILL = LIBRARIES.Path.join(FOLDER_SKILLS, NEW_SKILL_FOLDER_NAME);
+        const splitted = _git.split("/");
+        https://api.github.com/repos/heyheychicken/nova
+        _main.HTTPSJsonGet("api.github.com","/repos/" + splitted[splitted.length - 2] + "/" + splitted[splitted.length - 1], function(data){
+            const FOLDER_SKILLS = LIBRARIES.Path.join(_main.DirName, "/lib/skills/");
+            const FOLDER_SKILL = LIBRARIES.Path.join(FOLDER_SKILLS, data.id + "");
 
-        _main.Terminal("git clone " + _git + " " + FOLDER_SKILL, null, function(_error_code, _messages){
-            if(_error_code === 0){
-                const DEPENDENCIES = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(FOLDER_SKILL, "/package.json"), "utf8")).dependencies;
-                if(DEPENDENCIES !== undefined) {
-                    let array = [];
-                    for(let dependency in DEPENDENCIES) {
-                        array.push(dependency + "@" + DEPENDENCIES[dependency]);
+            _main.Terminal("git clone " + _git + " " + FOLDER_SKILL, null, function(_error_code, _messages){
+                if(_error_code === 0){
+                    const DEPENDENCIES = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(FOLDER_SKILL, "/package.json"), "utf8")).dependencies;
+                    if(DEPENDENCIES !== undefined) {
+                        let array = [];
+                        for(let dependency in DEPENDENCIES) {
+                            array.push(dependency + "@" + DEPENDENCIES[dependency]);
+                        }
+                        Skill.InstallDependances(_main, array, 0, function(){
+                            Skill.InstallStep2(_git, FOLDER_SKILL, _main, _socket);
+                        });
                     }
-                    Skill.InstallDependances(_main, array, 0, function(){
+                    else{
                         Skill.InstallStep2(_git, FOLDER_SKILL, _main, _socket);
-                    });
+                    }
                 }
                 else{
-                    Skill.InstallStep2(_git, FOLDER_SKILL, _main, _socket);
+                    _main.Log("Can't install the skill (\"" + _git + "\").", "red");
+                    _main.LauncherIO.emit("reboot_server");
                 }
-            }
-            else{
-                _main.Log("Can't install the skill (\"" + _git + "\").", "red");
-                _main.LauncherIO.emit("reboot_server");
-            }
+            });
         });
     }
 
