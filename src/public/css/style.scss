@@ -66,6 +66,17 @@ $message_color: #2196F3;
 
 html{
   > body{
+    .unofficial-plugin-message{
+      background-color: #FF9800;
+      padding: 15px;
+      margin-bottom: 15px;
+      @include border-radius(.3rem);
+
+      > i, > svg{
+        margin-right: 15px;
+      }
+    }
+
     > #app{
       > main{
         > #tutorial{

@@ -120,7 +120,7 @@ class Skill {
             }
         }
 
-        _main.Log("The skill named \"" + _directory + "\" is loaded (" + _main.Settings.Language + ").", "green");
+        _main.Log("The skill id \"" + _directory + "\" is loaded (" + _main.Settings.Language + ").", "green");
     }
 
     /* Cette fonction permet de charger tous les skills installés. */
@@ -226,9 +226,8 @@ class Skill {
     static Uninstall(_git, _main, _socket){
         const SKILL = _main.URL_Skills.find(x => x.git === _git);
         if(SKILL !== undefined){
-            const SKILLS_DIR_PATH = LIBRARIES.Path.join(_main.DirName, "/lib/skills/");
-            const SKILL_DIR_NAME = SKILL.git.split("/").splice(-2, 2).join("_") + "/";
-            LIBRARIES._FS.rmdirSync(SKILLS_DIR_PATH + SKILL_DIR_NAME); // On supprime le dossier du skill.
+            const SKILLS_DIR_PATH = LIBRARIES.Path.join(_main.DirName, "lib", "skills");
+            LIBRARIES._FS.rmdirSync(LIBRARIES.Path.join(SKILLS_DIR_PATH, SKILL.id + "")); // On supprime le dossier du skill.
 
             _main.SkillPermanentSettings.skills.find(x => x.GIT.URL === _git).Path = null;
             LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(_main.DirName, "/lib/skills/skills.json"), JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");

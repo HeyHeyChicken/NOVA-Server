@@ -30,7 +30,8 @@
     "accept": "Accept",
     "tuto_title": "How does your assistant work?",
     "tuto_description": "To begin with, it must be said, your assistant is a bit stupid ...<br/>To make it useful, you will need to install some skills for it.<br/><br/>1) In order to give it some vocabulary, I advise you to install the skill \"ChatBot\", and try to write \"Hello\" to it.<br/>2) If you want to hear his soft voice, I invite you to install a \"TTS\" (Text To Speech) skill.<br/>3) If you are tired of writing to him, install a \"STT\" (Speech To Text) skill.<br/>4) For him to recognize his first name, install a \"Wake Word\" skill.<br/><br/>Your assistant is missing some functionality? Install other skills or ... code them!",
-    "refresh": "Refresh"
+    "refresh": "Refresh",
+    "unofficial_plugin_message": "Please note, this skill is not an official skill."
   },
   "fr-FR": {
     "language_name": "\uD83C\uDDEB\uD83C\uDDF7 Français",
@@ -63,6 +64,7 @@
     "accept": "Accepter",
     "tuto_title": "Comment votre assistant fonctionne t'il ?",
     "tuto_description": "Pour commencer, il faut le dire, votre assistant est un peu bête ...<br/>Pour le rendre utile, vous devrez lui installer quelques skills.<br/><br/>1) Afin de lui donner un peu de vocabulaire, je vous conseille de lui installer le skill \"ChatBot\", et essayez de lui écrire \"Bonjour\".<br/>2) Si vous souhaitez entendre sa douce voix, je vous invite à lui installer un skill \"TTS\" (Text To Speech).<br/>3) Si vous en avez marre de lui écrire, installez lui un skill \"STT\" (Speech To Text).<br/>4) Pour qu'il reconaisse son prénom, installez lui un skill \"Wake Word\".<br/><br/>Il manque des fonctionnalités à votre assistant ? Installez-lui d'autres skills ou ... codez-les !",
-    "refresh": "Rafraîchir"
+    "refresh": "Rafraîchir",
+    "unofficial_plugin_message": "Attention, ce skill n'est pas un skill officiel."
   }
 }

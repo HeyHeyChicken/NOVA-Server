@@ -76,6 +76,7 @@ const APP = new Vue({
     Dictionary: {},
     NovaClients: [],
     DoneTutorial: null,
+    OfficialSkills: [],
     LicenseKey: "null",
     TutorialIndex: 0,
     LicenseAgreementReadedAndAccepted: false,
@@ -163,6 +164,11 @@ SOCKET.on("set_languages", function(_data) {
 // Si le serveur envoie une mise à jour de l'état de completion du tuto
 SOCKET.on("set_done_tutorial", function(_data) {
   APP.DoneTutorial = _data;
+});
+
+// Si le serveur envoie une mise à jour de l'état de completion du tuto
+SOCKET.on("set_official_skills", function(_data) {
+  APP.OfficialSkills = _data;
 });
 
 /* ################################################################################################################ */

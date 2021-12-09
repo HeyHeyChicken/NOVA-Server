@@ -87,6 +87,7 @@ class Main {
     },*/
     ];
 
+    this.Official_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/official_skill_list.json"), "utf8"));
     this.URL_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/github_skill_list.json"), "utf8"));
 
     if(this.URL_Skills.length == 0){
@@ -374,6 +375,7 @@ class Main {
       socket.emit("set_theme", SELF.Settings.Theme);
       socket.emit("set_license_key", SELF.Settings.LicenseKey);
       socket.emit("set_done_tutorial", SELF.Settings.DoneTutorial);
+      socket.emit("set_official_skills", SELF.Official_Skills);
 
       // Si l'utilisateur demande à changer les rélages d'un skill.
       socket.on("set_Installed", function(_skills){

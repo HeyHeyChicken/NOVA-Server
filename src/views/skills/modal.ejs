@@ -4,6 +4,7 @@
         <span class="title">{{ skill.title }}</span><br/>
         <a target="_blank" :href="skill.git.split('/').slice(0, -1).join('/')" class="author">{{ skill.git.split("/").slice(3, -1)[0] }}</a>
     </template>
+    <div class="unofficial-plugin-message" :data-id="skill.id" v-if="OfficialSkills.indexOf(skill.id) == -1"><i class="fas fa-exclamation-triangle"></i>{{ Dictionary.unofficial_plugin_message }}</div>
     <b-carousel v-if="skill.screenshots.length > 0 && !JsonEditing" :interval="4000" :controls="skill.screenshots.length > 1" :indicators="skill.screenshots.length > 1" background="#ababab" img-width="1024" img-height="480">
         <b-carousel-slide :key="index" v-for="(screenshot, index) in skill.screenshots" :img-src="screenshot"></b-carousel-slide>
     </b-carousel>

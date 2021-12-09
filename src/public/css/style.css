@@ -256,6 +256,17 @@
     width: 45px;
   }
 }
+html > body .unofficial-plugin-message {
+  background-color: #FF9800;
+  padding: 15px;
+  margin-bottom: 15px;
+  -webkit-border-radius: 0.3rem;
+  -moz-border-radius: 0.3rem;
+  border-radius: 0.3rem;
+}
+html > body .unofficial-plugin-message > i, html > body .unofficial-plugin-message > svg {
+  margin-right: 15px;
+}
 html > body > #app > main > #tutorial {
   background: #202328;
   top: 0;
