@@ -22,6 +22,8 @@ class Main {
     this.LauncherMessages = []; // Cette liste contiendra les messages non envoyés au launcher.
     this.InitialiseLauncherSocketClient();
 
+    this.FunctionsToAddToIOClientClients = {};
+
     this.DirName = _dirname;
     this.SkillPermanentSettings = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/skills.json"), "utf8"));
     this.Settings = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/settings.json"), "utf8")); // On récupère les paramètres du serveur.
@@ -266,6 +268,10 @@ class Main {
       socket.emit("set_language", SELF.Settings.Language);
       socket.emit("set_theme", SELF.Settings.Theme);
       socket.emit("set_done_tutorial", SELF.Settings.DoneTutorial);
+
+      for(var attribute in SELF.FunctionsToAddToIOClientClients){
+        socket.on(attribute, SELF.FunctionsToAddToIOClientClients[attribute]);
+      }
 
       // Lorsque l'utilisateur envoie un message au serveur.
       socket.on("cs_message", function(_message){
