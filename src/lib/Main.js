@@ -9,6 +9,7 @@ const LIBRARIES = {
   ChildProcess: require("child_process"),
   Path: require("path"),
 
+  Message: require("./Message"),
   NOVAClient: require("./Client"),
   Manager: require("./Manager"),
   Skill: require("./Skill")
@@ -292,15 +293,22 @@ class Main {
 
       // Lorsque l'utilisateur fait une demande directe au serveur.
       socket.on("server", function(_message){
+        let text = null;
         switch(_message){
           case "microphone_prompt_permission":
-            SELF.TTS(socket, "Bonjour, si vous souhaitez communiquer par la voix, vous devez autoriser Chrome à accéder à votre microphone.");
+            text = "Bonjour, si vous souhaitez communiquer par la voix, vous devez autoriser Chrome à accéder à votre microphone.";
+            socket.emit("sc_message", new LIBRARIES.Message(text, true));
+            SELF.TTS(socket, text);
             break;
           case "microphone_denied_permission":
-            SELF.TTS(socket, "Vous venez de refuser l'accès à Chrome à votre microphone, vous ne pourrez communiquer avec moi que par texte.");
+            text = "Vous venez de refuser l'accès à Chrome à votre microphone, vous ne pourrez communiquer avec moi que par texte.";
+            SELF.TTS(socket, text);
+            socket.emit("sc_message", new LIBRARIES.Message(text, true));
             break;
           case "microphone_granted_permission":
-            SELF.TTS(socket, "Parfait, vous pouvez à présent me parler.");
+            text = "Parfait, vous pouvez à présent me parler.";
+            SELF.TTS(socket, text);
+            socket.emit("sc_message", new LIBRARIES.Message(text, true));
             break;
         }
       });
