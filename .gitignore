@@ -12,3 +12,4 @@ sqlite.db
 /src/public/css/shadows.css
 /src/public/css/shadows.css.map
 src/lib/skills/skills.json
+src/lib/skills/github_skill_list.json
