@@ -138,7 +138,7 @@ class Main {
           title: skills.items[index].name,
           description: skills.items[index].description,
           git: skills.items[index].html_url,
-          wallpaper: "https://raw.githubusercontent.com/" + skills.items[index].full_name + "/master/resources/nova-wallpaper.png",
+          wallpaper: "https://raw.githubusercontent.com/" + skills.items[index].full_name + "/master/resources/nova-wallpaper.jpg",
           icon: "https://raw.githubusercontent.com/" + skills.items[index].full_name + "/master/resources/nova-icon.png",
           screenshots: []
         };
