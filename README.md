@@ -7,9 +7,7 @@
 <br> 
 
 <div align="center">
-    <a href="//nova-assistant.com">
-      <img style="border:1px solid black;" src="https://github.com/HeyHeyChicken/NOVA-Server/blob/master/resources/screenshot.jpg">
-    </a>
+  <img style="border:1px solid black;" src="https://github.com/HeyHeyChicken/NOVA-Server/blob/master/resources/screenshot.jpg">
 </div>
 
 ## Installation
