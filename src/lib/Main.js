@@ -296,12 +296,12 @@ class Main {
         let text = null;
         switch(_message){
           case "microphone_prompt_permission":
-            text = "Bonjour, si vous souhaitez communiquer par la voix, vous devez autoriser Chrome à accéder à votre microphone.";
+            text = "Bonjour, si vous souhaitez communiquer par la voix, vous devez autoriser votre navigateur à accéder à votre microphone.";
             socket.emit("sc_message", new LIBRARIES.Message(text, true));
             SELF.TTS(socket, text);
             break;
           case "microphone_denied_permission":
-            text = "Vous venez de refuser l'accès à Chrome à votre microphone, vous ne pourrez communiquer avec moi que par texte.";
+            text = "Vous venez de refuser l'accès à votre navigateur à votre microphone, vous ne pourrez communiquer avec moi que par texte.";
             SELF.TTS(socket, text);
             socket.emit("sc_message", new LIBRARIES.Message(text, true));
             break;
