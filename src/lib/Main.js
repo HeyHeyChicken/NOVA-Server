@@ -128,6 +128,14 @@ class Main {
     });
   }
 
+  TextURLToLink(text) {
+    // Put the URL to variable $1 after visiting the URL
+    var Rexp = /((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g;
+
+    // Replace the RegExp content by HTML element
+    return text.replace(Rexp, "<a href='$1' target='_blank'>$1</a>");
+  }
+
   // Cette fonction met à jour la liste des skills disponibles à être installés.
   RefreshSkillsList(_callback){
     const SELF = this;
@@ -137,7 +145,7 @@ class Main {
         let skill = {
           id: skills.items[index].id,
           title: skills.items[index].name,
-          description: skills.items[index].description,
+          description: SELF.TextURLToLink(skills.items[index].description.replaceAll("\\n", "<br/>").replaceAll("/!\\", "<i class=\"fas fa-exclamation-triangle\"></i>")),
           git: skills.items[index].html_url,
           wallpaper: "https://raw.githubusercontent.com/" + skills.items[index].full_name + "/master/resources/nova-wallpaper.jpg",
           icon: "https://raw.githubusercontent.com/" + skills.items[index].full_name + "/master/resources/nova-icon.png",

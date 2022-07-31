@@ -14,3 +14,8 @@ sqlite.db
 src/lib/skills/skills.json
 src/lib/skills/github_skill_list.json
 src/settings.json
+*/.DS_Store
+.DS_Store
+src/lib/skills/github_skill_list.json
+src/lib/skills/skills.json
+src/settings.json

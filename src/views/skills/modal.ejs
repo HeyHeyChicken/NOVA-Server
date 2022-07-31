@@ -8,7 +8,7 @@
     <b-carousel v-if="skill.screenshots.length > 0 && !JsonEditing" :interval="4000" :controls="skill.screenshots.length > 1" :indicators="skill.screenshots.length > 1" background="#ababab" img-width="1024" img-height="480">
         <b-carousel-slide :key="index" v-for="(screenshot, index) in skill.screenshots" :img-src="screenshot"></b-carousel-slide>
     </b-carousel>
-    <span v-show="!JsonEditing">{{ skill.description}}</span>
+    <span v-show="!JsonEditing" v-html="skill.description"></span>
     <slot v-if="skills.Installed.findIndex(x => x.GIT.URL === skill.git) > -1">
         <slot v-if="skills.Installed.find(x => x.GIT.URL === skill.git).Path !== null">
             <slot v-if="Object.keys(skills.Installed.find(x => x.GIT.URL === skill.git).Settings).length > 0">
