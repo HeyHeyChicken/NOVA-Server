@@ -142,10 +142,14 @@ class Main {
     SELF.HTTPSJsonGet("api.github.com","/search/repositories?q=+topic:nova-assistant-skill+is:public", function(skills){
       let apiRateLimitExceeded = false;
       for(let index = 0; index < skills.items.length; index++){
+        let description = "";
+        if(skills.items[index].description != null){
+          description = SELF.TextURLToLink(skills.items[index].description.replaceAll("\\n", "<br/>").replaceAll("/!\\", "<i class=\"fas fa-exclamation-triangle\"></i>"));
+        }
         let skill = {
           id: skills.items[index].id,
           title: skills.items[index].name,
-          description: SELF.TextURLToLink(skills.items[index].description.replaceAll("\\n", "<br/>").replaceAll("/!\\", "<i class=\"fas fa-exclamation-triangle\"></i>")),
+          description: description,
           git: skills.items[index].html_url,
           wallpaper: "https://raw.githubusercontent.com/" + skills.items[index].full_name + "/master/resources/nova-wallpaper.jpg",
           icon: "https://raw.githubusercontent.com/" + skills.items[index].full_name + "/master/resources/nova-icon.png",
