@@ -12,6 +12,14 @@
             <div class="input-group">
                 <input type="text" class="form-control" :placeholder="Dictionary.name" :value="client.Name">
             </div>
+            <div class="row">
+              <div class="col">
+                  <b-button variant="outline-primary" @click="reboot_client">
+                      <i class="fas fa-redo"></i>
+                      <span>{{Dictionary.reboot}}</span>
+                  </b-button>
+              </div>
+            </div>
         </b-card>
     </div>
 </div>

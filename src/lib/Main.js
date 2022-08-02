@@ -52,43 +52,7 @@ class Main {
 
     this.STT = null;
 
-    this.URL_Skills = [
-      /*
-    {
-      title: "Convert",
-      description: "This skill will allow your assistant to convert a lot of things...",
-      git: "https://github.com/constantgillet/NOVA-Convert",
-      wallpaper: "https://raw.githubusercontent.com/constantgillet/NOVA-Convert/master/resources/nova-wallpaper.jpg",
-      icon: "https://raw.githubusercontent.com/constantgillet/NOVA-Convert/master/resources/nova-icon.png",
-      screenshots: [
-          "https://raw.githubusercontent.com/constantgillet/NOVA-Convert/master/resources/screenshots/1.jpg"
-      ]
-    },
-    {
-      title: "Chrome Auto Launcher",
-      description: "This skill will allow your client to launch automatically Chrome at boot.",
-      git: "https://github.com/HeyHeyChicken/NOVA-ChromeAutoLauncher",
-      wallpaper: "https://www.journaldugeek.com/content/uploads/2019/08/googlechrome.png",
-      icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Google_Chrome_icon_%282011%29.svg/1024px-Google_Chrome_icon_%282011%29.svg.png",
-      screenshots: []
-    },
-    {
-      title: "Chrome Speech To text",
-      description: "This skill will allow your NOVA assistant understand what you say for free and unlimited, but you'll have to use the Google Chrome browser for your clients.",
-      git: "https://github.com/HeyHeyChicken/NOVA-Chrome-Speech-To-Text",
-      wallpaper: "https://cloud.google.com/images/products/speech/speech-api-lead.png?hl=fr",
-      icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Google_Chrome_icon_%282011%29.svg/1024px-Google_Chrome_icon_%282011%29.svg.png",
-      screenshots: []
-    },
-    {
-      title: "TuneIn",
-      description: "This skill will allow your assistant to play you radio.",
-      git: "https://github.com/HeyHeyChicken/NOVA-TuneIn",
-      wallpaper: "https://store-images.s-microsoft.com/image/apps.61349.9007199266246398.fab84bd6-dd10-4a80-9137-0a0428d5234f.0dfd8a2d-25e4-4765-ad8e-703d58c0ec3d",
-      icon: "https://www.underconsideration.com/brandnew/archives/tunein_2017_monogram.jpg",
-      screenshots: []
-    },*/
-    ];
+    this.URL_Skills = [];
 
     this.Official_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/official_skill_list.json"), "utf8"));
     this.URL_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/github_skill_list.json"), "utf8"));

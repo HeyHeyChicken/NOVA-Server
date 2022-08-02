@@ -26,6 +26,9 @@ const APP = new Vue({
         SOCKET.emit("install_skill", URL);
       }
     },
+    // Lorsque l'utilisateur demande à redémarer un client à partir du serveur.
+    reboot_client: function(event) {
+    },
     set_language: function(event) {
       if(event.target.value != ""){
         this.ShowSpinner = true;
