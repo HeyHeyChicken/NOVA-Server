@@ -28,6 +28,7 @@ const APP = new Vue({
     },
     // Lorsque l'utilisateur demande à redémarer un client à partir du serveur.
     reboot_client: function(event) {
+      console.log(event);
     },
     set_language: function(event) {
       if(event.target.value != ""){
