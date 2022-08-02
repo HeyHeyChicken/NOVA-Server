@@ -157,6 +157,7 @@ class Main {
         };
 
         // ON PART CHERCHER LES SCREENSHOTS
+        /*
         SELF.HTTPSJsonGet("api.github.com","/repos/" + skills.items[index].full_name + "/contents/resources/screenshots", function(data){
           if(!apiRateLimitExceeded){
             if(data.message != undefined){
@@ -186,6 +187,7 @@ class Main {
             }
           }
         });
+        */
       }
     });
   }
