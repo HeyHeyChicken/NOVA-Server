@@ -122,7 +122,6 @@ class Main {
         };
 
         // ON PART CHERCHER LES SCREENSHOTS
-        /*
         SELF.HTTPSJsonGet("api.github.com","/repos/" + skills.items[index].full_name + "/contents/resources/screenshots", function(data){
           if(!apiRateLimitExceeded){
             if(data.message != undefined){
@@ -143,7 +142,7 @@ class Main {
             }
           }
           SELF.URL_Skills.push(skill);
-          */
+
 
           if(index == skills.items.length - 1){
             SELF.URL_Skills.sort((a, b) => (a.title > b.title) ? 1 : -1);
@@ -351,8 +350,6 @@ class Main {
   // Cette fonction initialise le serveur socket reliant le serveur NOVA au serveur Web de NOVA.
   InitialiseSocketServer(){
     const SELF = this;
-            console.log("B");
-
     this.ServerIO = LIBRARIES.SocketIO();
     this.ServerIO.on("connection", function(socket){ // Un utilisateur vient d'ouvrir la page Web du serveur NOVA.
       // On envoie à l'interface WEB la liste des clients NOVA.
@@ -383,7 +380,6 @@ class Main {
         const OLD_SKILLS_LIST = SELF.URL_Skills;
         SELF.URL_Skills = [];
 
-        console.log("A");
         SELF.RefreshSkillsList(function(){
           socket.emit("set_skills", SELF.URL_Skills);
         });
