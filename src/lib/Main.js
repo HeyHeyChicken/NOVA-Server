@@ -57,7 +57,7 @@ class Main {
 
     this.Official_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/official_skill_list.json"), "utf8"));
     this.URL_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/github_skill_list.json"), "utf8"));
-console.log("C");
+
     if(this.URL_Skills.length == 0){
       this.RefreshSkillsList(function(){
         SELF.InitialiseServers(); // On initialise les serveurs de NOVA.
@@ -215,7 +215,7 @@ console.log("C");
   // Cette fonction initialise les serveurs de NOVA.
   InitialiseServers(){
     const SELF = this;
-
+    console.log("D");
     this.Express = LIBRARIES.Express(); // On initialise Express.
     this.Express.set("view engine", "ejs"); // On utilise le moteur de rendu "ejs" pour nos vues.
     this.Express.set("views", this.ExpressViewsDirectories);
