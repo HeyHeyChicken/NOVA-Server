@@ -105,8 +105,6 @@ class Main {
   RefreshSkillsList(_callback){
     const SELF = this;
     SELF.HTTPSJsonGet("api.github.com","/search/repositories?q=+topic:nova-assistant-skill+is:public", function(skills){
-      console.log("CC");
-      console.log(skills);
       let apiRateLimitExceeded = false;
       for(let index = 0; index < skills.items.length; index++){
         let description = "";
@@ -145,6 +143,7 @@ class Main {
             }
           }
           SELF.URL_Skills.push(skill);
+          */
 
           if(index == skills.items.length - 1){
             SELF.URL_Skills.sort((a, b) => (a.title > b.title) ? 1 : -1);
@@ -154,7 +153,6 @@ class Main {
             }
           }
         });
-        */
       }
     });
   }
