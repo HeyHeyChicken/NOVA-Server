@@ -80,17 +80,14 @@ class Main {
       let request_data = "";
 
       response.on("data", (chunk) => {
-      console.log("D");
         request_data += chunk;
       });
 
       response.on("end", () => {
-      console.log("E");
         _callback(JSON.parse(request_data));
       });
 
     }).on("error", (error) => {
-    console.log("F");
       SELF.Log(error.message, "red");
       _callback(null);
     });
@@ -107,8 +104,9 @@ class Main {
   // Cette fonction met à jour la liste des skills disponibles à être installés.
   RefreshSkillsList(_callback){
     const SELF = this;
-    console.log("C");
     SELF.HTTPSJsonGet("api.github.com","/search/repositories?q=+topic:nova-assistant-skill+is:public", function(skills){
+      console.log("CC");
+      console.log(skills);
       let apiRateLimitExceeded = false;
       for(let index = 0; index < skills.items.length; index++){
         let description = "";
