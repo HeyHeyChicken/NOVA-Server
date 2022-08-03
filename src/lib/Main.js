@@ -80,6 +80,7 @@ class Main {
       let request_data = "";
 
       response.on("data", (chunk) => {
+      console.log("D");
         request_data += chunk;
       });
 
