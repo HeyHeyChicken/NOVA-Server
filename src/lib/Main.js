@@ -383,6 +383,7 @@ class Main {
         const OLD_SKILLS_LIST = SELF.URL_Skills;
         SELF.URL_Skills = [];
 
+        console.log("A");
         SELF.RefreshSkillsList(function(){
           socket.emit("set_skills", SELF.URL_Skills);
         });
