@@ -28,7 +28,9 @@ const APP = new Vue({
     },
     // Lorsque l'utilisateur demande à redémarer un client à partir du serveur.
     reboot_client: function(event) {
-      console.log(event);
+      const CARD = event.target.closest(".card-body");
+      const ID = CARD.querySelector("input[name='ID']").value;
+      SOCKET.emit("reboot_client", ID);
     },
     set_language: function(event) {
       if(event.target.value != ""){

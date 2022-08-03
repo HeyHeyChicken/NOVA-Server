@@ -28,6 +28,7 @@ class Main {
     this.DirName = _dirname;
     this.SkillPermanentSettings = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/skills.json"), "utf8"));
     this.Settings = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/settings.json"), "utf8")); // On récupère les paramètres du serveur.
+    this.ClientsSocket = {};
 
     this.Translation = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/translation.json"), "utf8")); // On récupère les traductions pour les GUI.
     this.Languages = {};
@@ -243,6 +244,7 @@ class Main {
 
     this.ClientIO = LIBRARIES.SocketIO(this.HTTP);
     this.ClientIO.on("connection", function(socket){
+      //SELF.ClientsSocket.push();
       socket.emit("set_skills_public_files", SELF.ClientSkillsPublic);
       socket.emit("set_language", SELF.Settings.Language);
       socket.emit("set_theme", SELF.Settings.Theme);
@@ -274,17 +276,17 @@ class Main {
         let text = null;
         switch(_message){
           case "microphone_prompt_permission":
-            text = "Bonjour, si vous souhaitez communiquer par la voix, vous devez autoriser votre navigateur à accéder à votre microphone.";
+            text = SELF.Translation.microphone_prompt_permission;
             socket.emit("sc_message", new LIBRARIES.Message(text, true));
             SELF.TTS(socket, text);
             break;
           case "microphone_denied_permission":
-            text = "Vous venez de refuser l'accès à votre navigateur à votre microphone, vous ne pourrez communiquer avec moi que par texte.";
+            text = SELF.Translation.microphone_prompt_permission;
             SELF.TTS(socket, text);
             socket.emit("sc_message", new LIBRARIES.Message(text, true));
             break;
           case "microphone_granted_permission":
-            text = "Parfait, vous pouvez à présent me parler.";
+            text = SELF.Translation.microphone_granted_permission;
             SELF.TTS(socket, text);
             socket.emit("sc_message", new LIBRARIES.Message(text, true));
             break;
@@ -420,6 +422,11 @@ class Main {
           LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
           SELF.LauncherIO.emit("reboot_server");
         }
+      });
+
+      // L'utilisateur demande à redémarrer un client.
+      socket.on("reboot_client", function(_id) {
+
       });
 
       // L'utilisateur demande à changer le mot de déclenchement.
