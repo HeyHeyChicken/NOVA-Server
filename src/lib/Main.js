@@ -58,8 +58,6 @@ class Main {
     this.Official_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/official_skill_list.json"), "utf8"));
     this.URL_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/github_skill_list.json"), "utf8"));
 
-    console.log("C");
-    console.log(this.URL_Skills.length);
     if(this.URL_Skills.length == 0){
       this.RefreshSkillsList(function(){
         SELF.InitialiseServers(); // On initialise les serveurs de NOVA.
@@ -86,10 +84,12 @@ class Main {
       });
 
       response.on("end", () => {
+      console.log("E");
         _callback(JSON.parse(request_data));
       });
 
     }).on("error", (error) => {
+    console.log("F");
       SELF.Log(error.message, "red");
       _callback(null);
     });
@@ -106,6 +106,7 @@ class Main {
   // Cette fonction met à jour la liste des skills disponibles à être installés.
   RefreshSkillsList(_callback){
     const SELF = this;
+    console.log("C");
     SELF.HTTPSJsonGet("api.github.com","/search/repositories?q=+topic:nova-assistant-skill+is:public", function(skills){
       let apiRateLimitExceeded = false;
       for(let index = 0; index < skills.items.length; index++){
