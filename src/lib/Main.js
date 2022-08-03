@@ -57,7 +57,7 @@ class Main {
 
     this.Official_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/official_skill_list.json"), "utf8"));
     this.URL_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/github_skill_list.json"), "utf8"));
-
+console.log("C");
     if(this.URL_Skills.length == 0){
       this.RefreshSkillsList(function(){
         SELF.InitialiseServers(); // On initialise les serveurs de NOVA.
