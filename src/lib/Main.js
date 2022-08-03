@@ -352,6 +352,7 @@ class Main {
   // Cette fonction initialise le serveur socket reliant le serveur NOVA au serveur Web de NOVA.
   InitialiseSocketServer(){
     const SELF = this;
+            console.log("B");
 
     this.ServerIO = LIBRARIES.SocketIO();
     this.ServerIO.on("connection", function(socket){ // Un utilisateur vient d'ouvrir la page Web du serveur NOVA.
