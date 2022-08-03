@@ -108,7 +108,7 @@ class Main {
       for(let index = 0; index < skills.items.length; index++){
         let description = "";
         if(skills.items[index].description != null){
-          description = SELF.TextURLToLink(skills.items[index].description.replaceAll("\\n", "<br/>").replaceAll("/!\\", "<i class=\"fas fa-exclamation-triangle\"></i>"));
+          description = SELF.TextURLToLink(skills.items[index].description.replace(/(?:\r\n|\r|\n)/g, "<br/>").replace("/!\\", "<i class=\"fas fa-exclamation-triangle\"></i>"));
         }
         let skill = {
           id: skills.items[index].id,
