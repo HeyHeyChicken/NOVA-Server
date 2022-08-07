@@ -247,6 +247,7 @@ class Main {
       socket.emit("set_language", SELF.Settings.Language);
       socket.emit("set_theme", SELF.Settings.Theme);
       socket.emit("set_done_tutorial", SELF.Settings.DoneTutorial);
+      socket.emit("set_translation", SELF.Translation[SELF.Settings.Language]);
 
       for(var attribute in SELF.FunctionsToAddToIOClientClients){
         socket.on(attribute, SELF.FunctionsToAddToIOClientClients[attribute]);

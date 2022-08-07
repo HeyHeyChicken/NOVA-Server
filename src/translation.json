@@ -35,7 +35,8 @@
     "reboot": "Reboot",
     "microphone_prompt_permission": "Hello, if you want to communicate by voice, you must authorize your browser to access your microphone.",
     "microphone_denied_permission": "You have just denied your browser access to your microphone, you will only be able to communicate with me via text.",
-    "microphone_granted_permission": "Perfect, now you can talk to me."
+    "microphone_granted_permission": "Perfect, now you can talk to me.",
+    "server_url": "Server's URL"
   },
   "fr-FR": {
     "language_name": "\uD83C\uDDEB\uD83C\uDDF7 Français",
@@ -73,6 +74,7 @@
     "reboot": "Redémarrer",
     "microphone_prompt_permission": "Bonjour, si vous souhaitez communiquer par la voix, vous devez autoriser votre navigateur à accéder à votre microphone.",
     "microphone_denied_permission": "Vous venez de refuser l'accès à votre navigateur à votre microphone, vous ne pourrez communiquer avec moi que par texte.",
-    "microphone_granted_permission": "Parfait, vous pouvez à présent me parler."
+    "microphone_granted_permission": "Parfait, vous pouvez à présent me parler.",
+    "server_url": "URL du serveur"
   }
 }
