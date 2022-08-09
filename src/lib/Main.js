@@ -293,6 +293,7 @@ class Main {
       });
 
       socket.on("start_recording", function(_data){
+        console.log("start recording");
         SELF.WavWriters[socket.client.conn.id] = new LIBRARIES.WAV.FileWriter(SELF.DirName + "/voices/" + socket.client.conn.id + ".wav", {
           channels: _data.numChannels,
           sampleRate: _data.fps,
@@ -308,6 +309,7 @@ class Main {
 
       // L'utilisateur est en train de parler, nous enregisrons son flux audio dans un fichier.
       socket.on("write_audio", function(_data){
+        console.log("write audio");
         LIBRARIES.FS.appendFile(LIBRARIES.Path.join(SELF.DirName,"/voices/", socket.client.conn.id + ".wav"), _data, function (err) {
           if (err) throw err;
         });
@@ -315,6 +317,7 @@ class Main {
 
       // L'utilisateur a fini de parler, nous envoyons sa voix au serveur STT.
       socket.on("end_recording", function(){
+        console.log("end recording");
         const PATH = LIBRARIES.Path.join(SELF.DirName, "/voices/", socket.client.conn.id + ".wav");
         if(SELF.STT != null){
           SELF.STT.Recognize(PATH, function(_message){
