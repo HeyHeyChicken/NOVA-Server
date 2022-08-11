@@ -8,7 +8,38 @@
     <b-carousel v-if="skill.screenshots.length > 0 && !JsonEditing" :interval="4000" :controls="skill.screenshots.length > 1" :indicators="skill.screenshots.length > 1" background="#ababab" img-width="1024" img-height="480">
         <b-carousel-slide :key="index" v-for="(screenshot, index) in skill.screenshots" :img-src="screenshot"></b-carousel-slide>
     </b-carousel>
+    <div v-show="!JsonEditing" v-if="skill.worksOffline" class="alert alert-success">
+      <div class="row">
+          <div class="col col-auto">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="col">{{Dictionary.works_offline}}</div>
+      </div>
+    </div>
+    <div v-show="!JsonEditing" v-if="!skill.worksOffline" class="alert alert-warning">
+      <div class="row">
+          <div class="col col-auto">
+            <i class="fas fa-unlock"></i>
+          </div>
+          <div class="col">{{Dictionary.doesnt_works_offline}}</div>
+      </div>
+    </div>
     <span v-show="!JsonEditing" v-html="skill.description"></span>
+    <div v-show="!JsonEditing" v-if="skill.language.length > 0" class="languages">
+      <br />
+      <div class="row">
+        <div class="col col-auto">{{ Dictionary.languages }} :</div>
+        <div class="col">
+          <span v-for="language in skill.language">
+            <span v-if="language == 'fr-FR'" >🇫🇷</span>
+            <span v-if="language == 'en-US'">🇬🇧</span>
+            <span v-if="language == 'es-ES'">🇬🇪</span>
+            <span v-if="language == 'it-IT'">🇮🇹</span>
+            <span v-if="language == 'de-DE'">🇩🇪</span>
+          </span>
+        </div>
+      </div>
+    </div>
     <slot v-if="skills.Installed.findIndex(x => x.GIT.URL === skill.gitURL) > -1">
         <slot v-if="skills.Installed.find(x => x.GIT.URL === skill.gitURL).Path !== null">
             <slot v-if="Object.keys(skills.Installed.find(x => x.GIT.URL === skill.gitURL).Settings).length > 0">

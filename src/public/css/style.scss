@@ -77,6 +77,14 @@ html{
       }
     }
 
+    .languages{
+      line-height: 30px;
+      
+      span{
+        font-size: 30px;
+      }
+    }
+
     > #app{
       > main{
         > #tutorial{

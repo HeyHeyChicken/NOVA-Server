@@ -8,6 +8,7 @@
     "choose": "Choose...",
     "chooseRoom": "Choose room...",
     "language": "Language",
+    "languages": "Languages",
     "hotWord": "Hot word",
     "address": "Address",
     "uninstall": "Uninstall",
@@ -37,7 +38,9 @@
     "microphone_denied_permission": "You have just denied your browser access to your microphone, you will only be able to communicate with me via text.",
     "microphone_granted_permission": "Perfect, now you can talk to me.",
     "server_url": "Server's URL",
-    "what_can_i_ask": "What can I ask?"
+    "what_can_i_ask": "What can I ask?",
+    "works_offline": "This skill works offline and protects your privacy.",
+    "doesnt_works_offline": "This skill does not work offline."
   },
   "fr-FR": {
     "language_name": "\uD83C\uDDEB\uD83C\uDDF7 Français",
@@ -48,6 +51,7 @@
     "choose": "Veuillez renseigner ce champ...",
     "chooseRoom": "Veuillez renseigner la pièce...",
     "language": "Langue",
+    "languages": "Langues",
     "hotWord": "Mot déclencheur",
     "address": "Adresse",
     "uninstall": "Désinstaller",
@@ -77,6 +81,8 @@
     "microphone_denied_permission": "Vous venez de refuser l'accès à votre navigateur à votre microphone, vous ne pourrez communiquer avec moi que par texte.",
     "microphone_granted_permission": "Parfait, vous pouvez à présent me parler.",
     "server_url": "URL du serveur",
-    "what_can_i_ask": "Que pouvez vous me demander ?"
+    "what_can_i_ask": "Que pouvez vous me demander ?",
+    "works_offline": "Cette compétence fonctionne hors ligne et protège votre vie privée.",
+    "doesnt_works_offline": "Cette compétence ne fonctionne pas hors ligne."
   }
 }

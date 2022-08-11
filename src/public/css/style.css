@@ -267,6 +267,12 @@ html > body .unofficial-plugin-message {
 html > body .unofficial-plugin-message > i, html > body .unofficial-plugin-message > svg {
   margin-right: 15px;
 }
+html > body .languages{
+  line-height: 30px;
+}
+html > body .languages span{
+  font-size: 30px;
+}
 html > body > #app > main > #tutorial {
   background: #202328;
   top: 0;
