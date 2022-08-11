@@ -48,7 +48,6 @@ class Skill {
             if(skill == undefined){
               skill = new LIBRARIES.Info();
             }
-            console.log(skill);
             const LOGO_PATH = LIBRARIES.Path.join(RESOURCES_PATH, "nova-icon.png");
             const WALLPAPER_PATH = LIBRARIES.Path.join(RESOURCES_PATH, "nova-wallpaper.jpg");
             if (LIBRARIES.FS.existsSync(LOGO_PATH) || LIBRARIES.FS.existsSync(WALLPAPER_PATH)) {
@@ -72,7 +71,6 @@ class Skill {
                 }
             }
 
-            console.log(skill);
             const INDEX = _main.URL_Skills.findIndex(x => x.gitURL === skill.gitURL);
             if(INDEX === -1){
                 _main.URL_Skills.push(skill);
