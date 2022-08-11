@@ -12,7 +12,8 @@ const LIBRARIES = {
   Message: require("./Message"),
   NOVAClient: require("./Client"),
   Manager: require("./Manager"),
-  Skill: require("./Skill")
+  Skill: require("./Skill"),
+  Info: require("./Info")
 };
 
 class Main {
@@ -84,7 +85,14 @@ class Main {
       });
 
       response.on("end", () => {
-        _callback(JSON.parse(request_data));
+        let text = "";
+        try {
+          text = JSON.parse(request_data);
+        }
+        catch(err) {
+          text = null;
+        }
+        _callback(text);
       });
 
     }).on("error", (error) => {
@@ -101,56 +109,82 @@ class Main {
     return text.replace(Rexp, "<a href='$1' target='_blank'>$1</a>");
   }
 
+  // Cette fonction récupère la liste des screenshots d'un skill.
+  GetSkillScreenshot(_url, _index, _array, _callback) {
+    const SELF = this;
+    const HOST_NAME = "raw.githubusercontent.com";
+    const PATH = "/" + _url + "/master/resources/screenshots/" + _index + ".jpg";
+    LIBRARIES.HTTPS.get({
+      hostname: HOST_NAME,
+      path: PATH,
+      headers: { 'User-Agent': 'Mozilla/5.0' }
+    }, (response) => {
+      let request_data = "";
+
+      response.on("data", (chunk) => {
+        request_data += chunk;
+      });
+
+      response.on("end", () => {
+        if(request_data == "404: Not Found"){
+          _callback(_array);
+        }
+        else{
+          _array.push("https://" + HOST_NAME + PATH);
+          SELF.GetSkillScreenshot(_url, _index + 1, _array, _callback);
+        }
+      });
+    });
+  }
+
   // Cette fonction met à jour la liste des skills disponibles à être installés.
   RefreshSkillsList(_callback){
     const SELF = this;
-    SELF.HTTPSJsonGet("api.github.com","/search/repositories?q=+topic:nova-assistant-skill+is:public", function(skills){
-      let apiRateLimitExceeded = false;
+    SELF.URL_Skills = [];
+    SELF.HTTPSJsonGet("api.github.com", "/search/repositories?q=+topic:nova-assistant-skill+is:public", function(skills){
       for(let index = 0; index < skills.items.length; index++){
-        let description = "";
-        if(skills.items[index].description != null){
-          description = SELF.TextURLToLink(skills.items[index].description.replaceAll("\\n", "<br/>").replaceAll("/!\\", "<i class=\"fas fa-exclamation-triangle\"></i>"));
-        }
-        let skill = {
-          id: skills.items[index].id,
-          title: skills.items[index].name,
-          description: description,
-          git: skills.items[index].html_url,
-          wallpaper: "https://raw.githubusercontent.com/" + skills.items[index].full_name + "/master/resources/nova-wallpaper.jpg",
-          icon: "https://raw.githubusercontent.com/" + skills.items[index].full_name + "/master/resources/nova-icon.png",
-          screenshots: []
+        const URL_END = skills.items[index].html_url.split("https://github.com/")[1];
+        // On récupère le fichier "info.json"
+        const INFO = new LIBRARIES.Info();
+        INFO.id = skills.items[index].id;
+        INFO.name = skills.items[index].name;
+        INFO.author = {
+          name: skills.items[index].owner.login,
+          url: skills.items[index].owner.url
         };
+        INFO.gitURL = skills.items[index].html_url;
+        INFO.wallpaper = "https://raw.githubusercontent.com/" + URL_END + "/master/resources/nova-wallpaper.jpg",
+        INFO.icon = "https://raw.githubusercontent.com/" + URL_END + "/master/resources/nova-icon.png",
+        INFO.lastUpdated = skills.items[index].pushed_at
 
-        // ON PART CHERCHER LES SCREENSHOTS
-        SELF.HTTPSJsonGet("api.github.com","/repos/" + skills.items[index].full_name + "/contents/resources/screenshots", function(data){
-          if(!apiRateLimitExceeded){
-            if(data.message != undefined){
-              if(data.message.startsWith("API rate limit exceeded")){
-                SELF.Log("GitHub: " + data.message + "(" + data.documentation_url + ")", "red");
-                apiRateLimitExceeded = true;
+        SELF.HTTPSJsonGet("raw.githubusercontent.com", "/" + URL_END + "/master/resources/info.json", function(json){
+          if(json != null){
+            if(json.description[SELF.Settings.Language] != undefined){
+              INFO.description = json.description[SELF.Settings.Language];
+            }
+            else if(json.description["en-US"] != undefined){
+              INFO.description = json.description["en-US"];
+            }
+            else if(Object.keys(json.description).length > 0){
+              INFO.description = json.description[Object.keys(json.description)[0]];
+            }
+
+            INFO.language = json.language;
+            INFO.worksOffline = json.worksOffline;
+          }
+
+          SELF.GetSkillScreenshot(URL_END, 1, [], function(_screenshots){
+            INFO.screenshots = _screenshots;
+            SELF.URL_Skills.push(INFO);
+
+            if(SELF.URL_Skills.length == skills.items.length){
+              SELF.URL_Skills.sort((a, b) => (a.title > b.title) ? 1 : -1);
+              LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/lib/skills/github_skill_list.json"), JSON.stringify(SELF.URL_Skills, null, 4), "utf8");
+              if(_callback != undefined){
+                _callback();
               }
             }
-            if(!apiRateLimitExceeded){
-              if(data.message != "Not Found"){
-                for(let j = 1; j <= data.length; j++){
-                  const CURRENT = data.filter(function(x) { return x.name == j + ".jpg"; });
-                  if(CURRENT.length == 1){
-                    skill.screenshots.push(CURRENT[0].download_url);
-                  }
-                }
-              }
-            }
-          }
-          SELF.URL_Skills.push(skill);
-
-
-          if(index == skills.items.length - 1){
-            SELF.URL_Skills.sort((a, b) => (a.title > b.title) ? 1 : -1);
-            LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/lib/skills/github_skill_list.json"), JSON.stringify(SELF.URL_Skills, null, 4), "utf8");
-            if(_callback != undefined){
-              _callback();
-            }
-          }
+          });
         });
       }
     });

@@ -27,16 +27,16 @@
             </div>
         </div>
     </div>
-    <div v-if="skill.title.toLowerCase().includes(skillSearch.toLowerCase()) === true" class="col col-12 col-sm-12 col-md-6 col-lg-4" v-for="(skill,index) in skills.Library">
+    <div v-if="skill.name.toLowerCase().includes(skillSearch.toLowerCase()) === true" class="col col-12 col-sm-12 col-md-6 col-lg-4" v-for="(skill,index) in skills.Library">
         <b-card no-body v-b-modal="'modal-skill'+index" @click="JsonEditing = false">
             <b-card-header>
                 <div class="wallpaper" :style="{ backgroundImage: 'url(' + skill.wallpaper + ')' }"></div>
                 <div class="icon" :style="{ backgroundImage: 'url(' + skill.icon + ')' }"></div>
             </b-card-header>
             <b-card-body>
-                <b-card-title>{{skill.title}}</b-card-title>
-                <slot v-if="skills.Installed.findIndex(x => x.GIT.URL === skill.git) > -1">
-                    <div class="installed" v-if="skills.Installed.find(x => x.GIT.URL === skill.git).Path !== null">
+                <b-card-title>{{skill.name}}</b-card-title>
+                <slot v-if="skills.Installed.findIndex(x => x.GIT.URL === skill.gitURL) > -1">
+                    <div class="installed" v-if="skills.Installed.find(x => x.GIT.URL === skill.gitURL).Path !== null">
                         <i class="fas fa-check"></i>
                         <span>{{Dictionary.installed}}</span>
                     </div>
