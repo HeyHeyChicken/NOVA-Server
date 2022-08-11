@@ -150,7 +150,7 @@ class Main {
         INFO.name = skills.items[index].name;
         INFO.author = {
           name: skills.items[index].owner.login,
-          url: skills.items[index].owner.url
+          url: skills.items[index].owner.html_url
         };
         INFO.gitURL = skills.items[index].html_url;
         INFO.wallpaper = "https://raw.githubusercontent.com/" + URL_END + "/master/resources/nova-wallpaper.jpg",
