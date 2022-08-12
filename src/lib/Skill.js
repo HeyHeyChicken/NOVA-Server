@@ -213,7 +213,7 @@ class Skill {
 
     // Cette fonction désinstalle un skill.
     static Uninstall(_git, _main, _socket){
-        const SKILL = _main.URL_Skills.find(x => x.git === _git);
+        const SKILL = _main.URL_Skills.find(x => x.gitURL === _git);
         if(SKILL !== undefined){
             const SKILLS_DIR_PATH = LIBRARIES.Path.join(_main.DirName, "lib", "skills");
             LIBRARIES._FS.rmdirSync(LIBRARIES.Path.join(SKILLS_DIR_PATH, SKILL.id + "")); // On supprime le dossier du skill.
