@@ -452,7 +452,9 @@ class Main {
         if(_language != ""){
           SELF.Settings.Language = _language;
           LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");
-          SELF.LauncherIO.emit("reboot_server");
+          SELF.RefreshSkillsList(function(){
+            SELF.LauncherIO.emit("reboot_server");
+          });
         }
       });
 
