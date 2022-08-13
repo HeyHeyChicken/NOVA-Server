@@ -25,12 +25,12 @@ class Skill {
             for(let j = 0; j < CORPUS.data.length; j++) {
                 if(CORPUS.data[j].utterances !== undefined) {
                     for(let k = 0; k < CORPUS.data[j].utterances.length; k++) {
-                        _main.Manager.addDocuments(CORPUS.data[j].intent, CORPUS.data[j].utterances[k]);
+                        _main.Manager.addDocuments(CORPUS.data[j].intent, CORPUS.data[j].utterances);
                     }
                 }
                 if(CORPUS.data[j].answers !== undefined) {
                     for(let k = 0; k < CORPUS.data[j].answers.length; k++) {
-                        _main.Manager.addAnswers(CORPUS.data[j].intent, CORPUS.data[j].answers[k]);
+                        _main.Manager.addAnswers(CORPUS.data[j].intent, CORPUS.data[j].answers);
                     }
                 }
                 if(CORPUS.data[j].errors !== undefined) {
@@ -187,7 +187,6 @@ class Skill {
         }
 
         if(INDEX === -1) {
-
             const SPLIT = _git.split("/");
             _main.SkillPermanentSettings.skills.push({
                 GIT: {
@@ -201,11 +200,13 @@ class Skill {
         }
         else{
             _main.SkillPermanentSettings.skills[INDEX].Path = _folder;
+            /*
             for(let setting in settings){
                 if(_main.SkillPermanentSettings.skills[INDEX].Settings[setting] === undefined){
                     _main.SkillPermanentSettings.skills[INDEX].Settings[setting] = settings[setting];
                 }
             }
+            */
         }
         LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(_main.DirName, "/lib/skills/skills.json"), JSON.stringify(_main.SkillPermanentSettings, null, 4), "utf8");
         _main.LauncherIO.emit("reboot_server");
