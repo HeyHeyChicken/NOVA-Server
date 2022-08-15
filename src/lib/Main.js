@@ -463,7 +463,6 @@ class Main {
 
       });
 
-      // L'utilisateur demande à changer le mot de déclenchement.
       socket.on("set_theme", function(_theme) {
         SELF.Settings.Theme = _theme;
         LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "settings.json"), JSON.stringify(SELF.Settings, null, 4), "utf8");

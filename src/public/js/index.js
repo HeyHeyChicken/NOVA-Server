@@ -105,6 +105,7 @@ const APP = new Vue({
 /* ### SOCKETS #################################################################################################### */
 /* ################################################################################################################ */
 
+console.log(window.location.hostname);
 const SOCKET = io(window.location.hostname + ":8081");
 
 // Si la connection socket avec le serveur est réussie.
