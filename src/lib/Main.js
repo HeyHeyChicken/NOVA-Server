@@ -299,9 +299,9 @@ class Main {
           client = new LIBRARIES.NOVAClient(_ID).Insert(SELF);
           client.SetConnected(true, SELF);
           client.SetSocketID(socket.client.conn.id, SELF);
-
-          SELF.UpdateServerGUI();
         }
+        client.SetConnected(true, SELF);
+        SELF.UpdateServerGUI();
       });
 
       // Lorsque l'utilisateur fait une demande directe au serveur.
@@ -455,6 +455,16 @@ class Main {
           SELF.RefreshSkillsList(function(){
             SELF.LauncherIO.emit("reboot_server");
           });
+        }
+      });
+
+      // L'utilisateur demande à supprimer un client.
+      socket.on("remove_client", function(_id) {
+        let client = LIBRARIES.NOVAClient.SelectByID(_id, SELF);
+        if(client !== undefined){
+          client.Delete(SELF);
+
+          SELF.UpdateServerGUI();
         }
       });
 

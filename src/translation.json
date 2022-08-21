@@ -40,7 +40,8 @@
     "server_url": "Server's URL",
     "what_can_i_ask": "What can I ask?",
     "works_offline": "This skill works offline and protects your privacy.",
-    "doesnt_works_offline": "This skill does not work offline."
+    "doesnt_works_offline": "This skill does not work offline.",
+    "delete": "Delete"
   },
   "fr-FR": {
     "language_name": "\uD83C\uDDEB\uD83C\uDDF7 Français",
@@ -83,6 +84,7 @@
     "server_url": "URL du serveur",
     "what_can_i_ask": "Que pouvez vous me demander ?",
     "works_offline": "Cette compétence fonctionne hors ligne et protège votre vie privée.",
-    "doesnt_works_offline": "Cette compétence ne fonctionne pas hors ligne."
+    "doesnt_works_offline": "Cette compétence ne fonctionne pas hors ligne.",
+    "delete": "Supprimer"
   }
 }

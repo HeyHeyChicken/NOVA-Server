@@ -26,6 +26,12 @@ const APP = new Vue({
         SOCKET.emit("install_skill", URL);
       }
     },
+    // Lorsque l'utilisateur demande à supprimer un client à partir du serveur.
+    remove_client: function(event) {
+      const CARD = event.target.closest(".card-body");
+      const ID = CARD.querySelector("input[name='ID']").value;
+      SOCKET.emit("remove_client", ID);
+    },
     // Lorsque l'utilisateur demande à redémarer un client à partir du serveur.
     reboot_client: function(event) {
       const CARD = event.target.closest(".card-body");

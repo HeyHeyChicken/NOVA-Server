@@ -21,6 +21,19 @@ class Client {
     return this;
   }
 
+  Delete(_main){
+    const SELF = this;
+    Client._PrepareFile(_main);
+
+    let data = JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8"));
+    data = data.filter(function(obj) {
+        return obj.ID != SELF.ID;
+    });
+    LIBRARIES.FS.writeFileSync(Client._GetPath(_main), JSON.stringify(data, null, 4), "utf8");
+
+    return this;
+  }
+
   SetSocketID(_socketID, _main){
     Client._PrepareFile(_main);
 
@@ -85,7 +98,7 @@ class Client {
   static SelectByID(_ID, _main){
     Client._PrepareFile(_main);
 
-    return Client._Convert(JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8")).find(x => x.ID === _ID));
+    return Client._Convert(JSON.parse(LIBRARIES.FS.readFileSync(Client._GetPath(_main), "utf8")).find(x => x.ID == _ID));
   }
 
   static SelectAll(_main){

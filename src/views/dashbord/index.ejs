@@ -13,10 +13,16 @@
                 <input type="text" class="form-control" :placeholder="Dictionary.name" :value="client.Name">
             </div>
             <div class="row">
-              <div class="col">
+              <div class="col col-auto">
                   <b-button variant="outline-primary" @click="reboot_client">
                       <i class="fas fa-redo"></i>
                       <span>{{Dictionary.reboot}}</span>
+                  </b-button>
+              </div>
+              <div class="col col-auto">
+                  <b-button variant="outline-danger" @click="remove_client">
+                      <i class="fas fa-trash"></i>
+                      <span>{{Dictionary.delete}}</span>
                   </b-button>
               </div>
             </div>
