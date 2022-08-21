@@ -69,6 +69,11 @@ class Main {
       SELF.InitialiseServers(); // On initialise les serveurs de NOVA.
       LIBRARIES.Skill.LoadAll(SELF); // On charge les skills du serveur NOVA.
     }
+
+    const CLIENTS = LIBRARIES.NOVAClient.SelectAll(SELF);
+    for(let i = 0; i < CLIENTS.length; i++){
+      Object.assign(new LIBRARIES.NOVAClient, CLIENTS[i]).SetConnected(false, SELF);
+    }
   }
 
   HTTPSJsonGet(_hostname, _path, _callback){
