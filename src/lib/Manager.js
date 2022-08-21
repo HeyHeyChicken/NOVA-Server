@@ -135,7 +135,7 @@ class Manager {
     const VARIABLES = {};
     let variables_position = 0;
     let variable_name = null;
-    let ok = 0; // cette variablre représente le nombre de mots ou variables correspondantes à la phrase testée.
+    let ok = 0; // cette variable représente le nombre de mots ou variables correspondantes à la phrase testée.
     loop3:
     for(let b = 0; b < SPLITTED_SENTENSE.length; b++){
       // SI LE MOT EST UNE VARIABLE
