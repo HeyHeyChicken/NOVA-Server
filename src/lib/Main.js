@@ -276,7 +276,7 @@ class Main {
 
     this.ClientIO = LIBRARIES.SocketIO(this.HTTP);
     this.ClientIO.on("connection", function(socket){
-      //SELF.ClientsSocket.push();
+      SELF.ClientsSocket[socket.client.conn.id] = socket;
       socket.emit("set_skills_public_files", SELF.ClientSkillsPublic);
       socket.emit("set_language", SELF.Settings.Language);
       socket.emit("set_theme", SELF.Settings.Theme);
@@ -297,9 +297,8 @@ class Main {
         let client = LIBRARIES.NOVAClient.SelectByID(_ID, SELF);
         if(client === undefined){
           client = new LIBRARIES.NOVAClient(_ID).Insert(SELF);
-          client.SetConnected(true, SELF);
-          client.SetSocketID(socket.client.conn.id, SELF);
         }
+        client.SetSocketID(socket.client.conn.id, SELF);
         client.SetConnected(true, SELF);
         SELF.UpdateServerGUI();
       });
@@ -460,9 +459,9 @@ class Main {
 
       // L'utilisateur demande à supprimer un client.
       socket.on("remove_client", function(_id) {
-        let client = LIBRARIES.NOVAClient.SelectByID(_id, SELF);
-        if(client !== undefined){
-          client.Delete(SELF);
+        const CLIENT = LIBRARIES.NOVAClient.SelectByID(_id, SELF);
+        if(CLIENT !== undefined){
+          CLIENT.Delete(SELF);
 
           SELF.UpdateServerGUI();
         }
@@ -470,7 +469,10 @@ class Main {
 
       // L'utilisateur demande à redémarrer un client.
       socket.on("reboot_client", function(_id) {
-
+        const CLIENT = LIBRARIES.NOVAClient.SelectByID(_id, SELF);
+        if(CLIENT !== undefined){
+          SELF.ClientsSocket[CLIENT.SocketID].emit("reboot");
+        }
       });
 
       socket.on("set_theme", function(_theme) {
