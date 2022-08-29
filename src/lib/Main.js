@@ -356,6 +356,7 @@ class Main {
         const PATH = LIBRARIES.Path.join(SELF.DirName, "/voices/", socket.client.conn.id + ".wav");
         if(SELF.STT != null){
           SELF.STT.Recognize(PATH, function(_message){
+            socket.emit("stop_stt");
             socket.emit("cs_message", _message);
             SELF.Manager.process(_message, socket);
           });
