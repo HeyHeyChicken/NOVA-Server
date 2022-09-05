@@ -125,7 +125,19 @@ class Manager {
 
   /* Cette fonction est une boucle essentielle de la fonction "process"; */
   _process(_sentence, _splitedSay, _asc = true){
-    let SPLITTED_SENTENSE = _sentence.split(" ");
+    const REPLACE = ["'"];
+    const SEPARATOR = " ";
+    _splitedSay = _splitedSay.join(SEPARATOR);
+    for(let i = 0; i < REPLACE.length; i++){
+      while(_sentence.indexOf(REPLACE[i]) != -1){
+        _sentence = _sentence.replace(REPLACE[i], SEPARATOR);
+      }
+      while(_splitedSay.indexOf(REPLACE[i]) != -1){
+        _splitedSay = _splitedSay.replace(REPLACE[i], SEPARATOR);
+      }
+    }
+    _splitedSay = _splitedSay.split(SEPARATOR);
+    let SPLITTED_SENTENSE = _sentence.split(SEPARATOR);
 
     if(_asc === false){
       SPLITTED_SENTENSE = SPLITTED_SENTENSE.reverse();
@@ -173,7 +185,7 @@ class Manager {
         }
       }
     }
-
+    
     if(ok === SPLITTED_SENTENSE.length){
       return VARIABLES;
     }

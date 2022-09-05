@@ -8,6 +8,7 @@ const LIBRARIES = {
   SocketIOClient: require("socket.io-client"),
   ChildProcess: require("child_process"),
   Path: require("path"),
+  Axios: require("axios"),
 
   Message: require("./Message"),
   NOVAClient: require("./Client"),
@@ -79,31 +80,19 @@ class Main {
 
   HTTPSJsonGet(_hostname, _path, _callback){
     const SELF = this;
-    LIBRARIES.HTTPS.get({
-      hostname: _hostname,
-      path: _path,
-      headers: { 'User-Agent': 'Mozilla/5.0' }
-    }, (response) => {
-      let request_data = "";
+    let back = null;
 
-      response.on("data", (chunk) => {
-        request_data += chunk;
-      });
-
-      response.on("end", () => {
-        let text = "";
-        try {
-          text = JSON.parse(request_data);
-        }
-        catch(err) {
-          text = null;
-        }
-        _callback(text);
-      });
-
-    }).on("error", (error) => {
-      SELF.Log(error.message, "red");
-      _callback(null);
+    LIBRARIES.Axios.get(_hostname + _path)
+    .then(function (response) {
+      back = response.data;
+    })
+    .catch(function (error) {
+      SELF.Log(error, "red");
+    })
+    .then(function () {
+      if(_callback != undefined){
+        _callback(back);
+      }
     });
   }
 
@@ -147,38 +136,40 @@ class Main {
   RefreshSkillsList(_callback){
     const SELF = this;
     SELF.URL_Skills = [];
-    SELF.HTTPSJsonGet("api.github.com", "/search/repositories?q=+topic:nova-assistant-skill+is:public", function(skills){
-      for(let index = 0; index < skills.items.length; index++){
-        SELF.RefreshSkill(skills.items[index], function(){
-          if(SELF.URL_Skills.length == skills.items.length){
-
-            if(SELF.Unofficial_Skills.length > 0){
-              for(let unofficial_index = 0; unofficial_index < SELF.Unofficial_Skills.length; unofficial_index++){
-                SELF.HTTPSJsonGet("api.github.com", "/search/repositories?q=+repo:" + SELF.Unofficial_Skills[unofficial_index], function(unofficial_skills){
-                  SELF.RefreshSkill(unofficial_skills.items[0], function(){
-                    if(SELF.URL_Skills.length == skills.items.length + SELF.Unofficial_Skills.length){
-                      
-                      SELF.URL_Skills.sort((a, b) => (a.title > b.title) ? 1 : -1);
-                      LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/lib/skills/github_skill_list.json"), JSON.stringify(SELF.URL_Skills, null, 4), "utf8");
-                      
-                      if(_callback != undefined){
-                        _callback();
+    SELF.HTTPSJsonGet("https://api.github.com", "/search/repositories?q=+topic:nova-assistant-skill+is:public", function(skills){
+      if(skills != null){
+        for(let index = 0; index < skills.items.length; index++){
+          SELF.RefreshSkill(skills.items[index], function(){
+            if(SELF.URL_Skills.length == skills.items.length){
+  
+              if(SELF.Unofficial_Skills.length > 0){
+                for(let unofficial_index = 0; unofficial_index < SELF.Unofficial_Skills.length; unofficial_index++){
+                  SELF.HTTPSJsonGet("https://api.github.com", "/search/repositories?q=+repo:" + SELF.Unofficial_Skills[unofficial_index], function(unofficial_skills){
+                    SELF.RefreshSkill(unofficial_skills.items[0], function(){
+                      if(SELF.URL_Skills.length == skills.items.length + SELF.Unofficial_Skills.length){
+                        
+                        SELF.URL_Skills.sort((a, b) => (a.title > b.title) ? 1 : -1);
+                        LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/lib/skills/github_skill_list.json"), JSON.stringify(SELF.URL_Skills, null, 4), "utf8");
+                        
+                        if(_callback != undefined){
+                          _callback();
+                        }
                       }
-                    }
+                    });
                   });
-                });
+                }
+              }
+              else{
+                SELF.URL_Skills.sort((a, b) => (a.title > b.title) ? 1 : -1);
+                LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/lib/skills/github_skill_list.json"), JSON.stringify(SELF.URL_Skills, null, 4), "utf8");
+                
+                if(_callback != undefined){
+                  _callback();
+                }
               }
             }
-            else{
-              SELF.URL_Skills.sort((a, b) => (a.title > b.title) ? 1 : -1);
-              LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/lib/skills/github_skill_list.json"), JSON.stringify(SELF.URL_Skills, null, 4), "utf8");
-              
-              if(_callback != undefined){
-                _callback();
-              }
-            }
-          }
-        });
+          });
+        }
       }
     });
   }
@@ -200,7 +191,7 @@ class Main {
     INFO.icon = "https://raw.githubusercontent.com/" + URL_END + "/master/resources/nova-icon.png",
     INFO.lastUpdated = item.pushed_at
 
-    SELF.HTTPSJsonGet("raw.githubusercontent.com", "/" + URL_END + "/master/resources/info.json", function(json){
+    SELF.HTTPSJsonGet("https://raw.githubusercontent.com", "/" + URL_END + "/master/resources/info.json", function(json){
       if(json != null){
         if(json.description[SELF.Settings.Language] != undefined){
           INFO.description = json.description[SELF.Settings.Language];
