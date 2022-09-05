@@ -56,6 +56,7 @@ class Main {
 
     this.URL_Skills = [];
 
+    this.Unofficial_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/unofficial_skill_list.json"), "utf8"));
     this.Official_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/official_skill_list.json"), "utf8"));
     this.URL_Skills = JSON.parse(LIBRARIES.FS.readFileSync(LIBRARIES.Path.join(this.DirName, "/lib/skills/github_skill_list.json"), "utf8"));
 
@@ -148,50 +149,81 @@ class Main {
     SELF.URL_Skills = [];
     SELF.HTTPSJsonGet("api.github.com", "/search/repositories?q=+topic:nova-assistant-skill+is:public", function(skills){
       for(let index = 0; index < skills.items.length; index++){
-        const URL_END = skills.items[index].html_url.split("https://github.com/")[1];
-        // On récupère le fichier "info.json"
-        const INFO = new LIBRARIES.Info();
-        INFO.id = skills.items[index].id;
-        INFO.name = skills.items[index].name;
-        INFO.author = {
-          name: skills.items[index].owner.login,
-          url: skills.items[index].owner.html_url
-        };
-        INFO.gitURL = skills.items[index].html_url;
-        INFO.wallpaper = "https://raw.githubusercontent.com/" + URL_END + "/master/resources/nova-wallpaper.jpg",
-        INFO.icon = "https://raw.githubusercontent.com/" + URL_END + "/master/resources/nova-icon.png",
-        INFO.lastUpdated = skills.items[index].pushed_at
+        SELF.RefreshSkill(skills.items[index], function(){
+          if(SELF.URL_Skills.length == skills.items.length){
 
-        SELF.HTTPSJsonGet("raw.githubusercontent.com", "/" + URL_END + "/master/resources/info.json", function(json){
-          if(json != null){
-            if(json.description[SELF.Settings.Language] != undefined){
-              INFO.description = json.description[SELF.Settings.Language];
+            if(SELF.Unofficial_Skills.length > 0){
+              for(let unofficial_index = 0; unofficial_index < SELF.Unofficial_Skills.length; unofficial_index++){
+                SELF.HTTPSJsonGet("api.github.com", "/search/repositories?q=+repo:" + SELF.Unofficial_Skills[unofficial_index], function(unofficial_skills){
+                  SELF.RefreshSkill(unofficial_skills.items[0], function(){
+                    if(SELF.URL_Skills.length == skills.items.length + SELF.Unofficial_Skills.length){
+                      
+                      SELF.URL_Skills.sort((a, b) => (a.title > b.title) ? 1 : -1);
+                      LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/lib/skills/github_skill_list.json"), JSON.stringify(SELF.URL_Skills, null, 4), "utf8");
+                      
+                      if(_callback != undefined){
+                        _callback();
+                      }
+                    }
+                  });
+                });
+              }
             }
-            else if(json.description["en-US"] != undefined){
-              INFO.description = json.description["en-US"];
-            }
-            else if(Object.keys(json.description).length > 0){
-              INFO.description = json.description[Object.keys(json.description)[0]];
-            }
-
-            INFO.language = json.language;
-            INFO.worksOffline = json.worksOffline;
-          }
-
-          SELF.GetSkillScreenshot(URL_END, 1, [], function(_screenshots){
-            INFO.screenshots = _screenshots;
-            SELF.URL_Skills.push(INFO);
-
-            if(SELF.URL_Skills.length == skills.items.length){
+            else{
               SELF.URL_Skills.sort((a, b) => (a.title > b.title) ? 1 : -1);
               LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/lib/skills/github_skill_list.json"), JSON.stringify(SELF.URL_Skills, null, 4), "utf8");
+              
               if(_callback != undefined){
                 _callback();
               }
             }
-          });
+          }
         });
       }
+    });
+  }
+
+  // Cette fonction ajoute un skill à la liste des skills disponibles à être installés.
+  RefreshSkill(item, _callback){
+    const SELF = this;
+    const URL_END = item.html_url.split("https://github.com/")[1];
+    // On récupère le fichier "info.json"
+    const INFO = new LIBRARIES.Info();
+    INFO.id = item.id;
+    INFO.name = item.name;
+    INFO.author = {
+      name: item.owner.login,
+      url: item.owner.html_url
+    };
+    INFO.gitURL = item.html_url;
+    INFO.wallpaper = "https://raw.githubusercontent.com/" + URL_END + "/master/resources/nova-wallpaper.jpg",
+    INFO.icon = "https://raw.githubusercontent.com/" + URL_END + "/master/resources/nova-icon.png",
+    INFO.lastUpdated = item.pushed_at
+
+    SELF.HTTPSJsonGet("raw.githubusercontent.com", "/" + URL_END + "/master/resources/info.json", function(json){
+      if(json != null){
+        if(json.description[SELF.Settings.Language] != undefined){
+          INFO.description = json.description[SELF.Settings.Language];
+        }
+        else if(json.description["en-US"] != undefined){
+          INFO.description = json.description["en-US"];
+        }
+        else if(Object.keys(json.description).length > 0){
+          INFO.description = json.description[Object.keys(json.description)[0]];
+        }
+
+        INFO.language = json.language;
+        INFO.worksOffline = json.worksOffline;
+      }
+
+      SELF.GetSkillScreenshot(URL_END, 1, [], function(_screenshots){
+        INFO.screenshots = _screenshots;
+        SELF.URL_Skills.push(INFO);
+
+        if(_callback != undefined){
+          _callback();
+        }
+      });
     });
   }
 
@@ -444,7 +476,36 @@ class Main {
 
       // L'utilisateur demande à installer un skill.
       socket.on("install_skill", function(_git){
-        LIBRARIES.Skill.Install(_git, SELF, socket);
+        let presentInSkillList = false;
+        for(let index = 0; index < SELF.URL_Skills.length; index++){
+          if(SELF.URL_Skills[index].gitURL == _git){
+            presentInSkillList = true;
+          }
+        }
+
+        if(!presentInSkillList){
+          const END = ".git";
+          if(_git.endsWith(END)){
+            _git = _git.substring(_git.length - END.length, 0);
+          }
+          const SPLITTED = _git.split("/");
+          const ID = SPLITTED[SPLITTED.length - 2] + "/" + SPLITTED[SPLITTED.length - 1];
+          if(!SELF.Unofficial_Skills.includes(ID)){
+            SELF.Unofficial_Skills.push(ID);
+            LIBRARIES.FS.writeFileSync(LIBRARIES.Path.join(SELF.DirName, "/lib/skills/unofficial_skill_list.json"), JSON.stringify(SELF.Unofficial_Skills, null, 4), "utf8");  
+          }
+
+          SELF.RefreshSkillsList(function(){
+
+
+
+            socket.emit("set_skills", SELF.URL_Skills);
+            LIBRARIES.Skill.Install(_git, SELF, socket);
+          })
+        }
+        else{
+          LIBRARIES.Skill.Install(_git, SELF, socket);
+        }
       });
 
       // L'utilisateur demande à desinstaller un skill.
