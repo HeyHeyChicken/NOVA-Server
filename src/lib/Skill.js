@@ -146,7 +146,7 @@ class Skill {
 
         const splitted = _git.split("/");
         https://api.github.com/repos/heyheychicken/nova
-        _main.HTTPSJsonGet("api.github.com","/repos/" + splitted[splitted.length - 2] + "/" + splitted[splitted.length - 1], function(data){
+        _main.HTTPSJsonGet("https://api.github.com","/repos/" + splitted[splitted.length - 2] + "/" + splitted[splitted.length - 1], function(data){
             const FOLDER_SKILLS = LIBRARIES.Path.join(_main.DirName, "/lib/skills/");
             const FOLDER_SKILL = LIBRARIES.Path.join(FOLDER_SKILLS, data.id + "");
 
