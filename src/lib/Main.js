@@ -413,7 +413,7 @@ class Main {
   // Cette fonction initialise le serveur socket reliant le serveur NOVA au serveur Web de NOVA.
   InitialiseSocketServer(){
     const SELF = this;
-    this.ServerIO = LIBRARIES.SocketIO();
+    this.ServerIO = LIBRARIES.SocketIO(this.HTTP);
     this.ServerIO.on("connection", function(socket){ // Un utilisateur vient d'ouvrir la page Web du serveur NOVA.
       // On envoie à l'interface WEB la liste des clients NOVA.
 
@@ -539,8 +539,6 @@ class Main {
         SELF.LauncherIO.emit("reboot_server");
       });
     });
-
-    this.ServerIO.listen(8081);
   }
 
   // Cette fonction ajoute un fichier à l'arbre des fichiers provenant des skills destinés à la GUI des clients.

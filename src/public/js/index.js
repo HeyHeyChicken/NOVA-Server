@@ -111,7 +111,7 @@ const APP = new Vue({
 /* ### SOCKETS #################################################################################################### */
 /* ################################################################################################################ */
 
-const PORT = "8081";
+const PORT = "8080";
 let SOCKET = null;
 if(window.location.hostname.includes("gitpod.io")){
   const SPLITTER = "-";
@@ -121,7 +121,7 @@ if(window.location.hostname.includes("gitpod.io")){
   SOCKET = io(URL);
 }
 else{
-  SOCKET = io(window.location.hostname + ":" + PORT);
+  SOCKET = io();
 }
 
 // Si la connection socket avec le serveur est réussie.

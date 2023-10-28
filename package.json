@@ -14,8 +14,8 @@
   },
   "homepage": "https://github.com/HeyHeyChicken/NOVA-Server#readme",
   "dependencies": {
-    "@google-cloud/speech": "^4.9.0",
-    "@google-cloud/text-to-speech": "^3.4.0",
+    "@google-cloud/speech": "^6.0.2",
+    "@google-cloud/text-to-speech": "^5.0.1",
     "axios": "^0.27.2",
     "child_process": "^1.0.2",
     "ejs": "^3.1.2",
@@ -27,7 +27,7 @@
     "path": "^0.12.7",
     "querystring": "^0.2.1",
     "request": "^2.88.2",
-    "socket.io": "^2.4.1",
+    "socket.io": "^4.7.2",
     "socket.io-client": "^2.3.0",
     "util": "^0.12.4",
     "wav": "^1.0.2"
