@@ -7,18 +7,18 @@
 <br> 
 
 <div align="center">
-  <img style="border:1px solid black;" src="https://github.com/HeyHeyChicken/NOVA-Server/blob/master/resources/screenshot.jpg">
+  <img style="border:1px solid black;" src="https://github.com/HeyHeyChicken/NOVA-Server/blob/master/.github/screenshot.jpg">
 </div>
 
-## Installation
+## ⬇️ Installation
 
 Follow the [installation guide](//github.com/HeyHeyChicken/NOVA#installation).
 
-## Usage
+## 🚀 Usage
 
 Follow the [usage guide](//github.com/HeyHeyChicken/NOVA#usage).
 
-## Support and contribution
+## 🫵 Support and contribution
 
 I provide support for all users through [GitHub issues](//github.com/HeyHeyChicken/NOVA-Server/issues).
 
