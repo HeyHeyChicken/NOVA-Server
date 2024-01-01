@@ -302,7 +302,7 @@ class Main {
   InitialiseSocketClient(){
     const SELF = this;
 
-    this.ClientIO = LIBRARIES.SocketIO(this.HTTP);
+    this.ClientIO = LIBRARIES.SocketIO();
     this.ClientIO.on("connection", function(socket){
       SELF.ClientsSocket[socket.client.conn.id] = socket;
       socket.emit("set_skills_public_files", SELF.ClientSkillsPublic);
@@ -408,6 +408,7 @@ class Main {
         }
       });
     });
+    this.ClientIO.listen(8081);
   }
 
   // Cette fonction initialise le serveur socket reliant le serveur NOVA au serveur Web de NOVA.
